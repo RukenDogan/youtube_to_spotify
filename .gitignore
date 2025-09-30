@@ -1,0 +1,94 @@
+# =====================
+# Python
+# =====================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+wheels/
+*.manifest
+*.spec
+
+# Virtual environment
+venv/
+# Logs
+*.log
+
+# Cache
+*.sqlite3
+*.db
+*.db-journal
+__pycache__/
+
+# =====================
+# IDE / Editor
+# =====================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# =====================
+# OS
+# =====================
+.DS_Store
+Thumbs.db
+
+# =====================
+# Fichiers compilés / binaires
+# =====================
+*.exe
+*.dll
+*.so
+*.dylib
+lib/
+include/
+scripts/
+
+# =====================
+# Tests / coverage
+# =====================
+.coverage
+htmlcov/
+*.cover
+.cache
+nosetests.xml
+pytest_cache/
+.tox/
+.pytest_cache/
+
+# =====================
+# Python packages
+# =====================
+pip-log.txt
+pip-delete-this-directory.txt
+
+# =====================
+# Jupyter Notebook checkpoints
+# =====================
+.ipynb_checkpoints/
+
+# =====================
+# Flask / web
+# =====================
+instance/
+.webassets-cache
+
+# =====================
+# Autres fichiers sensibles ou temporaires
+# =====================
+*.env.local
+*.env.production
+*.env.test
+*.tmp
+*.bak
+*.swp
