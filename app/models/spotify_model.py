@@ -30,19 +30,36 @@ class Spotify:
         self.playlist_id = playlist["id"]
         return self.playlist_id
 
+
     def search_track(self, query):
-        results = self.client.search(q=query, type="track", limit=1)
-        tracks = results.get("tracks", {}).get("items")
-        if tracks:
-            return tracks[0]["id"]
+        results = self.client.search(q=query, type="track", limit=5)
+        tracks = results.get("tracks", {}).get("items", [])
+        if not tracks:
+            return None
+        
+        # Découpage de la requête pour séparer titre et artiste
+        parts = query.split()
+        query_lower = query.lower()
+
+        for track in tracks:
+            track_title = track["name"].lower()
+            track_artists = " ".join([a["name"].lower() for a in track["artists"]])
+
+            # Vérifie si le titre ET l'artiste sont dans la requête
+            if any(word in query_lower for word in track_title.split()) and any(a in query_lower for a in track_artists.split()):
+                return track["id"]
+
         return None
 
     def add_tracks_to_playlist(self, track_queries):
         track_ids = []
+        not_found = []
         for query in track_queries:
             track_id = self.search_track(query)
             if track_id:
                 track_ids.append(track_id)
+            else:
+                not_found.append(query)
 
         if track_ids:
             self.client.playlist_add_items(self.playlist_id, track_ids)
@@ -50,25 +67,13 @@ class Spotify:
 
 
    
-if __name__ == "__main__":
-    spotify_user_id = SPOTIFY_USER_ID # remplacer plus tard 
+# if __name__ == "__main__":
+#     spotify_user_id = SPOTIFY_USER_ID # remplacer plus tard 
 
-    sp = Spotify(SPOTIFY_USER_ID)
-    playlist_id = sp.create_spotify_playlist("Ma Playlist Test", "Chaîne YouTube")
+#     sp = Spotify(SPOTIFY_USER_ID)
+#     playlist_id = sp.create_spotify_playlist("Ma Playlist Test", "Chaîne YouTube")
 
-    tracks = ["Daft Punk One More Time", "Sade Pearl"] # simulé depuis YouTube
-    added = sp.add_tracks_to_playlist(tracks)
+#     tracks = ["Daft Punk One More Time", "Sade Pearls"] # simulé depuis YouTube
+#     added = sp.add_tracks_to_playlist(tracks)
 
-    print(f"✅ Playlist créée ({playlist_id}) avec {len(added)} morceaux ajoutés")
-
-
-
-
-
-    # youtube_url = input("🔗 Entrez l'URL de la playlist YouTube : ")
-    # spotify_user_id = input("🎵 Entrez votre Spotify user ID : ")
-
-    # sync = Synchronizer(youtube_url, spotify_user_id)
-    # sync.extract_youtube()
-    # sync.create_spotify_playlist()
-    # sync.add_tracks_to_spotify()
+#     print(f"✅ Playlist créée ({playlist_id}) avec {len(added)} morceaux ajoutés")
