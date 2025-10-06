@@ -15,6 +15,22 @@ def extract_playlist_id(url): # extraire l'ID de la playlist depuis l'URL
     params = parse_qs(query) # analyser la chaîne de requête pour extraire les paramètres
     return params["list"][0] if "list" in params else None # retourner l'ID de la playlist
 
+# récupérer les informations de la playlist
+def get_playlist_info(playlist_id):
+    youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
+    request = youtube.playlists().list(
+        part="snippet",
+        id=playlist_id
+    )
+    response = request.execute()
+    if response['items']:
+        snippet = response['items'][0]['snippet']
+        title = snippet['title']
+        channel_title = snippet['channelTitle']
+        return title, channel_title
+    return None, None
+
+
 # récupérer les vidéos d'une playlist
 def get_videos(playlist_url):
     youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY) # construire le service YouTube avec la clé API
@@ -50,12 +66,12 @@ def get_artists(videos):
     return artists # retourner la liste des artistes des vidéos
 
 
-if __name__ == "__main__":
-    playlist_url = "https://www.youtube.com/playlist?list=PL0C00MH_AB4eundtu0PqswbWyYHdZawZi"
-    playlist_id = extract_playlist_id(playlist_url) # extraire l'ID de la playlist depuis l'URL
+# if __name__ == "__main__":
+#     playlist_url = "https://www.youtube.com/playlist?list=PL0C00MH_AB4eundtu0PqswbWyYHdZawZi"
+#     playlist_id = extract_playlist_id(playlist_url) # extraire l'ID de la playlist depuis l'URL
 
-    videos = get_videos(playlist_id)
-    titles = get_titles(videos)
-    artists = get_artists(videos)
-    print(titles)
+#     videos = get_videos(playlist_id)
+#     titles = get_titles(videos)
+#     artists = get_artists(videos)
+#     print(titles)
 
