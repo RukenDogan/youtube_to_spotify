@@ -56,7 +56,7 @@ if __name__ == "__main__":
     sp = Spotify(SPOTIFY_USER_ID)
     playlist_id = sp.create_spotify_playlist("Ma Playlist Test", "Chaîne YouTube")
 
-    tracks = ["Daft Punk One More Time", "Coldplay Yellow"]  # simulé depuis YouTube
+    tracks = ["Daft Punk One More Time", "Sade Pearl"] # simulé depuis YouTube
     added = sp.add_tracks_to_playlist(tracks)
 
     print(f"✅ Playlist créée ({playlist_id}) avec {len(added)} morceaux ajoutés")
