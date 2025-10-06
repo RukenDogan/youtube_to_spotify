@@ -1,8 +1,6 @@
 # Synchronisation de Playlists YouTube vers Spotify
----
 
 ## Description
----
 Ce projet est une application Python qui permet de synchroniser les vidéos d'une playlist YouTube
 en créant automatiquement une playlist correspondante sur Spotify.
 
@@ -14,14 +12,12 @@ L'objectif principal est de se familiariser avec :
 - la recherche intelligente de morceaux sur Spotify avec correspondance titre/artiste.
 
 ## Fonctionnalités
----
 - Extraire les titres et artistes d'une playlist YouTube
 - Créer une nouvelle playlist sur Spotify
 - Rechercher les morceaux sur Spotify avec un score de correspondance
 - Ajouter les morceaux trouvés à la playlist Spotify
 
 ## Prérequis
----
 - Python 3.9 ou supérieur
 - Un compte Spotify avec une application enregistrée pour obtenir Client ID et Client Secret
 - Une clé API YouTube
@@ -31,7 +27,6 @@ L'objectif principal est de se familiariser avec :
     - google-api-python-client (pour YouTube)
 
 ## Installation
----
 1. Cloner le projet :
    git clone <URL_DU_REPO>
 
@@ -49,14 +44,12 @@ L'objectif principal est de se familiariser avec :
    - YOUTUBE_API_KEY=...
 
 ## Utilisation
----
 1. Lancer le script principal :
    python main.py
 2. Entrer l'URL de la playlist YouTube quand demandé
 3. L'application créera la playlist sur Spotify et ajoutera les morceaux trouvés
 
 ## Points importants
----
 - Certains morceaux peuvent ne pas être trouvés si le nom ou l'artiste est trop différent
 - Les vidéos YouTube provenant de chaînes "Topic" ou sans titre clair peuvent poser problème
 - Ce projet est structuré selon une architecture MVC :
