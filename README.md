@@ -22,20 +22,21 @@ L'objectif principal est de se familiariser avec :
 - Un compte Spotify avec une application enregistrée pour obtenir Client ID et Client Secret
 - Une clé API YouTube
 - Modules Python :
-    - spotipy
-    - python-dotenv
-    - google-api-python-client (pour YouTube)
+    - `spotipy`
+    - `python-dotenv`
+    - `google-api-python-client` (pour YouTube)
 
 ## Installation
 1. Cloner le projet :
-   git clone <URL_DU_REPO>
+   `git clone <URL_DU_REPO>`
 
 2. Créer un environnement virtuel et l'activer :
-   - python -m venv venv
-   - source venv/bin/activate   # Linux/Mac
-   - .\venv\Scripts\activate    # Windows
+   - `python -m venv venv`
+   - `source venv/bin/activate`   # Linux/Mac
+   - `.\venv\Scripts\activate`    # Windows
 3. Installer les dépendances :
-   - pip install -r requirements.txt
+   - `pip install -r requirements.txt`
+   - `pip freeze > requirements.txt` (pour mettre à jour les dépendances)
 4. Créer un fichier `.env.local` avec :
    - SPOTIFY_CLIENT_ID=...
    - SPOTIFY_CLIENT_SECRET=...
@@ -45,7 +46,7 @@ L'objectif principal est de se familiariser avec :
 
 ## Utilisation
 1. Lancer le script principal :
-   python main.py
+   `python main.py`
 2. Entrer l'URL de la playlist YouTube quand demandé
 3. L'application créera la playlist sur Spotify et ajoutera les morceaux trouvés
 
