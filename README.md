@@ -37,7 +37,7 @@ L'objectif principal est de se familiariser avec :
 3. Installer les dépendances :
    - `pip install -r requirements.txt`
    - `pip freeze > requirements.txt` (pour mettre à jour les dépendances)
-4. Créer un fichier `.env.local` avec :
+4. Créer un fichier `.env.local` (voir fichier .env) avec :
    - SPOTIFY_CLIENT_ID=...
    - SPOTIFY_CLIENT_SECRET=...
    - SPOTIFY_REDIRECT_URI=...
@@ -58,6 +58,7 @@ L'objectif principal est de se familiariser avec :
     - Controller : prévu pour gérer la logique lorsque l'interface sera ajoutée
     - Views : à développer plus tard pour créer une interface utilisateur
 - Le but est également de se préparer à l'ajout d'une interface graphique (par exemple avec Tkinter ou Flask/React)
+- La synchronisation inverse est également possible : à partir d'une playlist Spotify, nous pouvons récupérer les vidéos YouTube correspondantes et les ajouter à une playlist YouTube. Cela nécessite d'obtenir l'autorisation OAuth via l'API YouTube.
 
 ---
 Ruken
