@@ -1,19 +1,20 @@
 # récupérer les vidéos d’une playlist
-
 import os # pour accéder aux variables d'environnement
-from googleapiclient.discovery import build # pour interagir avec l'API YouTube
+import re # pour les opérations sur les chaînes de caractères
 from dotenv import load_dotenv # pour charger les variables d'environnement depuis le fichier .env
+from googleapiclient.discovery import build # pour interagir avec l'API YouTube
 from urllib.parse import urlparse, parse_qs # pour extraire l'ID de la playlist depuis l'URL
-
 
 load_dotenv(dotenv_path=".env.local") # charger les variables d'environnement depuis le fichier .env.local
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY") # récupérer la clé API YouTube depuis la variable d'environnement
+
 
 # extraire l'ID de la playlist depuis l'URL
 def extract_playlist_id(url): # extraire l'ID de la playlist depuis l'URL
     query = urlparse(url).query # analyser l'URL pour extraire la partie de l'URL qui contient l'ID de la playlist
     params = parse_qs(query) # analyser la chaîne de requête pour extraire les paramètres
     return params["list"][0] if "list" in params else None # retourner l'ID de la playlist
+
 
 # récupérer les informations de la playlist
 def get_playlist_info(playlist_id):
@@ -27,6 +28,7 @@ def get_playlist_info(playlist_id):
         snippet = response['items'][0]['snippet']
         title = snippet['title']
         channel_title = snippet['channelTitle']
+        channel_title = re.sub(r"\s*-\s*topic$", "", channel_title, flags=re.IGNORECASE).strip()
         return title, channel_title
     return None, None
 
@@ -45,6 +47,7 @@ def get_videos(playlist_url):
         videos.append(item['snippet']['resourceId']['videoId']) # ajouter l'ID de la vidéo à la liste
     return videos # retourner la liste des IDs des vidéos
 
+
 # récupérer les titres des vidéos
 def get_titles(videos):
     youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY) # construire le service YouTube avec la clé API
@@ -55,6 +58,7 @@ def get_titles(videos):
         titles.append(item['snippet']['title']) # ajouter le titre de la vidéo à la liste
     return titles # retourner la liste des titres des vidéos
 
+
 # récupérer les artistes des vidéos
 def get_artists(videos):
     youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY) # construire le service YouTube avec la clé API
@@ -62,7 +66,9 @@ def get_artists(videos):
     response = request.execute() # exécuter la requête
     artists = [] # liste pour stocker les artistes des vidéos
     for item in response['items']: # parcourir les éléments de la réponse
-        artists.append(item['snippet']['channelTitle']) # ajouter le nom de la chaîne (artiste) à la liste
+        channel_title = item['snippet']['channelTitle']
+        channel_title = re.sub(r"(\s*-\s*topic$)|(\s*\(.*official.*\)$)", "", channel_title, flags=re.IGNORECASE).strip()
+        artists.append(channel_title) # ajouter le nom de la chaîne (artiste) à la liste
     return artists # retourner la liste des artistes des vidéos
 
 

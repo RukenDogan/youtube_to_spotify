@@ -10,7 +10,7 @@ SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
 SPOTIFY_REDIRECT_URI = os.getenv("SPOTIFY_REDIRECT_URI")
 SPOTIFY_USER_ID= os.getenv("SPOTIFY_USER_ID")
 
-SCOPE = "playlist-modify-public"
+SCOPE = "playlist-modify-public playlist-modify-private"
 
 class Spotify:
     def __init__(self, spotify_user_id):
@@ -21,8 +21,7 @@ class Spotify:
             redirect_uri=SPOTIFY_REDIRECT_URI,
             scope=SCOPE
         ))
-        current_user = self.client.me()
-        self.spotify_user_id = current_user["id"]
+        self.spotify_user_id = self.client.me()["id"]
 
     def create_spotify_playlist(self, playlist_name, channel_name="YouTube"):
         name = f"{playlist_name} from @{channel_name}"
@@ -38,16 +37,21 @@ class Spotify:
             return None
         
         # Découpage de la requête pour séparer titre et artiste
-        parts = query.split()
         query_lower = query.lower()
 
         for track in tracks:
             track_title = track["name"].lower()
             track_artists = " ".join([a["name"].lower() for a in track["artists"]])
 
-            # Vérifie si le titre ET l'artiste sont dans la requête
-            if any(word in query_lower for word in track_title.split()) and any(a in query_lower for a in track_artists.split()):
+            title_terms = track_title.split()
+            artist_terms = track_artists.split()
+
+            if all(term in query_lower for term in title_terms + artist_terms):
                 return track["id"]
+
+            # Vérifie si le titre ET l'artiste sont dans la requête
+            # if all(term in query_lower for term in [track_title.split()[0]] + track_artists.split()):
+            #     return track["id"]
 
         return None
 
@@ -63,6 +67,7 @@ class Spotify:
 
         if track_ids:
             self.client.playlist_add_items(self.playlist_id, track_ids)
+        print(f"❌ Non trouvés ({len(not_found)}):", not_found)
         return track_ids
 
 

@@ -1,4 +1,4 @@
-from app.models.youtube_model import extract_playlist_id
+from backend.models.youtube_model import extract_playlist_id
 
 def test_extract_playlist_id():
     url = "https://www.youtube.com/playlist?list=PL123ABC"

@@ -1,6 +1,6 @@
-from app.models import youtube_model as yt
-from app.models import spotify_model as sp
-from app.models.spotify_model import SPOTIFY_USER_ID
+from backend.models import youtube_model as yt
+from backend.models import spotify_model as sp
+from backend.models.spotify_model import SPOTIFY_USER_ID
 
 class Synchronizer:
     def __init__(self, youtube_url, spotify_user_id):
