@@ -25,6 +25,7 @@ L'objectif principal est de se familiariser avec :
     - `spotipy`
     - `python-dotenv`
     - `google-api-python-client` (pour YouTube)
+    - `flask`
 
 ## Installation
 1. Cloner le projet :
