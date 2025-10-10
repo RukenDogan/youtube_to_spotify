@@ -3,6 +3,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
 import os
+import re
 
 load_dotenv(dotenv_path=".env.local")
 SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
@@ -54,6 +55,7 @@ class Spotify:
             #     return track["id"]
 
         return None
+    
 
     def add_tracks_to_playlist(self, track_queries):
         track_ids = []

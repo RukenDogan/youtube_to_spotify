@@ -52,7 +52,9 @@ L'objectif principal est de se familiariser avec :
 
 ## Points importants
 - Certains morceaux peuvent ne pas être trouvés si le nom ou l'artiste est trop différent
-- Les vidéos YouTube provenant de chaînes "Topic" ou sans titre clair peuvent poser problème
+- Les vidéos YouTube provenant de chaînes "Topic" ou dont le titre est peu clair peuvent parfois ne pas être parfaitement reconnues par Spotify.
+- L’API YouTube peut renvoyer des vidéos "fantômes" (supprimées, privées ou non listées)
+  si elles sont encore référencées dans la playlist. Ces vidéos peuvent ne plus apparaître dans l’interface YouTube, mais être comptées dans la requête API. Elles peuvent provoquer des écarts dans le nombre de morceaux importés.
 - Ce projet est structuré selon une architecture MVC :
     - Models : youtube_model.py et spotify_model.py
     - Controller : prévu pour gérer la logique lorsque l'interface sera ajoutée

@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from models.spotify_model import 
-from models.youtube_model import Youtube
+from models.youtube_model import
 
 app = Flask(__name__)
 
