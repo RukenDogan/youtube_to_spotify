@@ -2,6 +2,7 @@ import { useState } from "react";
 import { syncPlaylist } from "./api";
 import "./App.css";
 import logo from "./assets/images/logoBS.png";
+import beating from "./assets/images/beating.png";
 
 export default function App() {
   const [url, setUrl] = useState("");
@@ -19,16 +20,23 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <img src={logo} alt="logo" className="logo positioned-logo" />
-      <h1 className="text-h1">Let's Beat in Sync ♡</h1>
+      <h1 className="text-h1">
+        Synchronisez vos playlists en un battement
+        {/* <div className="beating">
+          <span className="note">♪</span>
+          <span className="heart">♡</span>
+        </div> */}
+        <img src={beating} alt="beating" className="beating" />
+      </h1>
       <p className="text">
-        Synchronisez vos playlists YouTube avec Spotify en un clin d'œil !
+        Collez l'URL d'une playlist YouTube pour la synchroniser avec Spotify
       </p>
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          placeholder="Entre une URL de playlist YouTube"
+          placeholder="Entrez une URL de playlist YouTube"
           className="border p-2 rounded w-96"
         />
         <button
