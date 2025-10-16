@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { syncPlaylist } from "./api";
+import "./App.css";
+import logo from "./assets/images/logoBS.png";
 
 export default function App() {
   const [url, setUrl] = useState("");
@@ -16,7 +18,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <h1 className="text-3xl font-bold mb-6">🎵 YouTube → Spotify</h1>
+      <img src={logo} alt="logo" className="logo positioned-logo" />
+      <h1 className="text-h1">Let's Beat in Sync ♡</h1>
+      <p className="text">
+        Synchronisez vos playlists YouTube avec Spotify en un clin d'œil !
+      </p>
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input
           type="text"
