@@ -72,9 +72,12 @@ L'objectif principal est de se familiariser avec :
 
 ## Test de la route avec Postman
 - Test de la route avec Postman :
+
  ![Test de la route avec Postman](docs-images/route_postman.png)
+
 - Test de la route dans le terminal :
- ![Test de la route dans le terminal](docs-images/route_terminal.png)
+
+ ![Test de la route dans le terminal](docs-images/terminal_test_postman.png)
 
 ---
 Ruken
