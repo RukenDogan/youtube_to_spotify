@@ -3,6 +3,7 @@ import { syncPlaylist } from "./api";
 import "./App.css";
 import logo from "./assets/images/logoBS.png";
 import beating from "./assets/images/beating.png";
+import Login from "./pages/Login";
 
 export default function App() {
   const [url, setUrl] = useState("");
@@ -63,3 +64,24 @@ export default function App() {
     </div>
   );
 }
+
+
+
+
+// import Dashboard from "./pages/Dashboard";
+// import Login from "./pages/Login";
+
+
+// import "./App.css";
+
+// export default function App() {
+//   const userLoggedIn = true; // gérer avec un state plus tard
+
+//   return (
+//     <div className="appContainer">
+//       <Header />
+//       {userLoggedIn ? <Dashboard /> : <Login />}
+//       <Footer />
+//     </div>
+//   );
+// }
