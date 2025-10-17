@@ -14,5 +14,5 @@ jobs:
       - name: Run tests
         working-directory: ./backend
         run: |
-          echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
-          pytest tests
+          echo "PYTHONPATH=$PYTHONPATH:$(pwd)/backend" >> $GITHUB_ENV
+          pytest backend/tests
