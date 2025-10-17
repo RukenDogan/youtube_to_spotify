@@ -83,8 +83,6 @@ L'objectif principal est de se familiariser avec :
 - Création d'une maquette pour la page login
 
 ## Tests
-
-## Tests
 - **Tests automatisés (CI/CD)** : exécutés avec GitHub Actions à chaque commit/pull request  
 - **Tests unitaires** : avec `pytest` dans le dossier `backend/tests`
 - **Tests manuels** :
