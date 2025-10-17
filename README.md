@@ -1,7 +1,7 @@
-# Synchronisation de Playlists YouTube vers Spotify
+# Synchronisation de Playlists YouTube vers Spotify - BeatSyncApp
 
 ## Description
-Ce projet est une application Python qui permet de synchroniser les vidéos d'une playlist YouTube
+Ce projet est une application **Python** et **React** qui permet de synchroniser les vidéos d'une playlist YouTube
 en créant automatiquement une playlist correspondante sur Spotify.
 
 L'objectif principal est de se familiariser avec :
@@ -10,12 +10,14 @@ L'objectif principal est de se familiariser avec :
 - la gestion de données JSON,
 - la structuration d'un projet en architecture MVC (Models, Controller, Views),
 - la recherche intelligente de morceaux sur Spotify avec correspondance titre/artiste.
+- la création d'une interface web en React.
 
 ## Fonctionnalités
 - Extraire les titres et artistes d'une playlist YouTube
 - Créer une nouvelle playlist sur Spotify
 - Rechercher les morceaux sur Spotify avec un score de correspondance
 - Ajouter les morceaux trouvés à la playlist Spotify
+- Interface web avec connexion Spotify sécurisée (à venir), saisie d’URL YouTube, et suivi de la synchronisation
 
 ## Prérequis
 - Python 3.9 ou supérieur
@@ -26,6 +28,9 @@ L'objectif principal est de se familiariser avec :
     - `python-dotenv`
     - `google-api-python-client` (pour YouTube)
     - `flask`
+- Modules React :
+   - `npm create vite@latest youtube-to-spotify-front --template react`
+   - `npm install`
 
 ## Installation
 1. Cloner le projet :
@@ -35,9 +40,11 @@ L'objectif principal est de se familiariser avec :
    - `python -m venv venv`
    - `source venv/bin/activate`   # Linux/Mac
    - `.\venv\Scripts\activate`    # Windows
+
 3. Installer les dépendances :
    - `pip install -r requirements.txt`
    - `pip freeze > requirements.txt` (pour mettre à jour les dépendances)
+
 4. Créer un fichier `.env.local` (voir fichier .env) avec :
    - SPOTIFY_CLIENT_ID=...
    - SPOTIFY_CLIENT_SECRET=...
@@ -46,10 +53,16 @@ L'objectif principal est de se familiariser avec :
    - YOUTUBE_API_KEY=...
 
 ## Utilisation
-1. Lancer le script principal :
+- Backend :
+1. Se positionner dans le dossier `backend` :
    `python main.py`
 2. Entrer l'URL de la playlist YouTube quand demandé
 3. L'application créera la playlist sur Spotify et ajoutera les morceaux trouvés
+
+- Frontend :
+1. Se positionner dans le dossier `frontend` :
+   `npm run dev`
+2. Ouvrir l'URL `http://localhost:5173/` dans le navigateur
 
 ## Points importants
 - Certains morceaux peuvent ne pas être trouvés si le nom ou l'artiste est trop différent
@@ -63,14 +76,21 @@ L'objectif principal est de se familiariser avec :
 - Le but est également de se préparer à l'ajout d'une interface graphique (par exemple avec Tkinter ou Flask/React)
 - La synchronisation inverse est également possible : à partir d'une playlist Spotify, nous pouvons récupérer les vidéos YouTube correspondantes et les ajouter à une playlist YouTube. Cela nécessite d'obtenir l'autorisation OAuth via l'API YouTube.
 
-
 ## Organisation du projet
 - Cahier des charges : [PDF](https://github.com/RukenDogan/youtube_to_spotify/tree/main/docs-images/CAHIER_DES_CHARGES_BeatSyncApp.pdf)
 - Gestion de projet (méthode Kanban) : https://trello.com/invite/b/68e4cd834914b08442301ac4/ATTI16bcee34f742fc93b408b9e6ff2bba5e6B03E2A1/gestion-de-projet-youtube-spotify
 - Création d'une maquette avec Figma : https://www.figma.com/design/NAmYPrvKnnxLt6XkuWXm5A/Dashboard-youtube-spotify?node-id=0-1&t=4zct53bk2ICdX9tM-1 (page principale)
 - Création d'une maquette pour la page login
 
-## Test de la route avec Postman
+## Tests
+
+## Tests
+- **Tests automatisés (CI/CD)** : exécutés avec GitHub Actions à chaque commit/pull request  
+- **Tests unitaires** : avec `pytest` dans le dossier `backend/tests`
+- **Tests manuels** :
+  - via **Postman** pour tester les endpoints
+  - via le **terminal**
+
 - Test de la route avec Postman :
 
  ![Test de la route avec Postman](docs-images/route_postman.png)
@@ -78,6 +98,13 @@ L'objectif principal est de se familiariser avec :
 - Test de la route dans le terminal :
 
  ![Test de la route dans le terminal](docs-images/terminal_test_postman.png)
+
+
+ ## Sécurité
+- Les clés API et identifiants Spotify sont stockés dans un fichier `.env.local` non versionné.  
+- (plus tard) Le projet ne stocke pas les tokens d’accès Spotify, ils sont utilisés uniquement le temps de la session.  
+- (plus tard) Aucune donnée utilisateur n’est conservée côté serveur.
+
 
 ---
 Ruken
