@@ -18,87 +18,48 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <div className="appContainer">
       <img src={logo} alt="logo" className="logo positioned-logo" />
       <h1 className="text-h1">
         Synchronisez vos playlists en un battement
-        {/* <div className="beating">
-          <span className="note">♪</span>
-          <span className="heart">♡</span>
-        </div> */}
         <img src={beating} alt="beating" className="beating" />
       </h1>
       <p className="text">
-        Collez l'URL d'une playlist YouTube pour la synchroniser avec Spotify
+        Collez l'URL d'une playlist YouTube pour la synchroniser vers Spotify
       </p>
-      <form onSubmit={handleSubmit} className="flex gap-2">
+      <form onSubmit={handleSubmit} className="handleSubmitForm">
         <input
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="Entrez une URL de playlist YouTube"
-          className="border p-2 rounded w-96"
+          className="input"
         />
         <button
           type="submit"
           disabled={loading}
-          className="bg-green-600 text-white px-4 py-2 rounded"
+          className="submitButton"
         >
           {loading ? "Synchronisation..." : "Synchroniser"}
         </button>
       </form>
 
       {result && (
-        <div className="mt-6 p-4 bg-white rounded shadow w-96 text-center">
+        <div className="resultBox">
           {result.error ? (
-            <p className="text-red-600">Erreur : {result.error}</p>
+            <p className="resultError">Erreur : {result.error}</p>
           ) : (
             <>
-              <p className="text-green-700 font-semibold">{result.message}</p>
+              <p className="resultText">{result.message}</p>
               <p>🎧 {result.nb_tracks_added} titres ajoutés</p>
             </>
           )}
         </div>
       )}
+
+      <footer className="footer">
+        <p>© 2025 Ruken Dogan</p>
+      </footer>
     </div>
   );
 }
-
-
-
-
-// // import { useState } from 'react'
-// // import reactLogo from './assets/react.svg'
-// // import viteLogo from '/vite.svg'
-// // import './App.css'
-
-// // function App() {
-// //   const [count, setCount] = useState(0)
-
-// //   return (
-// //     <>
-// //       <div>
-// //         <a href="https://vite.dev" target="_blank">
-// //           <img src={viteLogo} className="logo" alt="Vite logo" />
-// //         </a>
-// //         <a href="https://react.dev" target="_blank">
-// //           <img src={reactLogo} className="logo react" alt="React logo" />
-// //         </a>
-// //       </div>
-// //       <h1>Vite + React</h1>
-// //       <div className="card">
-// //         <button onClick={() => setCount((count) => count + 1)}>
-// //           count is {count}
-// //         </button>
-// //         <p>
-// //           Edit <code>src/App.jsx</code> and save to test HMR
-// //         </p>
-// //       </div>
-// //       <p className="read-the-docs">
-// //         Click on the Vite and React logos to learn more
-// //       </p>
-// //     </>
-// //   )
-// // }
-
-// // export default App
