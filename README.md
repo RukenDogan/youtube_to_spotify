@@ -65,10 +65,16 @@ L'objectif principal est de se familiariser avec :
 
 
 ## Organisation du projet
+- Cahier des charges : [PDF](https://github.com/RukenDogan/youtube_to_spotify/tree/main/docs-images/CAHIER_DES_CHARGES_BeatSyncApp.pdf)
 - Gestion de projet (méthode Kanban) : https://trello.com/invite/b/68e4cd834914b08442301ac4/ATTI16bcee34f742fc93b408b9e6ff2bba5e6B03E2A1/gestion-de-projet-youtube-spotify
 - Création d'une maquette avec Figma : https://www.figma.com/design/NAmYPrvKnnxLt6XkuWXm5A/Dashboard-youtube-spotify?node-id=0-1&t=4zct53bk2ICdX9tM-1 (page principale)
 - Création d'une maquette pour la page login
 
+## Test de la route avec Postman
+- Test de la route avec Postman :
+ ![Test de la route avec Postman](docs-images/route_postman.png)
+- Test de la route dans le terminal :
+ ![Test de la route dans le terminal](docs-images/route_terminal.png)
 
 ---
 Ruken
