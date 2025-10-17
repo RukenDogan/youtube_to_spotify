@@ -11,4 +11,8 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements.txt
-      - run: pytest
+      - name: Run tests
+        working-directory: ./backend
+        run: |
+          echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
+          pytest tests
