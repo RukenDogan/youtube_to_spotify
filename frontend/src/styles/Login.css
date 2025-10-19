@@ -1,0 +1,51 @@
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #023A32;
+  color: white;
+  font-family: 'Happy Monkey', cursive;
+  text-align: center;
+}
+
+.loginLogo {
+  width: 10rem;
+  margin-bottom: 2rem;
+}
+
+.loginTitle {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.loginText {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  width: 80%;
+  max-width: 500px;
+}
+
+.spotifyButton {
+  background-color: #1DB954;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.spotifyButton:hover {
+  background-color: #1ed760;
+  transform: scale(1.05);
+}
+
+.spotifyIcon {
+  font-size: 1.5rem;
+}

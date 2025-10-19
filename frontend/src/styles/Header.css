@@ -1,0 +1,40 @@
+.positioned-logo {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  height: 11em;
+  transition: transform 0.3s ease, filter 0.3s;
+}
+
+.positioned-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 1em #eeaac7);
+}
+
+.text-h1 {
+  font-size: 2.2em;
+  color: #ffffff;
+  margin: 2rem auto 0.5em auto;
+  max-width: 60%;
+}
+
+.beating {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  display: inline-block;
+  top: 20px;
+  animation: beating 1.5s infinite;
+}
+
+@keyframes beating {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+  .positioned-logo { height: 8em; top: 30px; left: 30px; }
+  .text-h1 { font-size: 1.6em; margin-top: 9rem; max-width: 90%; }
+  .beating { width: 3rem; height: 3rem; top: 5px; margin: 0 auto; left: auto; }
+}
