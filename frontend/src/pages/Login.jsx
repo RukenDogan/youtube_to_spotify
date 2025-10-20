@@ -1,6 +1,7 @@
 import "../styles/Login.css";
 import logo from "../assets/images/logoBS.png";
 import { FaSpotify } from "react-icons/fa";
+import Footer from "../components/Footer";
 
 export default function Login({ onLogin }) {
   const handleSpotifyLogin = () => {
@@ -18,6 +19,7 @@ export default function Login({ onLogin }) {
         <FaSpotify className="spotifyIcon" />
         Se connecter avec Spotify
       </button>
+      < Footer />
     </div>
   );
 }

@@ -34,7 +34,20 @@
 }
 
 @media (max-width: 768px) {
-  .positioned-logo { height: 8em; top: 30px; left: 30px; }
-  .text-h1 { font-size: 1.6em; margin-top: 9rem; max-width: 90%; }
-  .beating { width: 3rem; height: 3rem; top: 5px; margin: 0 auto; left: auto; }
+  .positioned-logo { 
+    height: 8em; 
+    top: 30px; 
+    left: 30px; 
+}
+  .text-h1 { 
+    font-size: 1.6em; 
+    margin-top: 9rem; 
+    max-width: 90%; 
+}
+  .beating { 
+    width: 3rem; 
+    height: 3rem; 
+    top: 5px; 
+    margin: 0 auto; 
+    left: auto; }
 }

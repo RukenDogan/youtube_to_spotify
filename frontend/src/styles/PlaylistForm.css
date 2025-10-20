@@ -41,7 +41,18 @@
 }
 
 @media (max-width: 768px) {
-  .text { font-size: 1em; margin: 3em 0 1.5em 0; }
-  .input { width: 90%; max-width: 300px; }
-  .submitButton { width: 90%; max-width: 200px; }
+  .text { 
+    font-size: 1em; 
+    margin: 3em 0 1.5em 0; 
+ }
+
+  .input { 
+    width: 90%; 
+    max-width: 300px; 
+  }
+
+  .submitButton { 
+    width: 90%; 
+    max-width: 200px; 
+  }
 }
