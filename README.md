@@ -106,7 +106,7 @@ L'objectif principal est de se familiariser avec :
 ## Aperçu visuel
 **Côté backend**
 
-Lancement du script `main.py` :
+- Lancement du script `main.py` :
 Exemple d’exécution dans le terminal lors de la synchronisation :
 
 <p align="center">
@@ -121,7 +121,7 @@ Playlist créée automatiquement :
 </p>
 
 **Côté frontend (React)**
-Se placer dans le dossier `frontend` et lancer `npm run dev` :
+- Se placer dans le dossier `frontend` et lancer `npm run dev` :
 
 Page de connexion :
 Page d’accueil invitant l’utilisateur à se connecter à son compte Spotify :
