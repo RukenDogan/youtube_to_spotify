@@ -103,6 +103,40 @@ L'objectif principal est de se familiariser avec :
 - (plus tard) Le projet ne stocke pas les tokens d’accès Spotify, ils sont utilisés uniquement le temps de la session.  
 - (plus tard) Aucune donnée utilisateur n’est conservée côté serveur.
 
+## Aperçu visuel
+**Côté backend**
+
+Lancement du script `main.py` :
+Exemple d’exécution dans le terminal lors de la synchronisation :
+
+<p align="center">
+  <img src="docs-images/terminal_main.png" width="600" />
+</p>
+
+Résultat sur Spotify :
+Playlist créée automatiquement :
+
+<p align="center">
+  <img src="docs-images/pl_spotify.png" width="600" />
+</p>
+
+**Côté frontend (React)**
+Se placer dans le dossier `frontend` et lancer `npm run dev` :
+
+Page de connexion :
+Page d’accueil invitant l’utilisateur à se connecter à son compte Spotify :
+
+<p align="center">
+  <img src="docs-images/page_login.png" width="600" />
+</p>
+
+Dashboard :
+Interface principale pour synchroniser les playlists YouTube → Spotify :
+
+<p align="center">
+  <img src="docs-images/page_dashboard.png" width="600" />
+</p>
+
 
 ---
 Ruken
