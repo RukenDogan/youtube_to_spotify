@@ -1,5 +1,9 @@
 # Synchronisation de Playlists YouTube vers Spotify - BeatSyncApp
 
+<p align="center">
+  <img src="frontend/src/assets/images/logoBS.png" width="10rem" />
+</p>
+
 ## Description
 Ce projet est une application **Python** et **React** qui permet de synchroniser les vidéos d'une playlist YouTube
 en créant automatiquement une playlist correspondante sur Spotify.

@@ -8,12 +8,11 @@
   color: white;
   font-family: 'Happy Monkey', cursive;
   text-align: center;
-  /* border: 1px solid #ffffff; */
 }
 
 .loginLogo {
   width: 10rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .loginTitle {
