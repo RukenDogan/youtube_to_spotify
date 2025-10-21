@@ -75,16 +75,14 @@ L'objectif principal est de se familiariser avec :
   si elles sont encore référencées dans la playlist. Ces vidéos peuvent ne plus apparaître dans l’interface YouTube, mais être comptées dans la requête API. Elles peuvent provoquer des écarts dans le nombre de morceaux importés.
 - Ce projet est structuré selon une architecture MVC :
     - Models : youtube_model.py et spotify_model.py
-    - Controller : prévu pour gérer la logique lorsque l'interface sera ajoutée
+    - Controller : prévu pour gérer la logique
     - Views : à développer plus tard pour créer une interface utilisateur
-- Le but est également de se préparer à l'ajout d'une interface graphique (par exemple avec Tkinter ou Flask/React)
-- La synchronisation inverse est également possible : à partir d'une playlist Spotify, nous pouvons récupérer les vidéos YouTube correspondantes et les ajouter à une playlist YouTube. Cela nécessite d'obtenir l'autorisation OAuth via l'API YouTube.
+- La synchronisation inverse pourrait également être envisageable : à partir d'une playlist Spotify, nous pouvons récupérer les vidéos YouTube correspondantes et les ajouter à une playlist YouTube. Cela nécessite d'obtenir l'autorisation OAuth via l'API YouTube.
 
 ## Organisation du projet
 - Cahier des charges : [PDF](https://github.com/RukenDogan/youtube_to_spotify/tree/main/docs-images/CAHIER_DES_CHARGES_BeatSyncApp.pdf)
-- Gestion de projet (méthode Kanban) : https://www.figma.com/design/NAmYPrvKnnxLt6XkuWXm5A/Pages-Login-et-Dashboard-youtube-spotify?node-id=0-1&t=hxy3dyF7D3XK1G16-1
-- Création d'une maquette avec Figma : https://www.figma.com/design/NAmYPrvKnnxLt6XkuWXm5A/Dashboard-youtube-spotify?node-id=0-1&t=4zct53bk2ICdX9tM-1 (page principale)
-- Création d'une maquette pour la page login
+- Gestion de projet (méthode Kanban) : https://trello.com/invite/b/68e4cd834914b08442301ac4/ATTI16bcee34f742fc93b408b9e6ff2bba5e6B03E2A1/gestion-de-projet-youtube-spotify
+- Création de maquettes avec Figma pour les pages Login et Dashboard : https://www.figma.com/design/NAmYPrvKnnxLt6XkuWXm5A/Pages-Login-et-Dashboard-youtube-spotify?node-id=0-1&p=f&t=DaXgRIgKQMHaadRD-0
 
 ## Tests
 - **Tests automatisés (CI/CD)** : exécutés avec GitHub Actions à chaque commit/pull request  
