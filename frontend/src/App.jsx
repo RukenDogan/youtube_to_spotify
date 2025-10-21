@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import "./styles/App.css";
 import Loader from "./components/Loader.jsx";
+import Footer from "./components/Footer.jsx";
 
 
 export default function App() {
@@ -19,8 +20,11 @@ export default function App() {
 
   return (
     <div className="appContainer">
-      {loading && <Loader />}
-      {user ? <Dashboard /> : <Login onLogin={handleLogin} />}
+      <div className="content">
+        {loading && <Loader loading={loading} />}
+        {!loading && (user ? <Dashboard /> : <Login onLogin={handleLogin} />)}
+      </div>
+      <Footer />
     </div>
   );
 }

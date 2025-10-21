@@ -1,15 +1,16 @@
 import React from "react";
+import { PacmanLoader } from "react-spinners";
 import "../styles/Loader.css";
 
-export default function Loader() {
+export default function Loader({ loading }) {
   return (
-    <div className="loader">
-      <div className="loader-inner">
-        <div className="loader-item"></div>
-        <div className="loader-item"></div>
-        <div className="loader-item"></div>
-        <div className="loader-item"></div>
-      </div>
+    <div className="loader-overlay">
+      <PacmanLoader 
+        color="#eeaac7" 
+        loading={loading} 
+        size={30} 
+        cssOverride={{ opacity: 0.7 }}
+        />
     </div>
   );
 }

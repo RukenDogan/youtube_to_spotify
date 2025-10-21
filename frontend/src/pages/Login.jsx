@@ -19,7 +19,6 @@ export default function Login({ onLogin }) {
         <FaSpotify className="spotifyIcon" />
         Se connecter avec Spotify
       </button>
-      < Footer />
     </div>
   );
 }

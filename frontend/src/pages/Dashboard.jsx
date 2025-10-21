@@ -8,7 +8,6 @@ export default function Dashboard() {
     <div className="appContainer">
       <Header />
       <PlaylistForm />
-      <Footer />
     </div>
   );
 }

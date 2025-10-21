@@ -1,11 +1,9 @@
 .resultBox {
-  margin-top: 2rem;
-  padding: 1rem;
-  border: 2px solid #ffffff;
-  border-radius: 0.5em;
   width: 80%;
   max-width: 400px;
   color: #ffffff;
+  margin: 0 auto;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .resultText {

@@ -6,15 +6,16 @@
 
 .handleSubmitForm {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
 .input {
   border: 2px solid #ffffff;
-  padding: 0.5em;
+  padding: 1em;
   border-radius: 0.5em;
-  width: 20rem;
+  width: 30rem;
   font-size: 1em;
 }
 
@@ -22,7 +23,7 @@
   background-color: #eeaac7;
   color: #023a32;
   border: none;
-  padding: 0.6em;
+  padding: 1.2em;
   border-radius: 0.5em;
   font-size: 1em;
   cursor: pointer;
