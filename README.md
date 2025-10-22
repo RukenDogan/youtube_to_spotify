@@ -23,6 +23,15 @@ L'objectif principal est de se familiariser avec :
 - Ajouter les morceaux trouvés à la playlist Spotify
 - Interface web avec connexion Spotify sécurisée (à venir), saisie d’URL YouTube, et suivi de la synchronisation
 
+## Architecture du projet
+Ce projet suit une architecture MVC adaptée avec un frontend React et un backend Flask :
+
+- **Models** : youtube_model.py et spotify_model.py côté backend, qui représentent les données et la logique métier (extraction YouTube, création playlist Spotify).
+- **Controllers** : les routes Flask (sync_playlist) orchestrent les appels aux models et renvoient les données sous forme JSON.
+- **Views** : côté frontend React, les pages et composants (Login, Dashboard, Footer, etc.) affichent l’interface utilisateur.
+
+Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont entièrement gérées par React, ce qui correspond à une séparation frontend/back‑end tout en conservant le principe MVC.
+
 ## Prérequis
 - Python 3.9 ou supérieur
 - Un compte Spotify avec une application enregistrée pour obtenir Client ID et Client Secret
