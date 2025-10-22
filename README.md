@@ -1,7 +1,7 @@
 # Synchronisation de Playlists YouTube vers Spotify - BeatSyncApp
 
 <p align="center">
-  <img src="frontend/src/assets/images/logoBS.png" width="200" />
+  <img src="docs-images/logoREADME.png" width="200" />
 </p>
 
 ## Description
