@@ -5,7 +5,7 @@
 </p>
 
 ## Description
-Ce projet est une application **Python** et **React** qui permet de synchroniser les vidéos d'une playlist YouTube
+Ce projet est une application **Python** / **Flask** et **React** / **Vite** qui permet de synchroniser les vidéos d'une playlist YouTube
 en créant automatiquement une playlist correspondante sur Spotify.
 
 L'objectif principal est de se familiariser avec :
