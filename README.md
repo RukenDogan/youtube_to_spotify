@@ -1,4 +1,5 @@
-# Synchronisation de Playlists YouTube vers Spotify - BeatSyncApp
+# Synchronisation de Playlists YouTube vers Spotify
+# - BeatSync App -
 
 <p align="center">
   <img src="docs-images/logoREADME.png" width="200" />
