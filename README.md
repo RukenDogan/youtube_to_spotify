@@ -149,6 +149,5 @@ Interface principale pour synchroniser les playlists YouTube → Spotify :
   <img src="docs-images/page_dashboard.png" width="600" />
 </p>
 
-
 ---
 Ruken
