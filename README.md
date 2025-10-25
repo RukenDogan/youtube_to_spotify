@@ -4,8 +4,6 @@
   <img src="docs-images/logoREADME.png" width="200" />
 </p>
 
-BeatSync App est une application web permettant de synchroniser automatiquement les playlists YouTube avec Spotify grâce à Flask (backend) et React (frontend).
-
 ## Description
 Ce projet est une application **Python** / **Flask** et **React** / **Vite** qui permet de synchroniser les vidéos d'une playlist YouTube
 en créant automatiquement une playlist correspondante sur Spotify.
