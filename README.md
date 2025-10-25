@@ -1,5 +1,4 @@
-# Synchronisation de Playlists YouTube vers Spotify
-# - BeatSync App -
+# BeatSync App - Synchronisation de Playlists YouTube vers Spotify
 
 <p align="center">
   <img src="docs-images/logoREADME.png" width="200" />
@@ -41,20 +40,6 @@ Ce projet suit une architecture MVC adaptée avec un frontend React et un backen
 - **Views** : côté frontend React, les pages et composants (Login, Dashboard, Footer, etc.) affichent l’interface utilisateur.
 
 Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont entièrement gérées par React, ce qui correspond à une séparation frontend/back‑end tout en conservant le principe MVC.
-
-**Flux MVC avec React/Flask** :
-
-YouTube / Spotify APIs
-        ↑
-        |
-   Controllers (Flask routes)
-        ↑
-        |
-       Models (logique métier)
-        ↑
-        |
-     Frontend React (Views)
-
 
 ## Prérequis
 - Python 3.9 ou supérieur
