@@ -5,6 +5,8 @@
   <img src="docs-images/logoREADME.png" width="200" />
 </p>
 
+BeatSync App est une application web permettant de synchroniser automatiquement les playlists YouTube avec Spotify grâce à Flask (backend) et React (frontend).
+
 ## Description
 Ce projet est une application **Python** / **Flask** et **React** / **Vite** qui permet de synchroniser les vidéos d'une playlist YouTube
 en créant automatiquement une playlist correspondante sur Spotify.
@@ -24,6 +26,13 @@ L'objectif principal est de se familiariser avec :
 - Ajouter les morceaux trouvés à la playlist Spotify
 - Interface web avec connexion Spotify sécurisée (à venir), saisie d’URL YouTube, et suivi de la synchronisation
 
+## Technologies principales
+- **Backend :** Python, Flask, Spotipy, Google API Client
+- **Frontend :** React (JS, Vite)
+- **Tests :** Pytest, Postman
+- **CI/CD :** GitHub Actions
+- **Gestion de projet :** Trello, Figma
+
 ## Architecture du projet
 Ce projet suit une architecture MVC adaptée avec un frontend React et un backend Flask :
 
@@ -32,6 +41,20 @@ Ce projet suit une architecture MVC adaptée avec un frontend React et un backen
 - **Views** : côté frontend React, les pages et composants (Login, Dashboard, Footer, etc.) affichent l’interface utilisateur.
 
 Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont entièrement gérées par React, ce qui correspond à une séparation frontend/back‑end tout en conservant le principe MVC.
+
+**Flux MVC avec React/Flask** :
+
+YouTube / Spotify APIs
+        ↑
+        |
+   Controllers (Flask routes)
+        ↑
+        |
+       Models (logique métier)
+        ↑
+        |
+     Frontend React (Views)
+
 
 ## Prérequis
 - Python 3.9 ou supérieur
@@ -83,11 +106,20 @@ Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont
 - Les vidéos YouTube provenant de chaînes "Topic" ou dont le titre est peu clair peuvent parfois ne pas être parfaitement reconnues par Spotify.
 - L’API YouTube peut renvoyer des vidéos "fantômes" (supprimées, privées ou non listées)
   si elles sont encore référencées dans la playlist. Ces vidéos peuvent ne plus apparaître dans l’interface YouTube, mais être comptées dans la requête API. Elles peuvent provoquer des écarts dans le nombre de morceaux importés.
-- Ce projet est structuré selon une architecture MVC :
-    - Models : youtube_model.py et spotify_model.py
-    - Controller : prévu pour gérer la logique
-    - Views : à développer plus tard pour créer une interface utilisateur
 - La synchronisation inverse pourrait également être envisageable : à partir d'une playlist Spotify, nous pouvons récupérer les vidéos YouTube correspondantes et les ajouter à une playlist YouTube. Cela nécessite d'obtenir l'autorisation OAuth via l'API YouTube.
+
+## Fonctionnalités à venir
+Ces fonctionnalités sont prévues pour les prochaines versions afin d’améliorer la sécurité et l’expérience utilisateur :
+- Connexion sécurisée via Spotify OAuth directement depuis l’interface React
+- Stockage des utilisateurs dans MongoDB pour renforcer la sécurité et permettre une authentification plus fiable
+- Amélioration de la gestion des erreurs et de la correspondance entre les morceaux YouTube ↔ Spotify
+
+## Déploiement prévu
+Le déploiement sera prochainement effectué :
+- sur **Render**, pour héberger le backend Flask et le frontend React, accessible via une URL publique
+- en **complément avec Docker**, pour créer un conteneur isolé contenant l’application complète et toutes ses dépendances, facilitant le test et la portabilité sur d’autres environnements
+
+Les instructions détaillées de déploiement (Dockerfile, configuration Render, etc.) seront ajoutées après la finalisation de ces fonctionnalités.
 
 ## Organisation du projet
 - Cahier des charges : [PDF](https://github.com/RukenDogan/youtube_to_spotify/tree/main/docs-images/CAHIER_DES_CHARGES_BeatSyncApp.pdf)
@@ -150,4 +182,4 @@ Interface principale pour synchroniser les playlists YouTube → Spotify :
 </p>
 
 ---
-Ruken
+Projet réalisé par Ruken Dogan

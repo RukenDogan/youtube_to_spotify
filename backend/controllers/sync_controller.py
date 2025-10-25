@@ -1,5 +1,8 @@
+# Routes flask pour la synchronisation des playlists et le login Spotify
+
 from flask import request, jsonify
 from backend.services.sync_service import synchronize_youtube_to_spotify
+from backend.models.spotify_model import SPOTIFY_USER_ID
 
 def sync_playlist():
     """Contrôleur Flask pour la synchronisation"""
