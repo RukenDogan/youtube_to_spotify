@@ -1,4 +1,4 @@
-from main import Synchronizer
+from backend.main import Synchronizer
 from backend.models.spotify_model import SPOTIFY_USER_ID
 
 def test_synchronizer():

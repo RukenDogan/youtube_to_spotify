@@ -1,11 +1,11 @@
 import "../styles/Login.css";
 import logo from "../assets/images/logoBS.png";
 import { FaSpotify } from "react-icons/fa";
-import Footer from "../components/Footer";
 
-export default function Login({ onLogin }) {
+export default function Login() {
   const handleSpotifyLogin = () => {
-    onLogin({ name: "Utilisateur Test" }); // pour simuler une connexion réussie
+    // onLogin({ name: "Utilisateur Test" }); // pour simuler une connexion réussie
+    window.location.href = "http://localhost:5000/login";
   };
 
   return (

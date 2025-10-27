@@ -74,7 +74,7 @@ Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont
 
 ## Utilisation
 - Backend :
-1. Se positionner à la racine du projet :
+1. Se positionner dans le dossier `backend` :
    `python main.py`
 2. Entrer l'URL de la playlist YouTube quand demandé
 3. L'application créera la playlist sur Spotify et ajoutera les morceaux trouvés
