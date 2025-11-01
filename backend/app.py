@@ -10,7 +10,7 @@ from backend.controllers.sync_controller import (
 )
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173"])
+CORS(app, origins=["http://localhost:5173"], supports_credentials=True)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev_secret")
 
 # Routes Spotify

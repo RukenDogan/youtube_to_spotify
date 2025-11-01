@@ -8,8 +8,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Récupère le token stocké côté serveur
-    fetch("http://localhost:5000/token", {
-      credentials: "include", // indispensable pour que Flask voie la session
+    fetch("http://localhost:5000/token", { 
+      credentials: "include", // inclut les cookies pour la session
     })
       .then((res) => res.json())
       .then((data) => {
