@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import PlaylistForm from "../components/PlaylistForm";
 import "../styles/App.css";
 
@@ -35,6 +36,7 @@ export default function Dashboard() {
       ) : (
         <p>Chargement du compte Spotify...</p>
       )}
+      <Footer />
     </div>
   );
 }

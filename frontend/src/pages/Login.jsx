@@ -1,5 +1,6 @@
 import "../styles/Login.css";
 import logo from "../assets/images/logoBS.png";
+import Footer from "../components/Footer";
 import { FaSpotify } from "react-icons/fa";
 
 export default function Login() {
