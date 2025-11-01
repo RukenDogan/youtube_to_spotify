@@ -1,21 +1,24 @@
 from flask import Flask
-from backend.controllers.sync_controller import sync_playlist, spotify_login, spotify_callback
-import os
 from flask_cors import CORS
+import os
+
+from backend.controllers.sync_controller import (
+    sync_playlist,
+    spotify_login,
+    spotify_callback,
+    get_token
+)
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173"]) # autorise l'accès à l'API depuis l'URL http://localhost:5173
+CORS(app, origins=["http://localhost:5173"])
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev_secret")
 
-# Clé de sécurité pour sessions Flask
-app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev_secret")  # fallback si non définie
-
-# Route pour l'authentification Spotify
+# Routes Spotify
 app.add_url_rule("/login", view_func=spotify_login)
-
-# Route pour la récupération du code Spotify
 app.add_url_rule("/callback", view_func=spotify_callback)
+app.add_url_rule("/token", view_func=get_token)
 
-# Route pour la synchronisation
+# Route de synchronisation
 app.add_url_rule("/youtube-to-spotify", view_func=sync_playlist, methods=["POST"])
 
 if __name__ == "__main__":

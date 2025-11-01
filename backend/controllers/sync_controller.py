@@ -1,5 +1,3 @@
-# Routes Flask pour la synchronisation des playlists et l'authentification Spotify
-
 from flask import request, jsonify, redirect, session
 from backend.services.sync_service import synchronize_youtube_to_spotify
 import os
@@ -19,24 +17,37 @@ sp_oauth = SpotifyOAuth(
     scope=SCOPE
 )
 
+
 # Routes Spotify
 def spotify_login():
     """Redirige l'utilisateur vers Spotify pour autorisation"""
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
 
+
 def spotify_callback():
     """Récupère le code Spotify et génère le token"""
     code = request.args.get("code")
-    token_info = sp_oauth.get_access_token(code)
-    # Récupère le token
-    access_token = token_info['access_token']
+    if not code:
+        return jsonify({"error": "Missing code"}), 400
 
-    # Redirige vers le frontend avec le token
-    return redirect(f"http://localhost:5173/dashboard?token={access_token}")
+    token_info = sp_oauth.get_access_token(code, check_cache=False)
+    session['spotify_token'] = token_info
+
+    # Redirige vers le frontend (Dashboard)
+    return redirect("http://localhost:5173/dashboard")
 
 
-# Synchronisation YouTube vers Spotify
+def get_token():
+    """Renvoie le token Spotify stocké en session"""
+    token_info = session.get("spotify_token")
+    if not token_info:
+        return jsonify({"error": "No token"}), 401
+    return jsonify({"access_token": token_info["access_token"]})
+
+
+
+# Synchronisation YouTube - Spotify
 def sync_playlist():
     """Contrôleur Flask pour la synchronisation"""
     data = request.json
@@ -50,4 +61,3 @@ def sync_playlist():
         return jsonify(result), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    

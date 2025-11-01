@@ -1,33 +1,44 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import PlaylistForm from "../components/PlaylistForm";
 import "../styles/App.css";
 
 export default function Dashboard() {
-  const location = useLocation();
   const [spotifyToken, setSpotifyToken] = useState(null);
 
   useEffect(() => {
-    // Récupère le token depuis l'URL si présent
-    const query = new URLSearchParams(location.search);
-    const token = query.get("token");
-    if (token) {
-      setSpotifyToken(token);
-      // Stocke le token dans le localStorage pour la connexion ultérieure
-      localStorage.setItem("spotify_token", token);
-      // Supprime le token de l'URL pour plus de propreté
-      window.history.replaceState({}, document.title, "/dashboard");
-    }
-  }, [location]);
+    // Récupère le token stocké côté serveur
+    fetch("http://localhost:5000/token", {
+      credentials: "include", // indispensable pour que Flask voie la session
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.access_token) {
+          setSpotifyToken(data.access_token);
+          localStorage.setItem("spotify_token", data.access_token);
+        } else {
+          // Si aucun token, redirige vers la page de login
+          window.location.href = "/";
+        }
+      })
+      .catch((err) => {
+        console.error("Erreur de récupération du token :", err);
+        window.location.href = "/";
+      });
+  }, []);
 
   return (
     <div className="appContainer">
       <Header />
-      <PlaylistForm spotifyToken={spotifyToken} />
+      {spotifyToken ? (
+        <PlaylistForm spotifyToken={spotifyToken} />
+      ) : (
+        <p>Chargement du compte Spotify...</p>
+      )}
     </div>
   );
 }
+
 
 
 // import Header from "../components/Header";
