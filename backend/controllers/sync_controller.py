@@ -35,7 +35,7 @@ def spotify_callback():
     session['spotify_token'] = token_info
 
     # Redirige vers le frontend (Dashboard)
-    return redirect("http://localhost:5173/dashboard")
+    return redirect("http://127.0.0.1:5173/dashboard")
 
 
 def get_token():

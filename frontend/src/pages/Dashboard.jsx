@@ -9,7 +9,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Récupère le token stocké côté serveur
-    fetch("http://localhost:5000/token", { 
+    fetch("http://127.0.0.1:5000/token", { 
       credentials: "include", // inclut les cookies pour la session
     })
       .then((res) => res.json())
@@ -19,12 +19,12 @@ export default function Dashboard() {
           localStorage.setItem("spotify_token", data.access_token);
         } else {
           // Si aucun token, redirige vers la page de login
-          window.location.href = "/";
+          window.location.href = "/login";
         }
       })
       .catch((err) => {
         console.error("Erreur de récupération du token :", err);
-        window.location.href = "/";
+        window.location.href = "/login";
       });
   }, []);
 
