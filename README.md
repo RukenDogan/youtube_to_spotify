@@ -92,7 +92,7 @@ Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont
 
 1. Se positionner dans le dossier `frontend` :
    `npm run dev`
-2. Ouvrir l'URL `http://localhost:5173/` dans le navigateur
+2. Ouvrir l'URL `http://127.0.0.1:5173/` dans le navigateur
 
 ## Points importants
 
