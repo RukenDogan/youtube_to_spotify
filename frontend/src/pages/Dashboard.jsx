@@ -36,7 +36,6 @@ export default function Dashboard() {
       ) : (
         <p>Chargement du compte Spotify...</p>
       )}
-      <Footer />
     </div>
   );
 }

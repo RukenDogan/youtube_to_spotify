@@ -24,6 +24,7 @@ class Spotify:
         ))
         self.spotify_user_id = self.client.me()["id"]
 
+
     def create_spotify_playlist(self, playlist_name, channel_name="YouTube"):
         name = f"{playlist_name} from @{channel_name}"
         playlist = self.client.user_playlist_create(self.spotify_user_id, name)
@@ -60,6 +61,7 @@ class Spotify:
     def add_tracks_to_playlist(self, track_queries):
         track_ids = []
         not_found = []
+
         for query in track_queries:
             track_id = self.search_track(query)
             if track_id:
@@ -68,8 +70,18 @@ class Spotify:
                 not_found.append(query)
 
         if track_ids:
-            self.client.playlist_add_items(self.playlist_id, track_ids)
-        print(f"❌ Non trouvés ({len(not_found)}):", not_found)
+            for i in range(0, len(track_ids), 100):
+                batch = track_ids[i:i + 100]
+                self.client.playlist_add_items(self.playlist_id, batch)
+                print(f"🎵 Ajout de {len(batch)} morceaux (batch {i//100 + 1})")
+            # self.client.playlist_add_items(self.playlist_id, track_ids)
+
+        if not_found:
+            print(f"❌ Non trouvés ({len(not_found)}):", not_found)
+
+
+        print(f"✅ Total ajouté: {len(track_ids)} morceaux")
+
         return track_ids
 
 
