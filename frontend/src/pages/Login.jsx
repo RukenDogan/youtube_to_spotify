@@ -1,12 +1,18 @@
 import "../styles/Login.css";
 import logo from "../assets/images/logoBS.png";
-import Footer from "../components/Footer";
 import { FaSpotify } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const handleSpotifyLogin = () => {
     // onLogin({ name: "Utilisateur Test" }); // pour simuler une connexion réussie
-    window.location.href = "http://127.0.0.1:5000/login";
+      const token = localStorage.getItem("spotify_token"); // ou ta méthode pour savoir si connecté
+  if (token) {
+    navigate("/already-connected"); // redirection vers la page intermédiaire
+  } else {
+    window.location.href = "http://127.0.0.1:5000/login"; // redirection vers le backend pour OAuth
+    }
   };
 
   return (
