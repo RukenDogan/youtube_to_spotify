@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
+import Header from "../components/DashboardHeader";
 import PlaylistForm from "../components/PlaylistForm";
-import "../styles/Dashboard.css";
-import logo from "../assets/images/logoBS.png";
-import beating from "../assets/images/beating.png";
+import "../styles/App.css";
 
 export default function Dashboard() {
   const [spotifyToken, setSpotifyToken] = useState(null);
@@ -29,12 +28,8 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="dashboardContainer">
-      <img src={logo} alt="logo" className="positioned-logo" />
-      <h1 className="text-h1">
-        Synchronisez vos playlists en un battement
-        <img src={beating} alt="beating" className="beating" />
-      </h1>
+    <div className="appContainer">
+      <Header />
       {spotifyToken ? (
         <PlaylistForm spotifyToken={spotifyToken} />
       ) : (

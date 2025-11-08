@@ -1,19 +1,16 @@
-import "../styles/NotFound.css";
 import { useNavigate } from "react-router-dom";
+import "../styles/NotFound.css";
+import Footer from "../components/Footer.jsx";
 
 export default function NotFound() {
   const navigate = useNavigate();
 
-  const handleHome = () => {
-    navigate("/"); // Redirection vers la page d'accueil
-  };
-
   return (
     <div className="notFoundContainer">
       <h1 className="notFoundTitle">404</h1>
-      <p className="notFoundText">Oups… la page que vous cherchez n’existe pas !</p>
-      <button className="notFoundButton" onClick={handleHome}>
-        Retour à l’accueil
+      <p className="notFoundText">Page introuvable</p>
+      <button className="notFoundButton" onClick={() => navigate("/")}>
+        Retour à l'accueil
       </button>
     </div>
   );

@@ -21,7 +21,6 @@ export default function AlreadyConnected() {
       <h2 className="alreadyConnectedTitle">Vous êtes déjà connecté à Spotify !</h2>
       <p className="alreadyConnectedText">Redirection vers le dashboard...</p>
       <Loader loading={true} />
-
     </div>
   );
 }

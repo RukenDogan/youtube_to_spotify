@@ -1,36 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .notFoundContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #1DB954, #1ed76033);
-  font-family: 'Arial', sans-serif;
+  background: #1a1a1a;
+  font-family: 'Press Start 2P', cursive;
   color: #fff;
   text-align: center;
 }
 
 .notFoundTitle {
   font-size: 6rem;
-  margin-bottom: 1rem;
-}
-
-.notFoundText {
-  font-size: 1.5rem;
+  color: #ff79c6; /* rose doux */
+  position: relative;
+  animation: glitch 1s infinite;
   margin-bottom: 2rem;
 }
 
-.notFoundButton {
-  padding: 0.8rem 2rem;
+.notFoundText {
   font-size: 1rem;
+  color: #e0e0e0; /* gris clair */
+  margin-bottom: 2rem;
+}
+
+
+@keyframes glitch {
+  0% {
+    text-shadow: 2px 0 #ff79c6, -2px 2px #8be9fd;
+  }
+  20% {
+    text-shadow: -2px -2px #ff79c6, 2px 2px #8be9fd;
+  }
+  40% {
+    text-shadow: 2px 2px #ff79c6, -2px -2px #8be9fd;
+  }
+  60% {
+    text-shadow: -2px 2px #ff79c6, 2px -2px #8be9fd;
+  }
+  80% {
+    text-shadow: 2px -2px #ff79c6, -2px 2px #8be9fd;
+  }
+  100% {
+    text-shadow: 2px 0 #ff79c6, -2px 2px #8be9fd;
+  }
+}
+
+.notFoundButton {
+  margin-top: 2rem;
+  padding: 0.7rem 2rem;
+  font-size: 0.8rem;
   color: #fff;
-  background-color: #1DB954;
+  background: #bd93f9;
   border: none;
-  border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
+  font-family: 'Press Start 2P', cursive;
 }
 
 .notFoundButton:hover {
-  background-color: #17a44d;
+  background: #8be9fd;
+  transform: scale(1.05);
 }

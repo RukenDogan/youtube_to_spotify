@@ -1,56 +1,26 @@
 // Fichier qui comporte les routes de l'application
 
 import { Routes, Route, Navigate } from "react-router-dom";
+import "./styles/App.css";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import AlreadyConnected from "./pages/AlreadyConnected";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
-
+import NotFound from "./pages/NotFound";
+import Footer from "./components/Footer.jsx";
 
 export default function App() {
-
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/already-connected" element={<AlreadyConnected />} />
-      <Route path="/privacy" element={<PrivacyPolicy />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-    </Routes>
+    <div className="appContainer">
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/already-connected" element={<AlreadyConnected />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+    </div>
   );
 }
-
-
-
-
-// import { useState } from "react";
-// import Login from "./pages/Login";
-// import Dashboard from "./pages/Dashboard";
-// import "./styles/App.css";
-// import Loader from "./components/Loader.jsx";
-// import Footer from "./components/Footer.jsx";
-
-
-// export default function App() {
-//   const [user, setUser] = useState(null);
-//   const [loading, setLoading] = useState(false);
-
-//   const handleLogin = (userData) => {
-//     setLoading(true);
-//     setTimeout(() => {
-//       setUser(userData);
-//       setLoading(false);
-//     }, 1500);
-//   };
-
-//   return (
-//     <div className="appContainer">
-//       <div className="content">
-//         {loading && <Loader loading={loading} />}
-//         {!loading && (user ? <Dashboard /> : <Login onLogin={handleLogin} />)}
-//       </div>
-//       <Footer />
-//     </div>
-//   );
-// }
-
