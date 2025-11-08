@@ -1,7 +1,11 @@
+// Fichier qui comporte les routes de l'application
+
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import AlreadyConnected from "./pages/AlreadyConnected";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+
 
 export default function App() {
 
@@ -10,6 +14,7 @@ export default function App() {
       <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/already-connected" element={<AlreadyConnected />} />
+      <Route path="/privacy" element={<PrivacyPolicy />} />
       <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   );
