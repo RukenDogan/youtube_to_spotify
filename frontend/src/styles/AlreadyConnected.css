@@ -4,33 +4,53 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #1DB954, #1ed76033); /* vert Spotify avec légère transparence */
+  background: radial-gradient(circle at top left, #023a32, #03584d99);
+  font-family: 'Happy Monkey', cursive;
   color: #fff;
-  font-family: 'Arial', sans-serif;
   text-align: center;
+  overflow: hidden;
+}
+
+.alreadyConnectedLogo {
+  width: 10rem;
+  margin-bottom: 2rem;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
 .alreadyConnectedTitle {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
   margin-bottom: 1rem;
+  animation: fadeIn 1s ease-out forwards;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
 .alreadyConnectedText {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin-bottom: 2rem;
+  animation: fadeIn 1.5s ease-out forwards;
 }
 
 .spinner {
   border: 6px solid rgba(255, 255, 255, 0.2);
   border-top: 6px solid #fff;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   animation: spin 1s linear infinite;
-  margin-top: 1rem;
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

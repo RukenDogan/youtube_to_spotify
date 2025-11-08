@@ -1,6 +1,7 @@
 import "../styles/AlreadyConnected.css";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import spotifyLogo from "../assets/images/logoBS.png"; // ton logo BeatSync ou Spotify
 
 export default function AlreadyConnected() {
   const navigate = useNavigate();
@@ -14,9 +15,11 @@ export default function AlreadyConnected() {
   }, [navigate]);
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h2>Vous êtes déjà connecté à Spotify !</h2>
-      <p>Redirection vers le dashboard...</p>
+    <div className="alreadyConnectedContainer">
+      <img src={spotifyLogo} alt="Logo" className="alreadyConnectedLogo" />
+      <h2 className="alreadyConnectedTitle">Vous êtes déjà connecté à Spotify !</h2>
+      <p className="alreadyConnectedText">Redirection vers le dashboard...</p>
+      <div className="spinner"></div>
     </div>
   );
 }
