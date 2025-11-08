@@ -13,13 +13,8 @@
 
 .alreadyConnectedLogo {
   width: 10rem;
-  margin-bottom: 2rem;
+  margin-bottom: 9rem;
   animation: bounce 1.5s infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
 }
 
 .alreadyConnectedTitle {
@@ -36,7 +31,18 @@
   animation: fadeIn 1.5s ease-out forwards;
 }
 
-.spinner {
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* .spinner {
   border: 6px solid rgba(255, 255, 255, 0.2);
   border-top: 6px solid #fff;
   border-radius: 50%;
@@ -48,9 +54,5 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
+} */
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
