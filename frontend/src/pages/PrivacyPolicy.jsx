@@ -49,8 +49,7 @@ export default function PrivacyPolicy() {
         <div>
           <h2>Contact</h2>
           <p>
-            Pour toute question sur vos données ou le RGPD : 
-            <a href="mailto:contact@beatsync.com"> contact@beatsync.com</a>
+            Pour toute question : <a href="mailto:à_venir"> adresse mail à venir</a>
           </p>
         </div>
       </div>
