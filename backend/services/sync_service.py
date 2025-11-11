@@ -1,8 +1,7 @@
 # Logique métier pour la synchronisation YouTube vers Spotify
-
-from main import Synchronizer
+from backend.main import Synchronizer
 from dotenv import load_dotenv
-from models.spotify_model import SPOTIFY_USER_ID
+from backend.models.spotify_model import SPOTIFY_USER_ID
 import os
 
 

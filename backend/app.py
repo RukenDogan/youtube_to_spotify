@@ -1,7 +1,7 @@
 # Route principal de l'application Flask
 from flask import Flask
 from flask_cors import CORS
-from controllers.sync_controller import (sync_playlist, spotify_login, spotify_callback, get_token)
+from backend.controllers.sync_controller import (sync_playlist, spotify_login, spotify_callback, get_token)
 import os
 
 app = Flask(__name__)

@@ -1,7 +1,7 @@
 # Fichier contenant les routes de l'API Flask
 from flask import request, jsonify, redirect, session
 from dotenv import load_dotenv
-from services.sync_service import synchronize_youtube_to_spotify
+from backend.services.sync_service import synchronize_youtube_to_spotify
 import os
 from spotipy.oauth2 import SpotifyOAuth
 
