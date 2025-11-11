@@ -5,7 +5,6 @@ from backend.models.spotify_model import SPOTIFY_USER_ID
 import os
 
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env.local"))
-
 class Synchronizer:
     def __init__(self, youtube_url, spotify_user_id):
         self.youtube_url = youtube_url
