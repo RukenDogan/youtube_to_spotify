@@ -1,8 +1,11 @@
+# Fichier contenant les routes de l'API Flask
 from flask import request, jsonify, redirect, session
-from backend.services.sync_service import synchronize_youtube_to_spotify
+from dotenv import load_dotenv
+from services.sync_service import synchronize_youtube_to_spotify
 import os
 from spotipy.oauth2 import SpotifyOAuth
 
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env.local"))
 
 # Configuration Spotify
 SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
@@ -44,7 +47,6 @@ def get_token():
     if not token_info:
         return jsonify({"error": "No token"}), 401
     return jsonify({"access_token": token_info["access_token"]})
-
 
 
 # Synchronisation YouTube - Spotify
