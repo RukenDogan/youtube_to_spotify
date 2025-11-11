@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/PrivacyPolicy.css";
 import { FaShieldAlt, FaLock, FaUserCheck, FaEnvelope } from "react-icons/fa";
 import logo from "../assets/images/logoBS.png";
+import Footer from "../components/Footer";
 
 export default function PrivacyPolicy() {
   return (
@@ -55,6 +56,7 @@ export default function PrivacyPolicy() {
       </div>
 
       <p className="privacyFooter">© 2025 BeatSync. Tous droits réservés.</p>
+      <Footer />
     </div>
   );
 }

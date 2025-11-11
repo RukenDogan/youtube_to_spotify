@@ -3,6 +3,7 @@ import PlaylistForm from "../components/PlaylistForm";
 import "../styles/Dashboard.css";
 import logo from "../assets/images/logoBS.png";
 import beating from "../assets/images/beating.png";
+import Footer from "../components/Footer.jsx";
 
 export default function Dashboard() {
   const [spotifyToken, setSpotifyToken] = useState(null);
@@ -40,20 +41,7 @@ export default function Dashboard() {
       ) : (
         <p>Chargement du compte Spotify...</p>
       )}
+      <Footer />
     </div>
   );
 }
-
-// import Header from "../components/Header";
-// import PlaylistForm from "../components/PlaylistForm";
-// import Footer from "../components/Footer";
-// import "../styles/App.css";
-
-// export default function Dashboard() {
-//   return (
-//     <div className="appContainer">
-//       <Header />
-//       <PlaylistForm />
-//     </div>
-//   );
-// }

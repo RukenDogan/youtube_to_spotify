@@ -12,6 +12,7 @@ export default function NotFound() {
       <button className="notFoundButton" onClick={() => navigate("/")}>
         Retour à l'accueil
       </button>
+      <Footer />
     </div>
   );
 }

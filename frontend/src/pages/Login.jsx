@@ -2,6 +2,7 @@ import "../styles/Login.css";
 import logo from "../assets/images/logoBS.png";
 import { FaSpotify } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ export default function Login() {
         <FaSpotify className="spotifyIcon" />
         Se connecter avec Spotify
       </button>
+      <Footer />
     </div>
   );
 }

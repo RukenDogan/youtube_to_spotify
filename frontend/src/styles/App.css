@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Titillium+Web:wght@200;300;400;600;700;900&display=swap');
 
 html, body {
+  --page-bg: #023A32;
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #023A32;
+  background-color: var(--page-bg);
 }
 
 .appContainer {

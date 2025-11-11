@@ -20,7 +20,6 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
-      <Footer />
     </div>
   );
 }
