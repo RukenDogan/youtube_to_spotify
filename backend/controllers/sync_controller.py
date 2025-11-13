@@ -7,11 +7,13 @@ from spotipy.oauth2 import SpotifyOAuth
 
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env.local"))
 
+
 # Configuration Spotify
 SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
 SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
 SPOTIFY_REDIRECT_URI = os.getenv("SPOTIFY_REDIRECT_URI")
 SCOPE = "playlist-modify-public playlist-modify-private"
+
 
 sp_oauth = SpotifyOAuth(
     client_id=SPOTIFY_CLIENT_ID,

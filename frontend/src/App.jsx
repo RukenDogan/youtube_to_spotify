@@ -7,7 +7,6 @@ import Dashboard from "./pages/Dashboard";
 import AlreadyConnected from "./pages/AlreadyConnected";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
-import Footer from "./components/Footer.jsx";
 
 export default function App() {
   return (

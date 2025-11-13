@@ -1,17 +1,39 @@
 .resultBox {
-  width: 80%;
-  max-width: 400px;
-  color: #eeaac7;
-  margin: 0 auto;
-  font-family: 'Courier New', Courier, monospace;
+  width: 90%;
+  max-width: 420px;
+  margin: 1.5rem auto;
+  padding: 1.2rem 1.5rem;
+  text-align: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(6px);
+  color: #f9f9f9;
+  border: 1px solid rgba(238, 170, 199, 0.4);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  font-family: "Inter", "Segoe UI", sans-serif;
+  transition: all 0.3s ease;
+}
+
+.resultBox:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(238, 170, 199, 0.3);
 }
 
 .resultText {
-  font-size: 1em;
-  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: #eeaac7;
+  letter-spacing: 0.2px;
 }
 
 .resultError {
-  font-size: 1em;
-  color: #ff5555;
+  font-size: 0.95rem;
+  color: #ff7b7b;
+  font-weight: 500;
+}
+
+.resultSuccess {
+  font-size: 0.95rem;
+  color: #b6f2d3;
+  font-weight: 500;
 }

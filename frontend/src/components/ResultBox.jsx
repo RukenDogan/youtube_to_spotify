@@ -1,5 +1,6 @@
 import "../styles/ResultBox.css";
 
+
 export default function ResultBox({ result }) {
   return (
     <div className="resultBox">
