@@ -208,13 +208,13 @@ Cette page sert de transition avant de rediriger automatiquement l’utilisateur
   `Login → (OAuth Spotify / AlreadyConnected selon session) → Dashboard`
 * Permet d’améliorer l’expérience utilisateur en évitant de demander une nouvelle autorisation si l’utilisateur est déjà connecté.
 
+
 **Page Privacy :**
 Cette page informe l’utilisateur sur la gestion de ses données personnelles et sur la manière dont BeatSync utilise les informations de Spotify et YouTube :
 
 <p align="center">
   <img src="docs-images/page_privacy.png" width="600" />
 </p>
-
 
 <p align="center">
   <img src="docs-images/page_privacy2.png" width="600" />
