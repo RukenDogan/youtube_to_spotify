@@ -169,19 +169,57 @@ Playlist créée automatiquement :
 
 - Se placer dans le dossier `frontend` et lancer `npm run dev` :
 
-Page de connexion :
+**Page de connexion** **(Login)** :
 Page d’accueil invitant l’utilisateur à se connecter à son compte Spotify :
 
 <p align="center">
   <img src="docs-images/page_login.png" width="600" />
 </p>
 
-Dashboard :
+
+**Page Dashboard** :
 Interface principale pour synchroniser les playlists YouTube → Spotify :
 
 <p align="center">
   <img src="docs-images/page_dashboard.png" width="600" />
 </p>
+
+
+
+**Page NotFound** :
+Gère les erreurs de connexion ou les routes inexistantes :
+
+<p align="center">
+  <img src="docs-images/page_error.png" width="600" />
+</p>
+
+
+
+**Page AlreadyConnected :**
+Page de redirection qui s'affiche si l'utilisateur est déjà connecté à Spotify.
+Elle apparaît lorsqu’un utilisateur clique sur **“Se connecter à Spotify”** depuis la page Login alors que sa session OAuth est toujours active.
+Cette page sert de transition avant de rediriger automatiquement l’utilisateur vers le  **Dashboard** , évitant ainsi de refaire une authentification inutile :
+
+<p align="center">
+  <img src="docs-images/page_alreadyconnected.png" width="600" />
+</p>
+
+* **Flux utilisateur simplifié :**
+  `Login → (OAuth Spotify / AlreadyConnected selon session) → Dashboard`
+* Permet d’améliorer l’expérience utilisateur en évitant de demander une nouvelle autorisation si l’utilisateur est déjà connecté.
+
+**Page Privacy :**
+Cette page informe l’utilisateur sur la gestion de ses données personnelles et sur la manière dont BeatSync utilise les informations de Spotify et YouTube :
+
+<p align="center">
+  <img src="docs-images/page_privacy.png" width="600" />
+</p>
+
+
+<p align="center">
+  <img src="docs-images/page_privacy2.png" width="600" />
+</p>
+
 
 ---
 
