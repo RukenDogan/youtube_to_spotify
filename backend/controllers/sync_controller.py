@@ -4,6 +4,9 @@ from dotenv import load_dotenv
 from backend.services.sync_service import synchronize_youtube_to_spotify
 import os
 from spotipy.oauth2 import SpotifyOAuth
+from backend.utils.mongo import save_spotify_token, get_spotify_token
+from spotipy import Spotify
+
 
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env.local"))
 
@@ -36,11 +39,39 @@ def spotify_callback():
     if not code:
         return jsonify({"error": "Missing code"}), 400
 
+    # Récupère le token depuis Spotify et stocke dans MongoDB
     token_info = sp_oauth.get_access_token(code, check_cache=False)
+
+    # Récupère l'ID utilisateur Spotify
+    sp = Spotify(auth=token_info['access_token'])
+    spotify_user_id = sp.me()['id']
+
+    # Stocke le token dans MongoDB
+    save_spotify_token(
+        spotify_user_id,
+        access_token = token_info['access_token'],
+        refresh_token = token_info['refresh_token'],
+        expires_at = token_info['expires_at']
+    )
+
+    # Mise à jour de la session avec le token
     session['spotify_token'] = token_info
 
     # Redirige vers le frontend (Dashboard)
     return redirect("http://127.0.0.1:5173/dashboard")
+
+
+    ########## Version callback sans MongoDB ##########
+    # """Récupère le code Spotify et génère le token"""
+    # code = request.args.get("code")
+    # if not code:
+    #     return jsonify({"error": "Missing code"}), 400
+
+    # token_info = sp_oauth.get_access_token(code, check_cache=False)
+    # session['spotify_token'] = token_info
+
+    # # Redirige vers le frontend (Dashboard)
+    # return redirect("http://127.0.0.1:5173/dashboard")
 
 
 def get_token():
@@ -56,6 +87,9 @@ def sync_playlist():
     """Contrôleur Flask pour la synchronisation"""
     data = request.json
     youtube_url = data.get("youtube_url")
+
+    if 'spotify_token' not in session:
+        return jsonify({"error": "Utilisateur non connecté à Spotify"}), 401
 
     if not youtube_url:
         return jsonify({"error": "URL YouTube manquante"}), 400
