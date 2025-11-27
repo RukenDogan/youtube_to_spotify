@@ -6,13 +6,12 @@ html, body {
   padding: 0;
   background-color: #0D1B2A;
   background-image: url('../assets/images/record.png');
-  background-position: bottom right;
+  background-position: right;
   background-repeat: no-repeat;
-  background-size: clamp(200px, 60vw, 600px);
+  background-size: clamp(200px, 40vw, 600px);
   background-blend-mode: multiply;
   background-attachment: fixed;
 }
-
 
 
 .appContainer {
