@@ -1,12 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Titillium+Web:wght@200;300;400;600;700;900&display=swap');
 
 html, body {
-  --page-bg: #023A32;
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: var(--page-bg);
+  background-color: #0D1B2A;
+  background-image: url('../assets/images/record.png');
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-size: clamp(200px, 60vw, 600px);
+  background-blend-mode: multiply;
+  background-attachment: fixed;
 }
+
+
 
 .appContainer {
   min-height: 100vh;

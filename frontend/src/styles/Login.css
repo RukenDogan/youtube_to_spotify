@@ -4,7 +4,13 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #023A32;
+  background-color: #0D1B2A;
+  background-image: url('../assets/images/record.png');
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-size: clamp(200px, 60vw, 600px);
+  background-blend-mode: multiply;
+  background-attachment: fixed;
   color: white;
   font-family: 'Happy Monkey', cursive;
   text-align: center;
