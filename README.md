@@ -176,7 +176,6 @@ Page d’accueil invitant l’utilisateur à se connecter à son compte Spotify 
   <img src="docs-images/page_login.png" width="600" />
 </p>
 
-
 **Page Dashboard** :
 Interface principale pour synchroniser les playlists YouTube → Spotify :
 
@@ -184,16 +183,12 @@ Interface principale pour synchroniser les playlists YouTube → Spotify :
   <img src="docs-images/page_dashboard.png" width="600" />
 </p>
 
-
-
 **Page NotFound** :
 Gère les erreurs de connexion ou les routes inexistantes :
 
 <p align="center">
   <img src="docs-images/page_error.png" width="600" />
 </p>
-
-
 
 **Page AlreadyConnected :**
 Page de redirection qui s'affiche si l'utilisateur est déjà connecté à Spotify.
@@ -208,7 +203,6 @@ Cette page sert de transition avant de rediriger automatiquement l’utilisateur
   `Login → (OAuth Spotify / AlreadyConnected selon session) → Dashboard`
 * Permet d’améliorer l’expérience utilisateur en évitant de demander une nouvelle autorisation si l’utilisateur est déjà connecté.
 
-
 **Page Privacy :**
 Cette page informe l’utilisateur sur la gestion de ses données personnelles et sur la manière dont BeatSync utilise les informations de Spotify et YouTube :
 
@@ -220,6 +214,26 @@ Cette page informe l’utilisateur sur la gestion de ses données personnelles e
   <img src="docs-images/page_privacy2.png" width="600" />
 </p>
 
+
+
+#### Gif Visuel :
+
+
+<p align="center">
+  <img src="docs-images/interface_gif.gif" width="600" />
+</p>
+
+
+---
+
+### Source images :
+
+- **Image de fond** : [Vecteezy – Vinyle classique
+  ](https://es.vecteezy.com/png/49662375-clasico-vinilo-grabar-dto-textura)--> Image d’origine téléchargée sur Vecteezy, **découpée et ajustée** pour n’en conserver qu’une partie.
+- **Logo BeatSync** : réalisé à partir d’un modèle Canva, avec modifications personnelles (couleurs, texte, ajout de flèches)
+- **Icône de cœur battant** (Dashboard) : composition d’éléments Canva (couleurs modifiées)
+
+  Les modifications graphiques (découpe, transparence, GIF) ont été réalisées avec des outils en ligne.
 
 ---
 
