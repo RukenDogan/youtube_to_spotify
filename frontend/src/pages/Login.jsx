@@ -27,7 +27,7 @@ export default function Login() {
       <button
         type="button"
         className="spotifyButton"
-        onClick={handleSpotifyLogin} // ← ton onClick ici
+        onClick={handleSpotifyLogin}
       >
         <svg
           className="waveSvg"
@@ -51,6 +51,7 @@ export default function Login() {
         <FaSpotify className="spotifyIcon" />
         Se connecter avec Spotify
       </button> */}
+
       <Footer />
     </div>
   );

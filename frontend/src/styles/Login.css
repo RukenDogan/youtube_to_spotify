@@ -69,12 +69,12 @@
   height: 200%;
   fill: rgba(255, 255, 255, 0.12);
   z-index: 1;
-  animation: waveMove 5s ease-in-out infinite alternate;
+  animation: waveMove 3s ease-in-out infinite alternate;
 }
 
 @keyframes waveMove {
-  from { transform: translateX(-20%) rotate(0deg); }
-  to   { transform: translateX(20%) rotate(3deg); }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(5deg); }
 }
 
 .spotifyLogo {
