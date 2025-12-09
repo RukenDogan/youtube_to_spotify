@@ -6,6 +6,7 @@ import os
 from spotipy.oauth2 import SpotifyOAuth
 from backend.utils.mongo import save_spotify_token, get_spotify_token
 from spotipy import Spotify
+from backend.models.spotify_model import Spotify as SpotifyModel
 
 
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env.local"))
@@ -43,8 +44,22 @@ def spotify_callback():
     token_info = sp_oauth.get_access_token(code, check_cache=False)
 
     # Récupère l'ID utilisateur Spotify
-    sp = Spotify(auth=token_info['access_token'])
-    spotify_user_id = sp.me()['id']
+    # sp = Spotify(auth=token_info['access_token'])
+    # spotify_user_id = sp.me()['id']
+
+    # API Spotify brute
+    sp_api = Spotify(auth=token_info['access_token'])  # spotipy
+    spotify_user_id = sp_api.me()['id']  # récupère l'user
+
+    # Initialise le modèle Spotify avec l'ID utilisateur
+    sp_model = SpotifyModel(spotify_user_id)
+
+    # Exemple : récupérer tous les morceaux d’une playlist
+    tracks = sp_model.get_all_tracks_from_playlist("1234PLAYLISTID")
+
+    print("Tracks trouvés:", len(tracks))
+
+    
 
     # Stocke le token dans MongoDB
     save_spotify_token(

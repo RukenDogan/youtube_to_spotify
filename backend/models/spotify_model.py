@@ -83,6 +83,44 @@ class Spotify:
         print(f"✅ Total ajouté: {len(track_ids)} morceaux")
 
         return track_ids
+    
+
+    # Récupère tous les morceaux d'une playlist Spotify avec pagination
+    def get_all_tracks_from_playlist(self, playlist_id, limit=50):
+        all_tracks = []
+        offset = 0
+
+        while True:
+            results = self.client.playlist_items(
+                playlist_id,
+                limit=limit,
+                offset=offset
+        )
+
+            items = results.get("items", [])
+            if not items:
+                break
+
+            all_tracks.extend(items)
+            offset += limit
+
+        print(f"🎧 Total récupéré : {len(all_tracks)} morceaux")
+        return all_tracks
+    
+
+    def extract_track_info(self, playlist_items):
+        track_queries = []
+
+        for item in playlist_items:
+            track = item.get("track", {})
+            name = track.get("name")
+            artists = ", ".join(a["name"] for a in track.get("artists", []))
+            query = f"{name} {artists}"
+            track_queries.append(query)
+
+        return track_queries
+
+
 
 
    

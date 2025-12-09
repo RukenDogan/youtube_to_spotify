@@ -4,7 +4,8 @@ export async function syncPlaylist(youtubeUrl) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ youtube_url: youtubeUrl }),
-      signal: AbortSignal.timeout(600000) // 10 minutes max
+      signal: AbortSignal.timeout(600000), // 10 minutes max
+      credentials: "include", // gestion des cookies pour le frontend
     });
 
     if (!response.ok) {
