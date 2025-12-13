@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/NotFound.css";
-import Footer from "../components/Footer.jsx";
+
 
 export default function NotFound() {
   const navigate = useNavigate();
@@ -12,7 +12,6 @@ export default function NotFound() {
       <button className="notFoundButton" onClick={() => navigate("/")}>
         Retour à l'accueil
       </button>
-      <Footer />
     </div>
   );
 }
