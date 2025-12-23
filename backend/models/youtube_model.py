@@ -1,13 +1,10 @@
 # récupérer les vidéos d’une playlist
+from config import YOUTUBE_API_KEY
 import re # pour les opérations sur les chaînes de caractères
-from dotenv import load_dotenv # pour charger les variables d'environnement depuis le fichier .env
 from googleapiclient.discovery import build # pour interagir avec l'API YouTube
 from urllib.parse import urlparse, parse_qs # pour extraire l'ID de la playlist depuis l'URL
-import os # pour accéder aux variables d'environnement
 
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env.local")) # charger les variables d'environnement depuis le fichier .env.local
 
-YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY") # récupérer la clé API YouTube depuis la variable d'environnement
 
 # extraire l'ID de la playlist depuis l'URL
 def extract_playlist_id(url): # extraire l'ID de la playlist depuis l'URL

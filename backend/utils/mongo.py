@@ -1,15 +1,10 @@
-import os
+from config import MONGO_URI
 from pymongo import MongoClient
-from dotenv import load_dotenv
 from pathlib import Path
 
 
-dotenv_path = Path(__file__).resolve().parent.parent.parent / ".env.local"
 
-load_dotenv(dotenv_path=dotenv_path)
-
-# récupérer l'URI
-MONGO_URI = os.getenv("MONGO_URI")
+# récupérer l'URI de MongoDB depuis les variables d'environnement
 if not MONGO_URI:
     raise RuntimeError("MONGO_URI n'est pas défini ! Vérifie .env.local à la racine du projet")
 

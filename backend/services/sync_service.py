@@ -1,10 +1,9 @@
 # Logique métier pour la synchronisation YouTube vers Spotify
+from config import SPOTIFY_USER_ID
 from backend.main import Synchronizer
 from dotenv import load_dotenv
 from backend.models.spotify_model import SPOTIFY_USER_ID
-import os
 
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env.local"))
 
 def synchronize_youtube_to_spotify(youtube_url):
     """Service : synchronise une playlist YouTube vers Spotify"""
