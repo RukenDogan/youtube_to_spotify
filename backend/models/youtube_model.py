@@ -5,7 +5,6 @@ from googleapiclient.discovery import build # pour interagir avec l'API YouTube
 from urllib.parse import urlparse, parse_qs # pour extraire l'ID de la playlist depuis l'URL
 
 
-
 # extraire l'ID de la playlist depuis l'URL
 def extract_playlist_id(url): # extraire l'ID de la playlist depuis l'URL
     query = urlparse(url).query # analyser l'URL pour extraire la partie de l'URL qui contient l'ID de la playlist

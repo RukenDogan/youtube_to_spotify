@@ -1,23 +1,15 @@
 # Fichier contenant les routes de l'API Flask
 from flask import request, jsonify, redirect, session
-from dotenv import load_dotenv
+from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI, FRONTEND_URL
 from backend.services.sync_service import synchronize_youtube_to_spotify
-import os
 from spotipy.oauth2 import SpotifyOAuth
 from backend.utils.mongo import save_spotify_token, get_spotify_token
 from spotipy import Spotify
 from backend.models.spotify_model import Spotify as SpotifyModel
 
 
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env.local"))
-
-
 # Configuration Spotify
-SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
-SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
-SPOTIFY_REDIRECT_URI = os.getenv("SPOTIFY_REDIRECT_URI")
 SCOPE = "playlist-modify-public playlist-modify-private"
-
 
 sp_oauth = SpotifyOAuth(
     client_id=SPOTIFY_CLIENT_ID,
@@ -58,7 +50,6 @@ def spotify_callback():
     tracks = sp_model.get_all_tracks_from_playlist("1234PLAYLISTID")
 
     print("Tracks trouvés:", len(tracks))
-
     
 
     # Stocke le token dans MongoDB
@@ -73,7 +64,10 @@ def spotify_callback():
     session['spotify_token'] = token_info
 
     # Redirige vers le frontend (Dashboard)
-    return redirect("http://127.0.0.1:5173/dashboard")
+    return redirect(f"{FRONTEND_URL}dashboard")
+
+
+
 
 
     ########## Version callback sans MongoDB ##########

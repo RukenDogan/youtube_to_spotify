@@ -84,7 +84,7 @@ Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont
 - Backend :
 
 1. Se positionner à la racine du projet :
-   `python -m backend.app`
+   `python backend/app.py`
 2. Entrer l'URL de la playlist YouTube quand demandé
 3. L'application créera la playlist sur Spotify et ajoutera les morceaux trouvés
 
@@ -214,15 +214,11 @@ Cette page informe l’utilisateur sur la gestion de ses données personnelles e
   <img src="docs-images/page_privacy2.png" width="600" />
 </p>
 
-
-
 #### Gif Visuel :
-
 
 <p align="center">
   <img src="docs-images/interface_gif.gif" width="600" />
 </p>
-
 
 ---
 

@@ -1,8 +1,7 @@
 # créer une playlist sur spotify, rechercher les morceaux de la playlist youtube et ajouter les morceaux à la playlist spotify
-from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI, SPOTIFY_USER_ID, MONGO_URI
+from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-
 
 
 SCOPE = "playlist-modify-public playlist-modify-private"
