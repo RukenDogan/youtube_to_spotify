@@ -6,6 +6,7 @@ from spotipy.oauth2 import SpotifyOAuth
 from backend.utils.mongo import save_spotify_token, get_spotify_token
 from spotipy import Spotify
 from backend.models.spotify_model import Spotify as SpotifyModel
+from urllib.parse import urljoin
 
 
 # Configuration Spotify
@@ -70,7 +71,7 @@ def spotify_callback():
 
 
     # Redirige vers le frontend (Dashboard)
-    return redirect(f"{FRONTEND_URL}dashboard")
+    return redirect(urljoin(FRONTEND_URL, "/dashboard"))
 
 
 
