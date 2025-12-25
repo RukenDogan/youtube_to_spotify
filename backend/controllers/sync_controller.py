@@ -31,6 +31,9 @@ def spotify_callback():
     code = request.args.get("code")
     if not code:
         return jsonify({"error": "Missing code"}), 400
+    
+    print("SESSION AVANT REDIRECT:", dict(session))
+
 
     # Récupère le token depuis Spotify et stocke dans MongoDB
     token_info = sp_oauth.get_access_token(code, check_cache=False)
@@ -62,6 +65,9 @@ def spotify_callback():
 
     # Mise à jour de la session avec le token
     session['spotify_token'] = token_info
+
+    print("SESSION TOKEN CHECK:", dict(session))
+
 
     # Redirige vers le frontend (Dashboard)
     return redirect(f"{FRONTEND_URL}dashboard")

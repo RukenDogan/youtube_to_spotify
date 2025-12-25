@@ -1,33 +1,39 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PlaylistForm from "../components/PlaylistForm";
 import "../styles/Dashboard.css";
 import logo from "../assets/images/logoBS.png";
 import beating from "../assets/images/beating.png";
 import Footer from "../components/Footer.jsx";
+import NotFound from "./NotFound.jsx";
 
 export default function Dashboard() {
   const [spotifyToken, setSpotifyToken] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Récupère le token stocké côté serveur
-    fetch("http://127.0.0.1:5000/token", {
-      credentials: "include", // inclut les cookies pour la session
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    const checkSpotifyToken = async () => {
+      try {
+        const res = await fetch("http://127.0.0.1:5000/token", {
+          credentials: "include",
+        });
+        const data = await res.json();
+
         if (data.access_token) {
           setSpotifyToken(data.access_token);
           localStorage.setItem("spotify_token", data.access_token);
         } else {
-          // Si aucun token, redirige vers la page de login
-          window.location.href = "/login";
+          // Pas de token → redirige vers la page NotFound
+          navigate("/not-found");
         }
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Erreur de récupération du token :", err);
-        window.location.href = "/login";
-      });
-  }, []);
+        navigate("/not-found");
+      }
+    };
+
+    checkSpotifyToken();
+  }, [navigate]);
 
   return (
     <div className="dashboardContainer">

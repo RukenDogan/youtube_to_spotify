@@ -17,7 +17,8 @@ export default function App() {
         <Route path="/already-connected" element={<AlreadyConnected />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/*" element={<NotFound />} />
+        <Route path="/not-found" element={<NotFound />} />
+        <Route path="/*" element={<NotFound />} /> // fallback pour les routes inconnues
       </Routes>
     </div>
   );
