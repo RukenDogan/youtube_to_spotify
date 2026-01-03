@@ -16,6 +16,7 @@ export default function PlaylistForm() {
     setLoading(false);
   };
 
+
   return (
     <>
       <p className="text">
@@ -29,9 +30,15 @@ export default function PlaylistForm() {
           placeholder="Entrez une URL de playlist YouTube"
           className="input"
         />
-        <button type="submit" disabled={loading} className="submitButton">
-          {loading ? "Synchronisation..." : "Synchroniser"}
+
+        <button
+          type="submit"
+          disabled={loading}
+          className={`submitButton ${loading ? "loading" : ""}`}
+        >
+          <span>{loading ? "Synchronisation..." : "Synchroniser"}</span>
         </button>
+
       </form>
       {result && <ResultBox result={result} />}
     </>
