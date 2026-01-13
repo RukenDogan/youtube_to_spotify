@@ -51,9 +51,9 @@ def spotify_callback():
     sp_model = SpotifyModel(spotify_user_id)
 
     # Exemple : récupérer tous les morceaux d’une playlist
-    tracks = sp_model.get_all_tracks_from_playlist("1234PLAYLISTID")
+    # tracks = sp_model.get_all_tracks_from_playlist("1234PLAYLISTID")
 
-    print("Tracks trouvés:", len(tracks))
+    # print("Tracks trouvés:", len(tracks))
     
 
     # Stocke le token dans MongoDB
