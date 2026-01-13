@@ -24,12 +24,13 @@ L'objectif principal est de se familiariser avec :
 - Créer une nouvelle playlist sur Spotify
 - Rechercher les morceaux sur Spotify avec un score de correspondance
 - Ajouter les morceaux trouvés à la playlist Spotify
-- Interface web avec connexion Spotify sécurisée (à venir), saisie d’URL YouTube, et suivi de la synchronisation
+- Interface web avec connexion Spotify sécurisée, saisie d’URL YouTube, et suivi de la synchronisation
 
 ## Technologies principales
 
 - **Backend :** Python, Flask, Spotipy, Google API Client
 - **Frontend :** React (JS, Vite)
+- **BDD :** MongoDB
 - **Tests :** Pytest, Postman
 - **CI/CD :** GitHub Actions
 - **Gestion de projet :** Trello, Figma
@@ -42,7 +43,7 @@ Ce projet suit une architecture MVC adaptée avec un frontend React et un backen
 - **Controllers** : les routes Flask (sync_playlist) orchestrent les appels aux models et renvoient les données sous forme JSON.
 - **Views** : côté frontend React, les pages et composants (Login, Dashboard, Footer, etc.) affichent l’interface utilisateur.
 
-Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont entièrement gérées par React, ce qui correspond à une séparation frontend/back‑end tout en conservant le principe MVC.
+Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont entièrement gérées par React, ce qui correspond à une séparation frontend/backend tout en conservant le principe MVC.
 
 ## Prérequis
 
