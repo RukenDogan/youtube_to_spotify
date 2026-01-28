@@ -32,16 +32,30 @@ def get_playlist_info(playlist_id):
 # récupérer les vidéos d'une playlist
 def get_videos(playlist_url):
     youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY) # construire le service YouTube avec la clé API
-    request = youtube.playlistItems().list( # récupérer les vidéos
-    part="snippet", # les informations de la vidéo
-    playlistId=playlist_url, # utiliser l'ID de la playlist
-    maxResults=50 # maximum autorisé par l'API
-    )
-    response = request.execute() # exécuter la requête
+    
     videos = [] # liste pour stocker les IDs des vidéos
-    for item in response['items']: # parcourir les éléments de la réponse
-        videos.append(item['snippet']['resourceId']['videoId']) # ajouter l'ID de la vidéo à la liste
-    return videos # retourner la liste des IDs des vidéos
+    next_page_token = None # token de la page suivante
+
+    while True:
+        request = youtube.playlistItems().list( # récupérer les vidéos
+            part="snippet", # les informations de la vidéo
+            playlistId=playlist_url, # utiliser l'ID de la playlist
+            maxResults=50, # maximum autorisé par l'API
+            pageToken=next_page_token # le token de la page suivante
+        )
+        response = request.execute() # exécuter la requête
+    
+        for item in response.get('items', []): # parcourir les éléments de la réponse
+            video_id= item['snippet']['resourceId']['videoId']
+            videos.append(video_id) # ajouter l'ID de la vidéo à la liste
+    
+        # Pagination pour récupérer toutes les vidéos
+        next_page_token = response.get('nextPageToken')
+        if not next_page_token:
+            break
+
+    print(f"Total vidéos récupérées : {len(videos)}")
+    return videos
 
 
 # récupérer les titres des vidéos
