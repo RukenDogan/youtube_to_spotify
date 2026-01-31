@@ -6,7 +6,7 @@
 
 ## Description
 
-Ce projet est une application **Python** / **Flask** et **React** / **Vite** qui permet de synchroniser les vidéos d'une playlist YouTube
+Ce projet est une application **Python** / **Flask, React** / **Vite** et **MongoDB** qui permet de synchroniser les vidéos d'une playlist YouTube
 en créant automatiquement une playlist correspondante sur Spotify.
 
 L'objectif principal est de se familiariser avec :
@@ -103,12 +103,12 @@ Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont
   si elles sont encore référencées dans la playlist. Ces vidéos peuvent ne plus apparaître dans l’interface YouTube, mais être comptées dans la requête API. Elles peuvent provoquer des écarts dans le nombre de morceaux importés.
 - La synchronisation inverse pourrait également être envisageable : à partir d'une playlist Spotify, nous pouvons récupérer les vidéos YouTube correspondantes et les ajouter à une playlist YouTube. Cela nécessite d'obtenir l'autorisation OAuth via l'API YouTube.
 - La connexion OAuth Spotify est opérationnelle : le front redirige correctement vers Spotify et revient sur le dashboard une fois l’autorisation validée.
+- Stockage des tokens dans MongoDB pour renforcer la sécurité et permettre une authentification plus fiable.
 
 ## Fonctionnalités à venir
 
 Ces fonctionnalités sont prévues pour les prochaines versions afin d’améliorer la sécurité et l’expérience utilisateur :
 
-- Stockage des utilisateurs dans MongoDB pour renforcer la sécurité et permettre une authentification plus fiable
 - Amélioration de la gestion des erreurs et de la correspondance entre les morceaux YouTube ↔ Spotify
 
 ## Déploiement prévu
