@@ -92,7 +92,7 @@ def spotify_callback():
 
 def get_token():
     """Renvoie le token Spotify stocké en session"""
-    print("SESSION ACTUELLE :", dict(session))
+    # print("SESSION ACTUELLE :", dict(session))
     token_info = session.get("spotify_token")
     if not token_info:
         return jsonify({"error": "No token"}), 401

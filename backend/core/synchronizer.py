@@ -27,5 +27,3 @@ class Synchronizer:
         queries = [f"{title} {artist}" for title, artist in zip(self.titles, self.artists)]
         self.track_ids = self.spotify.add_tracks_to_playlist(queries)
         return self.track_ids
-
-
