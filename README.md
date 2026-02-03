@@ -40,7 +40,7 @@ L'objectif principal est de se familiariser avec :
 Ce projet suit une architecture MVC adaptée avec un frontend React et un backend Flask :
 
 - **Models** : youtube_model.py et spotify_model.py côté backend, qui représentent les données et la logique métier (extraction YouTube, création playlist Spotify).
-- **Controllers** : les routes Flask (sync_playlist) orchestrent les appels aux models et renvoient les données sous forme JSON.
+- **Controllers** : les routes Flask (sync_controller) orchestrent les appels aux models et renvoient les données sous forme JSON.
 - **Views** : côté frontend React, les pages et composants (Login, Dashboard, Footer, etc.) affichent l’interface utilisateur.
 
 Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont entièrement gérées par React, ce qui correspond à une séparation frontend/backend tout en conservant le principe MVC.
@@ -79,6 +79,9 @@ Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont
    - SPOTIFY_REDIRECT_URI=...
    - SPOTIFY_USER_ID=...
    - YOUTUBE_API_KEY=...
+   - FLASK_SECRET_KEY=
+   - MONGO_URI=
+   - FRONTEND_URL=
 
 ## Utilisation
 
@@ -188,7 +191,7 @@ Interface principale pour synchroniser les playlists YouTube → Spotify :
 Gère les erreurs de connexion ou les routes inexistantes :
 
 <p align="center">
-  <img src="docs-images/page_error.png" width="600" />
+  <img src="docs-images/page_notfound.png" width="600" />
 </p>
 
 **Page AlreadyConnected :**
