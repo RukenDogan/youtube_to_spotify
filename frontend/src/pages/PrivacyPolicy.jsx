@@ -49,7 +49,7 @@ export default function PrivacyPolicy() {
         <div>
           <h2>Contact</h2>
           <p>
-            Pour toute question : <a href="mailto:à_venir"> adresse mail à venir</a>
+            Pour toute question : <a href="mailto:beat20sync25app@gmail.com">beat20sync25app@gmail.com</a>
           </p>
         </div>
       </div>
