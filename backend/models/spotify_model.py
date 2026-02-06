@@ -43,11 +43,7 @@ class Spotify:
 
             if all(term in query_lower for term in title_terms + artist_terms):
                 return track["id"]
-
-            # Vérifie si le titre ET l'artiste sont dans la requête
-            # if all(term in query_lower for term in [track_title.split()[0]] + track_artists.split()):
-            #     return track["id"]
-
+            
         return None
     
 
@@ -71,7 +67,6 @@ class Spotify:
 
         if not_found:
             print(f"❌ Non trouvés ({len(not_found)}):", not_found)
-
 
         print(f"✅ Total ajouté: {len(track_ids)} morceaux")
 
@@ -100,7 +95,7 @@ class Spotify:
         print(f"🎧 Total récupéré : {len(all_tracks)} morceaux")
         return all_tracks
     
-
+    # Extrait les informations de titre et artiste pour chaque morceau d'une playlist Spotify
     def extract_track_info(self, playlist_items):
         track_queries = []
 
