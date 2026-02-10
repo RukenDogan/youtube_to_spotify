@@ -24,6 +24,15 @@ class Spotify:
         playlist = self.client.user_playlist_create(self.spotify_user_id, name)
         self.playlist_id = playlist["id"]
         return self.playlist_id
+    
+    # Nettoyage du texte pour la recherche de morceaux sur Spotify
+    def clean_query(text: str) -> str:
+        text = re.sub(r"\[[^\]]*\]", "", text)         # [Official Video]
+        text = re.sub(r"\([^)]*\)", "", text)          # (Official Audio)
+        text = re.sub(r'".*?"', "", text)              # "..."
+        text = re.sub(r"\b(official|audio|video|hd|4k|lyric|lyrics|visualizer|vevo|live|remastered)\b", "", text, flags=re.I)
+        text = re.sub(r"\s+", " ", text).strip()
+        return text
 
 
     def search_track(self, query):
@@ -46,27 +55,16 @@ class Spotify:
                 return track["id"]
             
         return None
-
-
-
-    def clean_query(text: str) -> str:
-        text = re.sub(r"\[[^\]]*\]", "", text)         # [Official Video]
-        text = re.sub(r"\([^)]*\)", "", text)          # (Official Audio)
-        text = re.sub(r'".*?"', "", text)              # "..."
-        text = re.sub(r"\b(official|audio|video|hd|4k|lyric|lyrics|visualizer|vevo|live|remastered)\b", "", text, flags=re.I)
-        text = re.sub(r"\s+", " ", text).strip()
-        return text
-
     
 
     def add_tracks_to_playlist(self, track_queries):
         track_ids = []
         not_found = []
-        query = clean_query(query)
-
 
         for query in track_queries:
-            track_id = self.search_track(query)
+            cleaned = self.clean_query(query)
+            track_id = self.search_track(cleaned)
+            
             if track_id:
                 track_ids.append(track_id)
             else:
