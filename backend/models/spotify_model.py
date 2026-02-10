@@ -2,6 +2,7 @@
 from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+import re
 
 
 SCOPE = "playlist-modify-public playlist-modify-private"
@@ -45,11 +46,24 @@ class Spotify:
                 return track["id"]
             
         return None
+
+
+
+    def clean_query(text: str) -> str:
+        text = re.sub(r"\[[^\]]*\]", "", text)         # [Official Video]
+        text = re.sub(r"\([^)]*\)", "", text)          # (Official Audio)
+        text = re.sub(r'".*?"', "", text)              # "..."
+        text = re.sub(r"\b(official|audio|video|hd|4k|lyric|lyrics|visualizer|vevo|live|remastered)\b", "", text, flags=re.I)
+        text = re.sub(r"\s+", " ", text).strip()
+        return text
+
     
 
     def add_tracks_to_playlist(self, track_queries):
         track_ids = []
         not_found = []
+        query = clean_query(query)
+
 
         for query in track_queries:
             track_id = self.search_track(query)
