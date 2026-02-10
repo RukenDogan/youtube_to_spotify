@@ -60,26 +60,62 @@ def get_videos(playlist_url):
 
 # récupérer les titres des vidéos
 def get_titles(videos):
-    youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY) # construire le service YouTube avec la clé API
-    request = youtube.videos().list(part="snippet", id=",".join(videos)) # récupérer les informations des vidéos
-    response = request.execute() # exécuter la requête
-    titles = [] # liste pour stocker les titres des vidéos
-    for item in response['items']: # parcourir les éléments de la réponse
-        titles.append(item['snippet']['title']) # ajouter le titre de la vidéo à la liste
-    return titles # retourner la liste des titres des vidéos
+    youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
+    titles = []
+
+    for i in range(0, len(videos), 50):
+        batch = videos[i:i+50]
+        request = youtube.videos().list(part="snippet", id=",".join(batch))
+        response = request.execute()
+
+        for item in response.get("items", []):
+            titles.append(item["snippet"]["title"])
+
+    return titles
+# def get_titles(videos):
+#     youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY) # construire le service YouTube avec la clé API
+#     request = youtube.videos().list(part="snippet", id=",".join(videos)) # récupérer les informations des vidéos
+#     response = request.execute() # exécuter la requête
+#     titles = [] # liste pour stocker les titres des vidéos
+#     for item in response['items']: # parcourir les éléments de la réponse
+#         titles.append(item['snippet']['title']) # ajouter le titre de la vidéo à la liste
+#     return titles # retourner la liste des titres des vidéos
 
 
 # récupérer les artistes des vidéos
 def get_artists(videos):
-    youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY) # construire le service YouTube avec la clé API
-    request = youtube.videos().list(part="snippet", id=",".join(videos)) # récupérer les informations des vidéos
-    response = request.execute() # exécuter la requête
-    artists = [] # liste pour stocker les artistes des vidéos
-    for item in response['items']: # parcourir les éléments de la réponse
-        channel_title = item['snippet']['channelTitle']
-        channel_title = re.sub(r"(\s*-\s*topic$)|(\s*\(.*official.*\)$)", "", channel_title, flags=re.IGNORECASE).strip()
-        artists.append(channel_title) # ajouter le nom de la chaîne (artiste) à la liste
-    return artists # retourner la liste des artistes des vidéos
+    youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
+    artists = []
+
+    for i in range(0, len(videos), 50):
+        batch = videos[i:i+50]
+        request = youtube.videos().list(part="snippet", id=",".join(batch))
+        response = request.execute()
+
+        for item in response.get("items", []):
+            channel_title = item["snippet"]["channelTitle"]
+            channel_title = re.sub(
+                r"(\s*-\s*topic$)|(\s*\(.*official.*\)$)",
+                "",
+                channel_title,
+                flags=re.IGNORECASE
+            ).strip()
+            artists.append(channel_title)
+
+    return artists
+
+# def get_artists(videos):
+#     youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY) # construire le service YouTube avec la clé API
+#     request = youtube.videos().list(part="snippet", id=",".join(videos)) # récupérer les informations des vidéos
+#     response = request.execute() # exécuter la requête
+#     artists = [] # liste pour stocker les artistes des vidéos
+#     for item in response['items']: # parcourir les éléments de la réponse
+#         channel_title = item['snippet']['channelTitle']
+#         channel_title = re.sub(r"(\s*-\s*topic$)|(\s*\(.*official.*\)$)", "", channel_title, flags=re.IGNORECASE).strip()
+#         artists.append(channel_title) # ajouter le nom de la chaîne (artiste) à la liste
+#     return artists # retourner la liste des artistes des vidéos
+
+
 
 
 # if __name__ == "__main__":
