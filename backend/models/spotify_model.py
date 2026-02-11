@@ -26,7 +26,7 @@ class Spotify:
         return self.playlist_id
     
     # Nettoyage du texte pour la recherche de morceaux sur Spotify
-    def clean_query(text: str) -> str:
+    def clean_query(self, text: str) -> str:
         text = re.sub(r"\[[^\]]*\]", "", text)         # [Official Video]
         text = re.sub(r"\([^)]*\)", "", text)          # (Official Audio)
         text = re.sub(r'".*?"', "", text)              # "..."
@@ -64,7 +64,7 @@ class Spotify:
         for query in track_queries:
             cleaned = self.clean_query(query)
             track_id = self.search_track(cleaned)
-            
+
             if track_id:
                 track_ids.append(track_id)
             else:
