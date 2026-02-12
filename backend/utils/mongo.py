@@ -49,7 +49,7 @@ def get_spotify_token(spotify_user_id):
     else:
         return None
 
-save_spotify_token("test_user", "abc123", "def456", 1700000000)
-token = get_spotify_token("test_user")
-print("Token récupéré :", token)
+# save_spotify_token("test_user", "abc123", "def456", 1700000000)
+# token = get_spotify_token("test_user")
+# print("Token récupéré :", token)
 
