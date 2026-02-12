@@ -5,6 +5,9 @@ from flask_cors import CORS
 from backend.controllers.sync_controller import (sync_playlist, spotify_login, spotify_callback, get_token)
 import os
 from backend.db import db
+from backend.sql_models.user import User
+from backend.sql_models.sync_job import SyncJob
+from backend.sql_models.sync_run import SyncRun
 
 
 app = Flask(__name__) # Création de l'application Flask
@@ -15,6 +18,10 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:/
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
+
+with app.app_context():
+    db.create_all()
+print("Tables créées")
 
 
 # CORS pour autoriser les appels des routes depuis l'URL frontend
