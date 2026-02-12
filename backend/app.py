@@ -4,9 +4,17 @@ from flask import Flask
 from flask_cors import CORS
 from backend.controllers.sync_controller import (sync_playlist, spotify_login, spotify_callback, get_token)
 import os
+from backend.db import db
+
 
 app = Flask(__name__) # Création de l'application Flask
 app.secret_key = FLASK_SECRET_KEY # Clé secrète pour les sessions Flask
+
+# Configuration de la base de données SQLAlchemy
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///beatsync.db")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db.init_app(app)
 
 
 # CORS pour autoriser les appels des routes depuis l'URL frontend
