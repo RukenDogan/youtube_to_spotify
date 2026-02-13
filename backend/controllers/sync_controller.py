@@ -7,6 +7,7 @@ from backend.utils.mongo import save_spotify_token, get_spotify_token
 from spotipy import Spotify
 from backend.models.spotify_model import Spotify as SpotifyModel
 from urllib.parse import urljoin
+from backend.services.user_service import get_or_create_user_by_spotify_id
 
 
 # Configuration Spotify
@@ -24,6 +25,7 @@ sp_oauth = SpotifyOAuth(
 def spotify_login():
     """Redirige l'utilisateur vers Spotify pour autorisation"""
     auth_url = sp_oauth.get_authorize_url()
+
     return redirect(auth_url)
 
 
@@ -46,6 +48,11 @@ def spotify_callback():
     # API Spotify brute
     sp_api = Spotify(auth=token_info['access_token'])  # spotipy
     spotify_user_id = sp_api.me()['id']  # récupère l'user
+
+    user = get_or_create_user_by_spotify_id(spotify_user_id)
+    session["user_id"] = user.id
+    print("USER ID SQL:", session.get("user_id"))
+
 
     # Initialise le modèle Spotify avec l'ID utilisateur
     sp_model = SpotifyModel(spotify_user_id)
@@ -73,7 +80,8 @@ def spotify_callback():
     # Redirige vers le frontend (Dashboard)
     return redirect(urljoin(FRONTEND_URL, "/dashboard"))
 
-
+def debug_session():
+    return jsonify(dict(session)), 200
 
 
 

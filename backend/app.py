@@ -8,6 +8,7 @@ from backend.db import db
 from backend.sql_models.user import User
 from backend.sql_models.sync_job import SyncJob
 from backend.sql_models.sync_run import SyncRun
+from backend.controllers.sync_controller import debug_session
 
 
 app = Flask(__name__) # Création de l'application Flask
@@ -16,6 +17,9 @@ app.secret_key = FLASK_SECRET_KEY # Clé secrète pour les sessions Flask
 # Configuration de la base de données SQLAlchemy
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///beatsync.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+# Routes de débogage
+app.add_url_rule("/debug-session", view_func=debug_session, methods=["GET"])
 
 db.init_app(app)
 
