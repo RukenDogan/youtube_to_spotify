@@ -46,8 +46,9 @@ def spotify_callback():
     # spotify_user_id = sp.me()['id']
 
     # API Spotify brute
-    sp_api = Spotify(auth=token_info['access_token'])  # spotipy
-    spotify_user_id = sp_api.me()['id']  # récupère l'user
+    sp_api = Spotify(auth=token_info['access_token']) # spotipy
+    spotify_user_id = sp_api.me()['id'] # récupère l'user
+    session["spotify_user_id"] = spotify_user_id
 
     user = get_or_create_user_by_spotify_id(spotify_user_id)
     session["user_id"] = user.id
@@ -55,7 +56,7 @@ def spotify_callback():
 
 
     # Initialise le modèle Spotify avec l'ID utilisateur
-    sp_model = SpotifyModel(spotify_user_id)
+    # sp_model = SpotifyModel(spotify_user_id)
 
     # Exemple : récupérer tous les morceaux d’une playlist
     # tracks = sp_model.get_all_tracks_from_playlist("1234PLAYLISTID")
@@ -67,7 +68,7 @@ def spotify_callback():
     save_spotify_token(
         spotify_user_id,
         access_token = token_info['access_token'],
-        refresh_token = token_info['refresh_token'],
+        refresh_token = token_info.get('refresh_token'),
         expires_at = token_info['expires_at']
     )
 
@@ -110,18 +111,23 @@ def get_token():
 # Synchronisation YouTube - Spotify
 def sync_playlist():
     """Contrôleur Flask pour la synchronisation"""
-    data = request.json
+    data = request.json or {}
     youtube_url = data.get("youtube_url")
 
-    if 'spotify_token' not in session:
+    if "spotify_token" not in session:
         return jsonify({"error": "Utilisateur non connecté à Spotify"}), 401
+
+    spotify_user_id = session.get("spotify_user_id")
+    if not spotify_user_id:
+        return jsonify({"error": "Identifiant Spotify manquant en session"}), 401
 
     if not youtube_url:
         return jsonify({"error": "URL YouTube manquante"}), 400
 
     try:
-        result = synchronize_youtube_to_spotify(youtube_url)
+        result = synchronize_youtube_to_spotify(youtube_url, spotify_user_id)
         return jsonify(result), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
