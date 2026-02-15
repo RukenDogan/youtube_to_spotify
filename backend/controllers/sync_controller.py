@@ -8,6 +8,12 @@ from spotipy import Spotify
 from backend.models.spotify_model import Spotify as SpotifyModel
 from urllib.parse import urljoin
 from backend.services.user_service import get_or_create_user_by_spotify_id
+from datetime import datetime, timezone
+from backend.db import db
+from backend.sql_models.sync_job import SyncJob
+from backend.sql_models.sync_run import SyncRun
+from backend.models import youtube_model as yt
+
 
 
 # Configuration Spotify
@@ -124,10 +130,35 @@ def sync_playlist():
     if not youtube_url:
         return jsonify({"error": "URL YouTube manquante"}), 400
 
+    # Vérification de l'existence d'une playlist YouTube avec le même ID
+    user_id = session.get("user_id")
+    if not user_id:
+        return jsonify({"error": "Not authenticated"}), 401
+
+    playlist_id = yt.extract_playlist_id(youtube_url)
+    if not playlist_id:
+        return jsonify({"error": "URL YouTube invalide"}), 400
+
+    job = SyncJob.query.filter_by(user_id=user_id, youtube_playlist_id=playlist_id).first()
+    if not job:
+        job = SyncJob(user_id=user_id, youtube_playlist_id=playlist_id)
+        db.session.add(job)
+        db.session.commit()
+
+    run = SyncRun(job_id=job.id, user_id=user_id, status="RUNNING")
+    db.session.add(run)
+    db.session.commit()
+
     try:
         result = synchronize_youtube_to_spotify(youtube_url, spotify_user_id)
+        run.status = "SUCCESS"
+        run.ended_at = datetime.now(timezone.utc)
+        run.added = result.get("nb_tracks_added", 0)
+        db.session.commit()
         return jsonify(result), 200
+    
     except Exception as e:
+        run.status = "FAILED"
+        run.ended_at = datetime.now(timezone.utc)
+        db.session.commit()
         return jsonify({"error": str(e)}), 500
-
-
