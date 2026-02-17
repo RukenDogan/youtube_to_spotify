@@ -1,3 +1,4 @@
+// API pour les routes de l'application
 export async function syncPlaylist(youtubeUrl) {
   try {
     const response = await fetch("http://127.0.0.1:5000/youtube-to-spotify", {
@@ -17,3 +18,22 @@ export async function syncPlaylist(youtubeUrl) {
     return { error: error.message };
   }
 }
+
+// récupérer l'historique des synchronisations
+export async function getHistory() {
+  try {
+    const response = await fetch("http://127.0.0.1:5000/history", {
+      method: "GET",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erreur serveur : ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+

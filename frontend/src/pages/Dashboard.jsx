@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PlaylistForm from "../components/PlaylistForm";
+import HistoryPanel from "../components/HistoryPanel.jsx";
 import "../styles/Dashboard.css";
 import logo from "../assets/images/logoBS.png";
 import beating from "../assets/images/beating.png";
 import Footer from "../components/Footer.jsx";
-import NotFound from "./NotFound.jsx";
+
 
 export default function Dashboard() {
   const [spotifyToken, setSpotifyToken] = useState(null);
+  const [view, setView] = useState("sync"); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,8 +44,30 @@ export default function Dashboard() {
         Synchronisez vos playlists en un battement
         <img src={beating} alt="beating" className="beating" />
       </h1>
+      {/* {spotifyToken ? (
+        <PlaylistForm spotifyToken={spotifyToken} /> */}
+
+        <div className="dashboardTabs">
+        <button
+          className={`tabBtn ${view === "sync" ? "active" : ""}`}
+          onClick={() => setView("sync")}
+        >
+          Synchroniser
+        </button>
+        <button
+          className={`tabBtn ${view === "history" ? "active" : ""}`}
+          onClick={() => setView("history")}
+        >
+          Historique
+        </button>
+      </div>
+
       {spotifyToken ? (
-        <PlaylistForm spotifyToken={spotifyToken} />
+        view === "sync" ? (
+          <PlaylistForm spotifyToken={spotifyToken} />
+        ) : (
+          <HistoryPanel />
+        )
       ) : (
         <p>Chargement du compte Spotify...</p>
       )}

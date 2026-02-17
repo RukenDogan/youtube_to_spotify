@@ -1,0 +1,29 @@
+.dashboardTabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 0.2rem auto 1rem auto;
+  padding: 0 1rem;
+}
+
+.tabBtn {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.tabBtn:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 0 0.6em rgba(238, 170, 199, 0.35));
+}
+
+.tabBtn.active {
+  background: rgba(238, 170, 199, 0.85);
+  color: #0D1B2A;
+  border-color: rgba(238, 170, 199, 0.65);
+}

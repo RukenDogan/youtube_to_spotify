@@ -15,7 +15,6 @@ from backend.sql_models.sync_run import SyncRun
 from backend.models import youtube_model as yt
 
 
-
 # Configuration Spotify
 SCOPE = "playlist-modify-public playlist-modify-private"
 
@@ -155,6 +154,7 @@ def sync_playlist():
         run.ended_at = datetime.now(timezone.utc)
         run.added = result.get("nb_tracks_added", 0)
         db.session.commit()
+
         return jsonify(result), 200
     
     except Exception as e:
