@@ -1,8 +1,8 @@
 .privacyContainer {
+  font-family: 'Titillium Web', sans-serif;
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
-  font-family: 'Happy Monkey', cursive;
   background: rgba(13, 27, 42, 0.15);
   border: 1px solid rgba(255,255,255,0.12);
   backdrop-filter: blur(12px) saturate(150%);
@@ -10,6 +10,7 @@
   border-radius: 5px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   text-align: center;
+  letter-spacing: 0.2px;
 }
 
 
@@ -29,9 +30,18 @@
 }
 
 .privacyTitle {
+  font-family: 'Happy Monkey', cursive;
   font-size: 2.8rem;
   color: #eeaac7;
   margin-bottom: 1.5rem;
+}
+
+ul {
+  text-align: left;
+  max-width: 600px;
+  margin: 0.5rem auto 1.5rem auto;
+  padding-left: 1.2rem;
+  list-style-type: circle;
 }
 
 .privacyIntro {
@@ -42,7 +52,7 @@
 .privacySection {
   display: flex;
   align-items: flex-start;
-  margin: 1.5rem 0;
+  margin: 2rem 0;
   gap: 1rem;
 }
 
@@ -57,6 +67,8 @@
 }
 
 .privacySection h2 {
+  font-family: 'Happy Monkey', cursive;
+  color: #eeaac7;
   text-align: center;
   margin-bottom: 0.5rem;
   font-size: 1.5rem;
@@ -64,7 +76,7 @@
 
 .privacySection p {
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.75;
   text-align: left;
 }
 
@@ -75,6 +87,20 @@ a {
 
 .privacyFooter {
   margin-top: 2rem;
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.7);
+  font-size: 1rem;
+  color: rgba(255,255,255,0.75);
+}
+
+
+@media (max-width: 768px) {
+  .privacySection {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .privacySection p,
+  ul {
+    text-align: left;
+  }
 }
