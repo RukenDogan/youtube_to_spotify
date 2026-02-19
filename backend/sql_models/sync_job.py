@@ -10,4 +10,6 @@ class SyncJob(db.Model):
     youtube_playlist_id = db.Column(db.String(255), nullable=False)
     spotify_playlist_id = db.Column(db.String(255), nullable=True)
 
-    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at = db.Column(db.DateTime(timezone=True),
+                       default=lambda: datetime.now(timezone.utc),
+                       nullable=False)

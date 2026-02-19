@@ -1,5 +1,5 @@
 # Route principal de l'application Flask
-from config import FLASK_SECRET_KEY, FRONTEND_URL
+from config import FLASK_SECRET_KEY, FRONTEND_URL, DATABASE_URL
 from flask import Flask
 from flask_cors import CORS
 from backend.controllers.sync_controller import (sync_playlist, spotify_login, spotify_callback, get_token)
@@ -16,8 +16,12 @@ app = Flask(__name__) # Création de l'application Flask
 app.secret_key = FLASK_SECRET_KEY # Clé secrète pour les sessions Flask
 
 # Configuration de la base de données SQLAlchemy
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///beatsync.db")
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+print("DB repr:", repr(DATABASE_URL))
+print("DB len:", len(DATABASE_URL))
+print("DB type:", type(DATABASE_URL))
 
 # Routes de l'historique
 app.add_url_rule("/history", view_func=history_list, methods=["GET"])

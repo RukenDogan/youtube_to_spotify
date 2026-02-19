@@ -7,4 +7,6 @@ class User(db.Model):
 
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     spotify_user_id = db.Column(db.String(64), unique=True, nullable=True)
-    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at = db.Column(db.DateTime(timezone=True),
+                       default=lambda: datetime.now(timezone.utc),
+                       nullable=False)

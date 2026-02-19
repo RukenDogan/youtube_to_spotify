@@ -9,7 +9,10 @@ class SyncRun(db.Model):
     user_id = db.Column(db.String(36), db.ForeignKey("users.id"), nullable=False)
 
     status = db.Column(db.String(20), nullable=False, default="RUNNING")
-    started_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    started_at = db.Column(db.DateTime(timezone=True),
+                       default=lambda: datetime.now(timezone.utc),
+                       nullable=False)
+
     ended_at = db.Column(db.DateTime(timezone=True), nullable=True)
 
     added = db.Column(db.Integer, nullable=False, default=0)
