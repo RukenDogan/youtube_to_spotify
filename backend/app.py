@@ -5,10 +5,7 @@ from flask_cors import CORS
 from backend.controllers.sync_controller import (sync_playlist, spotify_login, spotify_callback, get_token)
 import os
 from backend.db import db
-from backend.sql_models.user import User
-from backend.sql_models.sync_job import SyncJob
-from backend.sql_models.sync_run import SyncRun
-from backend.controllers.history_controller import history_list
+from backend.controllers.history_controller import history_list, history_detail
 from backend.controllers.sync_controller import debug_session
 
 
@@ -25,6 +22,7 @@ print("DB type:", type(DATABASE_URL))
 
 # Routes de l'historique
 app.add_url_rule("/history", view_func=history_list, methods=["GET"])
+app.add_url_rule("/history/<int:run_id>", view_func=history_detail, methods=["GET"])
 
 # Routes de débogage
 app.add_url_rule("/debug-session", view_func=debug_session, methods=["GET"])

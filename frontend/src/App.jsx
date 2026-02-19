@@ -7,6 +7,8 @@ import Dashboard from "./pages/Dashboard";
 import AlreadyConnected from "./pages/AlreadyConnected";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
+import History from "./pages/History";
+import HistoryDetail from "./pages/HistoryDetail";
 
 export default function App() {
   return (
@@ -17,8 +19,10 @@ export default function App() {
         <Route path="/already-connected" element={<AlreadyConnected />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/history/:runId" element={<HistoryDetail />} />
         <Route path="/not-found" element={<NotFound />} />
-        <Route path="/*" element={<NotFound />} /> // fallback pour les routes inconnues
+        <Route path="/*" element={<NotFound />} /> {/* fallback pour les routes inconnues */}
       </Routes>
     </div>
   );

@@ -49,12 +49,6 @@ export default function Dashboard() {
 
         <div className="dashboardTabs">
         <button
-          className={`tabBtn ${view === "sync" ? "active" : ""}`}
-          onClick={() => setView("sync")}
-        >
-          Synchroniser
-        </button>
-        <button
           className={`tabBtn ${view === "history" ? "active" : ""}`}
           onClick={() => setView("history")}
         >
