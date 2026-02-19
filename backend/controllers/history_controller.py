@@ -14,11 +14,8 @@ def history_list():
 
     return jsonify([{
         "id": r.id,
-        "job_id": r.job_id,
         "status": r.status,
         "started_at": r.started_at.isoformat(),
-        "ended_at": r.ended_at.isoformat() if r.ended_at else None,
         "added": r.added,
-        "skipped": r.skipped,
         "failed": r.failed,
     } for r in runs]), 200

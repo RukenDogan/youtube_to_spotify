@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 from backend.db import db
+from sqlalchemy.dialects.postgresql import JSON
 
 class SyncRun(db.Model):
     __tablename__ = "sync_runs"
@@ -16,5 +17,7 @@ class SyncRun(db.Model):
     ended_at = db.Column(db.DateTime(timezone=True), nullable=True)
 
     added = db.Column(db.Integer, nullable=False, default=0)
-    skipped = db.Column(db.Integer, nullable=False, default=0)
     failed = db.Column(db.Integer, nullable=False, default=0)
+
+    added_tracks = db.Column(JSON, nullable=True)
+    failed_tracks = db.Column(JSON, nullable=True)

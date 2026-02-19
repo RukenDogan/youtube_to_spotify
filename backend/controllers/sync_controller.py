@@ -10,6 +10,7 @@ from urllib.parse import urljoin
 from backend.services.user_service import get_or_create_user_by_spotify_id
 from datetime import datetime, timezone
 from backend.db import db
+from backend.sql_models.user import User
 from backend.sql_models.sync_job import SyncJob
 from backend.sql_models.sync_run import SyncRun
 from backend.models import youtube_model as yt
@@ -41,7 +42,6 @@ def spotify_callback():
         return jsonify({"error": "Missing code"}), 400
     
     print("SESSION AVANT REDIRECT:", dict(session))
-
 
     # Récupère le token depuis Spotify et stocke dans MongoDB
     token_info = sp_oauth.get_access_token(code, check_cache=False)
@@ -125,14 +125,12 @@ def sync_playlist():
     spotify_user_id = session.get("spotify_user_id")
     if not spotify_user_id:
         return jsonify({"error": "Identifiant Spotify manquant en session"}), 401
+    
+    user = get_or_create_user_by_spotify_id(spotify_user_id)
+    user_id = user.id
 
     if not youtube_url:
         return jsonify({"error": "URL YouTube manquante"}), 400
-
-    # Vérification de l'existence d'une playlist YouTube avec le même ID
-    user_id = session.get("user_id")
-    if not user_id:
-        return jsonify({"error": "Not authenticated"}), 401
 
     playlist_id = yt.extract_playlist_id(youtube_url)
     if not playlist_id:
