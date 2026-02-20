@@ -180,6 +180,16 @@ Page d’accueil invitant l’utilisateur à se connecter à son compte Spotify 
   <img src="docs-images/page_login.png" width="600" />
 </p>
 
+
+
+***Page de redirection OAuth Spotify** :*
+ Interface de connexion OAuth Spotify :
+
+<p align="center">
+  <img src="docs-images/oauth_spotify.png" width="600" />
+</p>
+
+
 **Page Dashboard** :
 Interface principale pour synchroniser les playlists YouTube → Spotify :
 

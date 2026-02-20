@@ -11,4 +11,6 @@ def synchronize_youtube_to_spotify(youtube_url, spotify_user_id):
         "nb_tracks_added": len(sync.track_ids),
         "playlist_name": sync.playlist_name,
         "spotify_playlist_id": sync.playlist_id,
+        "added_tracks": sync.track_ids,
+        "failed_tracks": [],
     }
