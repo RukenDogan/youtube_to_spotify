@@ -24,6 +24,6 @@ class Synchronizer:
         return self.playlist_id
 
     def add_tracks_to_spotify(self):
-        queries = [f"{title} {artist}" for title, artist in zip(self.titles, self.artists)]
-        self.track_ids = self.spotify.add_tracks_to_playlist(queries)
-        return self.track_ids
+        track_inputs = [{"title": t, "artist": a} for t, a in zip(self.titles, self.artists)]
+        self.added_tracks, self.failed_tracks = self.spotify.add_tracks_to_playlist(track_inputs)
+        return self.added_tracks, self.failed_tracks

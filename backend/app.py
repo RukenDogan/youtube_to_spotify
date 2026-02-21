@@ -16,10 +16,6 @@ app.secret_key = FLASK_SECRET_KEY # Clé secrète pour les sessions Flask
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-print("DB repr:", repr(DATABASE_URL))
-print("DB len:", len(DATABASE_URL))
-print("DB type:", type(DATABASE_URL))
-
 # Routes de l'historique
 app.add_url_rule("/history", view_func=history_list, methods=["GET"])
 app.add_url_rule("/history/<int:run_id>", view_func=history_detail, methods=["GET"])

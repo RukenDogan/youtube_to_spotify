@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { getHistory } from "../api/api";
+import { useNavigate } from "react-router-dom";
 import "../styles/HistoryPanel.css";
 
 export default function HistoryPanel() {
   const [runs, setRuns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
+  const navigate = useNavigate();
 
   const load = async () => {
     setLoading(true);
@@ -49,7 +51,7 @@ export default function HistoryPanel() {
                 <th>Date</th>
                 <th>Statut</th>
                 <th>Ajoutés</th>
-                <th>Job</th>
+                <th>Détails</th>
               </tr>
             </thead>
             <tbody>
@@ -68,7 +70,14 @@ export default function HistoryPanel() {
                     </span>
                   </td>
                   <td>{r.added}</td>
-                  <td>{r.job_id}</td>
+                  <td>
+                    <button
+                      className="historyBtn"
+                      onClick={() => navigate(`/history/${r.id}`)}
+                    >
+                      Voir
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

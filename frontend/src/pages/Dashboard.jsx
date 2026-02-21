@@ -10,7 +10,7 @@ import Footer from "../components/Footer.jsx";
 
 export default function Dashboard() {
   const [spotifyToken, setSpotifyToken] = useState(null);
-  const [view, setView] = useState("sync"); 
+  // const [view, setView] = useState("sync"); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,23 +48,17 @@ export default function Dashboard() {
         <PlaylistForm spotifyToken={spotifyToken} /> */}
 
         <div className="dashboardTabs">
-        <button
-          className={`tabBtn ${view === "history" ? "active" : ""}`}
-          onClick={() => setView("history")}
-        >
+        <button className="tabBtn" onClick={() => navigate("/history")}>
           Historique
         </button>
       </div>
 
       {spotifyToken ? (
-        view === "sync" ? (
-          <PlaylistForm spotifyToken={spotifyToken} />
-        ) : (
-          <HistoryPanel />
-        )
+        <PlaylistForm spotifyToken={spotifyToken} />
       ) : (
         <p>Chargement du compte Spotify...</p>
       )}
+
       <Footer />
     </div>
   );

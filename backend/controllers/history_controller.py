@@ -1,10 +1,15 @@
 from flask import jsonify, session
 from backend.sql_models.sync_run import SyncRun
+from backend.services.user_service import get_or_create_user_by_spotify_id
 
 def history_list():
-    user_id = session.get("user_id")
-    if not user_id:
+    spotify_user_id = session.get("spotify_user_id")
+    if not spotify_user_id:
         return jsonify({"error": "Not authenticated"}), 401
+
+    user = get_or_create_user_by_spotify_id(spotify_user_id)
+    session["user_id"] = user.id
+    user_id = user.id
 
     runs = (SyncRun.query
             .filter_by(user_id=user_id)
@@ -21,9 +26,13 @@ def history_list():
     } for r in runs]), 200
 
 def history_detail(run_id: int):
-    user_id = session.get("user_id")
-    if not user_id:
+    spotify_user_id = session.get("spotify_user_id")
+    if not spotify_user_id:
         return jsonify({"error": "Not authenticated"}), 401
+
+    user = get_or_create_user_by_spotify_id(spotify_user_id)
+    session["user_id"] = user.id
+    user_id = user.id
 
     run = SyncRun.query.filter_by(id=run_id, user_id=user_id).first()
     if not run:

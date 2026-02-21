@@ -1,3 +1,82 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getHistoryDetail } from "../api/api";
+import "../styles/HistoryPanel.css"; // pour garder le style
+
 export default function HistoryDetail() {
-  return <div>History detail</div>;
+  const { runId } = useParams();
+  const navigate = useNavigate();
+
+  const [data, setData] = useState(null);
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const load = async () => {
+      setLoading(true);
+      setErr("");
+      const res = await getHistoryDetail(runId);
+
+      if (res?.error) setErr(res.error);
+      else setData(res);
+
+      setLoading(false);
+    };
+    load();
+  }, [runId]);
+
+  return (
+    <div className="historyPanel">
+      <div className="historyHeader">
+        <h2 className="historyTitle">Détails synchronisation #{runId}</h2>
+        <button className="historyBtn" onClick={() => navigate("/history")}>
+          ← Retour
+        </button>
+      </div>
+
+      {loading && <p className="historyText">Chargement…</p>}
+      {err && <p className="historyError">Erreur : {err}</p>}
+
+      {!loading && !err && data && (
+        <>
+          <p className="historyText">
+            Statut : <strong>{data.status}</strong> — Ajoutés :{" "}
+            <strong>{data.added}</strong> — Échoués :{" "}
+            <strong>{data.failed}</strong>
+          </p>
+
+          <h3 className="historyTitle" style={{ marginTop: "1rem" }}>
+            Morceaux ajoutés
+          </h3>
+          {data.added_tracks?.length ? (
+            <ul className="historyText">
+              {data.added_tracks.map((t, idx) => (
+                <li key={idx}>
+                  {t.artist} — {t.title}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="historyText">Aucun morceau ajouté.</p>
+          )}
+
+          <h3 className="historyTitle" style={{ marginTop: "1rem" }}>
+            Morceaux non trouvés
+          </h3>
+          {data.failed_tracks?.length ? (
+            <ul className="historyText">
+              {data.failed_tracks.map((t, idx) => (
+                <li key={idx}>
+                  {t.artist ? `${t.artist} — ` : ""}
+                  {t.title || t.query}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="historyText">Aucun morceau en échec.</p>
+          )}
+        </>
+      )}
+    </div>
+  );
 }

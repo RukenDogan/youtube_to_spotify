@@ -52,38 +52,64 @@ class Spotify:
             artist_terms = track_artists.split()
 
             if all(term in query_lower for term in title_terms + artist_terms):
-                return track["id"]
+                return track
             
         return None
     
 
-    def add_tracks_to_playlist(self, track_queries):
+    def add_tracks_to_playlist(self, track_inputs):
+        added_items = []   # [{title, artist, spotify_id}]
+        failed_items = []  # [{title, artist, query}]
         track_ids = []
-        not_found = []
 
-        for query in track_queries:
-            cleaned = self.clean_query(query)
-            track_id = self.search_track(cleaned)
-
-            if track_id:
-                track_ids.append(track_id)
+        for item in track_inputs:
+            if isinstance(item, dict):
+                title = item.get("title", "").strip()
+                artist = item.get("artist", "").strip()
+                raw_query = f"{title} {artist}".strip()
             else:
-                not_found.append(query)
+                raw_query = str(item).strip()
+                title = ""
+                artist = ""
+
+            cleaned = self.clean_query(raw_query)
+            track = self.search_track(cleaned)
+
+            if track:
+                spotify_id = track["id"]
+                track_ids.append(spotify_id)
+
+            # si title/artist pas fournis (cas string), on prend ceux de Spotify
+                if not title:
+                    title = track.get("name", "")
+                if not artist:
+                    artist = ", ".join(a["name"] for a in track.get("artists", []))
+
+                added_items.append({
+                    "title": title,
+                    "artist": artist,
+                    "spotify_id": spotify_id,
+                })
+            else:
+                failed_items.append({
+                    "title": title,
+                    "artist": artist,
+                    "query": raw_query,
+                })
 
         if track_ids:
             for i in range(0, len(track_ids), 100):
                 batch = track_ids[i:i + 100]
                 self.client.playlist_add_items(self.playlist_id, batch)
                 print(f"🎵 Ajout de {len(batch)} morceaux (batch {i//100 + 1})")
-            # self.client.playlist_add_items(self.playlist_id, track_ids)
 
-        if not_found:
-            print(f"❌ Non trouvés ({len(not_found)}):", not_found)
+        if failed_items:
+            print(f"❌ Non trouvés ({len(failed_items)}):", [f["query"] for f in failed_items])
 
         print(f"✅ Total ajouté: {len(track_ids)} morceaux")
 
-        return track_ids
-    
+        return added_items, failed_items
+
 
     # Récupère tous les morceaux d'une playlist Spotify avec pagination
     def get_all_tracks_from_playlist(self, playlist_id, limit=50):

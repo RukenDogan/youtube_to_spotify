@@ -151,11 +151,16 @@ def sync_playlist():
         run.status = "SUCCESS"
         run.ended_at = datetime.now(timezone.utc)
         run.added = result.get("nb_tracks_added", 0)
+        run.failed = result.get("nb_tracks_failed", 0)
+        run.added_tracks = result.get("added_tracks", [])
+        run.failed_tracks = result.get("failed_tracks", [])
+
         db.session.commit()
 
         return jsonify(result), 200
     
     except Exception as e:
+        db.session.rollback()
         run.status = "FAILED"
         run.ended_at = datetime.now(timezone.utc)
         db.session.commit()
