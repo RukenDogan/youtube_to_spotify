@@ -127,6 +127,7 @@ def sync_playlist():
         return jsonify({"error": "Identifiant Spotify manquant en session"}), 401
     
     user = get_or_create_user_by_spotify_id(spotify_user_id)
+    session["user_id"] = user.id
     user_id = user.id
 
     if not youtube_url:
