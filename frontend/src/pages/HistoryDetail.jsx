@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getHistoryDetail } from "../api/api";
 import "../styles/HistoryPanel.css"; // pour garder le style
+import "../styles/HistoryDetail.css";
 
 export default function HistoryDetail() {
   const { runId } = useParams();
@@ -40,40 +41,40 @@ export default function HistoryDetail() {
       {!loading && !err && data && (
         <>
           <p className="historyText">
-            Statut : <strong>{data.status}</strong> — Ajoutés :{" "}
-            <strong>{data.added}</strong> — Échoués :{" "}
+            Statut : <strong>{data.status}</strong> - Ajoutés :{" "}
+            <strong>{data.added}</strong> - Échoués :{" "}
             <strong>{data.failed}</strong>
           </p>
 
-          <h3 className="historyTitle" style={{ marginTop: "1rem" }}>
+          <h3 className="historyTitle">
             Morceaux ajoutés
           </h3>
           {data.added_tracks?.length ? (
-            <ul className="historyText">
+            <ul className="historyTrackList">
               {data.added_tracks.map((t, idx) => (
                 <li key={idx}>
-                  {t.artist} — {t.title}
+                  {t.artist} - {t.title}
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="historyText">Aucun morceau ajouté.</p>
+            <p className="historyTrackList">Aucun morceau ajouté.</p>
           )}
 
-          <h3 className="historyTitle" style={{ marginTop: "1rem" }}>
+          <h3 className="historyTitle">
             Morceaux non trouvés
           </h3>
           {data.failed_tracks?.length ? (
-            <ul className="historyText">
+            <ul className="historyTrackList">
               {data.failed_tracks.map((t, idx) => (
                 <li key={idx}>
-                  {t.artist ? `${t.artist} — ` : ""}
+                  {t.artist ? `${t.artist} - ` : ""}
                   {t.title || t.query}
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="historyText">Aucun morceau en échec.</p>
+            <p className="historyTrackList">Aucun morceau en échec.</p>
           )}
         </>
       )}
