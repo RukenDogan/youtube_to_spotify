@@ -24,9 +24,9 @@
 .text-h1 {
   font-size: 2.2em;
   color: #ffffff;
-  margin: 2rem auto 0.5em auto;
+  margin: 3rem auto 0.5em auto;
   max-width: 60%;
-  padding: 2rem;
+  padding: 3rem;
   text-align: center;
 }
 
@@ -62,4 +62,58 @@
     top: 5px; 
     margin: 0 auto; 
     left: auto; }
+}
+
+
+.dashNav {
+  position: absolute;
+  top: 36px;
+  right: 40px;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  z-index: 10;
+}
+
+.dashNavLink {
+  background: transparent;
+  border: none;
+  padding: 6px 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.dashNavLink:hover {
+  color: #eeaac7;
+}
+
+.dashNavLink::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.25); /* ligne permanente douce */
+}
+
+.dashNavLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: rgba(238, 170, 199, 0.95);
+  transition: width 0.25s ease;
+}
+
+.dashNavLink:hover::after {
+  width: 100%;
 }

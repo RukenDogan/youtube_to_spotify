@@ -44,14 +44,21 @@ export default function Dashboard() {
         Synchronisez vos playlists en un battement
         <img src={beating} alt="beating" className="beating" />
       </h1>
-      {/* {spotifyToken ? (
-        <PlaylistForm spotifyToken={spotifyToken} /> */}
 
-        <div className="dashboardTabs">
-        <button className="tabBtn" onClick={() => navigate("/history")}>
+      <nav className="dashNav">
+        <button className="dashNavLink" onClick={() => navigate("/history")}>
           Historique
         </button>
-      </div>
+
+        <a
+          className="dashNavLink"
+          href="https://open.spotify.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Ouvrir Spotify
+        </a>
+      </nav>
 
       {spotifyToken ? (
         <PlaylistForm spotifyToken={spotifyToken} />
