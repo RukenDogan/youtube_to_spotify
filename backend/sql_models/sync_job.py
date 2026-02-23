@@ -6,8 +6,8 @@ class SyncJob(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.String(36), db.ForeignKey("users.id"), nullable=False)
-
     youtube_playlist_id = db.Column(db.String(255), nullable=False)
+    youtube_playlist_title = db.Column(db.String(255))
     spotify_playlist_id = db.Column(db.String(255), nullable=True)
 
     created_at = db.Column(db.DateTime(timezone=True),

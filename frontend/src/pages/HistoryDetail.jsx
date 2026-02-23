@@ -29,7 +29,15 @@ export default function HistoryDetail() {
   return (
     <div className="historyPanel">
       <div className="historyHeader">
-        <h2 className="historyTitle">Détails synchronisation #{runId}</h2>
+        <h2 className="historyTitle">
+          Détails synchronisation #{runId}
+          {data?.playlist_title && (
+            <>
+              <br />
+              Playlist : "{data.playlist_title}"
+            </>
+          )}
+        </h2>
         <button className="historyBtn" onClick={() => navigate("/history")}>
           ← Retour
         </button>

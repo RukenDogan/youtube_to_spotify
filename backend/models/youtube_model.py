@@ -1,5 +1,5 @@
 # récupérer les vidéos d’une playlist
-from config import YOUTUBE_API_KEY
+from backend.config import YOUTUBE_API_KEY
 import re # pour les opérations sur les chaînes de caractères
 from googleapiclient.discovery import build # pour interagir avec l'API YouTube
 from urllib.parse import urlparse, parse_qs # pour extraire l'ID de la playlist depuis l'URL

@@ -23,24 +23,36 @@
 }
 
 .historyBtn {
-  border: none;
-  padding: 10px 14px;
-  border-radius: 12px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Happy Monkey", sans-serif;
+  padding: 0.5rem 1rem;
+  border-radius: 2em;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(238, 146, 186, 0.25);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  color: white;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  background: rgba(238, 170, 199, 0.85);
-  color: #0D1B2A;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-.historyBtn:hover {
+.historyBtn:hover:not(:disabled) {
+  background: rgba(238,153,189,0.35);
   transform: scale(1.03);
-  filter: drop-shadow(0 0 0.6em rgba(238, 170, 199, 0.5));
+  box-shadow: 0 0 15px rgba(238,170,199,0.5);
 }
 
 .historyBtn:disabled {
-  opacity: 0.6;
+  background: rgba(180, 180, 180, 0.25);
+  box-shadow: none;
+  transform: none;
   cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .historyText {

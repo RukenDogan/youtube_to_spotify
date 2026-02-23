@@ -23,7 +23,9 @@ def history_list():
         "started_at": r.started_at.isoformat(),
         "added": r.added,
         "failed": r.failed,
+        "playlist_title": r.job.youtube_playlist_title if r.job else "Unknown Playlist",
     } for r in runs]), 200
+
 
 def history_detail(run_id: int):
     spotify_user_id = session.get("spotify_user_id")
@@ -47,4 +49,5 @@ def history_detail(run_id: int):
         "failed": run.failed,
         "added_tracks": run.added_tracks or [],
         "failed_tracks": run.failed_tracks or [],
+        "playlist_title": run.job.youtube_playlist_title if run.job else "Unknown Playlist",
     }), 200

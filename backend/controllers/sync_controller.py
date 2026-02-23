@@ -1,6 +1,6 @@
 # Fichier contenant les routes de l'API Flask
 from flask import request, jsonify, redirect, session
-from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI, FRONTEND_URL
+from backend.config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI, FRONTEND_URL
 from backend.services.sync_service import synchronize_youtube_to_spotify
 from spotipy.oauth2 import SpotifyOAuth
 from backend.utils.mongo import save_spotify_token, get_spotify_token
@@ -147,11 +147,18 @@ def sync_playlist():
     if not playlist_id:
         return jsonify({"error": "URL YouTube invalide"}), 400
 
+    playlist_title, _ = yt.get_playlist_info(playlist_id)
+
     job = SyncJob.query.filter_by(user_id=user_id, youtube_playlist_id=playlist_id).first()
     if not job:
-        job = SyncJob(user_id=user_id, youtube_playlist_id=playlist_id)
+        job = SyncJob(user_id=user_id, youtube_playlist_id=playlist_id, youtube_playlist_title=playlist_title)
         db.session.add(job)
         db.session.commit()
+
+    else:
+        if not job.youtube_playlist_title and playlist_title:
+            job.youtube_playlist_title = playlist_title
+            db.session.commit()
 
     run = SyncRun(job_id=job.id, user_id=user_id, status="RUNNING")
     db.session.add(run)

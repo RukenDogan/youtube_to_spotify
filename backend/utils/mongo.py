@@ -1,7 +1,6 @@
-from config import MONGO_URI
 from pymongo import MongoClient
+from backend.config import MONGO_URI
 from pathlib import Path
-
 
 
 # récupérer l'URI de MongoDB depuis les variables d'environnement
@@ -48,8 +47,3 @@ def get_spotify_token(spotify_user_id):
         return doc
     else:
         return None
-
-# save_spotify_token("test_user", "abc123", "def456", 1700000000)
-# token = get_spotify_token("test_user")
-# print("Token récupéré :", token)
-

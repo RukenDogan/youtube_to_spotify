@@ -49,6 +49,7 @@ export default function HistoryPanel() {
             <thead>
               <tr>
                 <th>Date</th>
+                <th>Playlist</th>
                 <th>Statut</th>
                 <th>Ajoutés</th>
                 <th>Détails</th>
@@ -58,6 +59,7 @@ export default function HistoryPanel() {
               {runs.map((r) => (
                 <tr key={r.id}>
                   <td>{new Date(r.started_at).toLocaleString()}</td>
+                  <td>{r.playlist_title}</td>
                   <td>
                     <span
                       className={
