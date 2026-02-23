@@ -78,9 +78,9 @@ def spotify_callback():
     )
 
     # Mise à jour de la session avec le token
-    session['spotify_token'] = token_info
+    # session['spotify_token'] = token_info
 
-    print("SESSION TOKEN CHECK:", dict(session))
+    # print("SESSION TOKEN CHECK:", dict(session))
 
 
     # Redirige vers le frontend (Dashboard)
@@ -105,12 +105,21 @@ def debug_session():
 
 
 def get_token():
-    """Renvoie le token Spotify stocké en session"""
+    """Renvoie le token Spotify stocké en session ou un booléen si connecté"""
+    spotify_user_id = session.get("spotify_user_id")
+    if not spotify_user_id:
+        return jsonify({"connected": False}), 200
+
+    doc = get_spotify_token(spotify_user_id)
+    if not doc:
+        return jsonify({"connected": False}), 200
+
+    return jsonify({"connected": True, "spotify_user_id": spotify_user_id}), 200
     # print("SESSION ACTUELLE :", dict(session))
-    token_info = session.get("spotify_token")
-    if not token_info:
-        return jsonify({"error": "No token"}), 401
-    return jsonify({"access_token": token_info["access_token"]})
+    # token_info = session.get("spotify_token")
+    # if not token_info:
+    #     return jsonify({"error": "No token"}), 401
+    # return jsonify({"access_token": token_info["access_token"]})
 
 
 # Synchronisation YouTube - Spotify
@@ -119,12 +128,13 @@ def sync_playlist():
     data = request.json or {}
     youtube_url = data.get("youtube_url")
 
-    if "spotify_token" not in session:
-        return jsonify({"error": "Utilisateur non connecté à Spotify"}), 401
-
     spotify_user_id = session.get("spotify_user_id")
     if not spotify_user_id:
-        return jsonify({"error": "Identifiant Spotify manquant en session"}), 401
+        return jsonify({"error": "Utilisateur non connecté à Spotify"}), 401
+
+    token_doc = get_spotify_token(spotify_user_id)
+    if not token_doc:
+        return jsonify({"error": "Token Spotify introuvable"}), 401
     
     user = get_or_create_user_by_spotify_id(spotify_user_id)
     session["user_id"] = user.id

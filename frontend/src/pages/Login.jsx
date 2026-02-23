@@ -6,14 +6,12 @@ import Footer from "../components/Footer";
 
 export default function Login() {
   const navigate = useNavigate();
-  const handleSpotifyLogin = () => {
-    // onLogin({ name: "Utilisateur Test" }); // pour simuler une connexion réussie
-    const token = localStorage.getItem("spotify_token"); // ou ta méthode pour savoir si connecté
-    if (token) {
-      navigate("/already-connected"); // redirection vers la page intermédiaire
-    } else {
-      window.location.href = "http://127.0.0.1:5000/login"; // redirection vers le backend pour OAuth
-    }
+  const handleSpotifyLogin = async () => {
+    const res = await fetch("http://127.0.0.1:5000/token", { credentials: "include" });
+    const data = await res.json();
+
+    if (data.connected) navigate("/already-connected");
+    else window.location.href = "http://127.0.0.1:5000/login";
   };
 
   return (

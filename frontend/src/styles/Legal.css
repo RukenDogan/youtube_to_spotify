@@ -1,4 +1,6 @@
-.privacyContainer {
+/* Legal.css - Styles pour les pages de mentions légales et conditions d'utilisation */
+
+.legalContainer {
   font-family: 'Titillium Web', sans-serif;
   max-width: 900px;
   margin: 2rem auto;
@@ -14,7 +16,7 @@
 }
 
 
-.privacyLogo {
+.legalLogo {
   width: 120px;
   margin-bottom: 1rem;
   animation: bounce 1.5s infinite;
@@ -29,7 +31,7 @@
     }
 }
 
-.privacyTitle {
+.legalTitle {
   font-family: 'Happy Monkey', cursive;
   font-size: 2.8rem;
   color: #eeaac7;
@@ -44,29 +46,29 @@ ul {
   list-style-type: circle;
 }
 
-.privacyIntro {
+.legalIntro {
   font-size: 1.2rem;
   margin-bottom: 2rem;
 }
 
-.privacySection {
+.legalSection {
   display: flex;
   align-items: flex-start;
   margin: 2rem 0;
   gap: 1rem;
 }
 
-.privacyIcon {
+.legalIcon {
   font-size: 2rem;
   color: #eeaac7;
   flex-shrink: 0;
 }
 
-.privacySection > div {
+.legalSection > div {
   flex: 1;
 }
 
-.privacySection h2 {
+.legalSection h2 {
   font-family: 'Happy Monkey', cursive;
   color: #eeaac7;
   text-align: center;
@@ -74,7 +76,7 @@ ul {
   font-size: 1.5rem;
 }
 
-.privacySection p {
+.legalSection p {
   font-size: 1.1rem;
   line-height: 1.75;
   text-align: left;
@@ -85,7 +87,7 @@ a {
   text-decoration: underline;
 }
 
-.privacyFooter {
+.legalFooter {
   margin-top: 2rem;
   font-size: 1rem;
   color: rgba(255,255,255,0.75);
@@ -93,13 +95,13 @@ a {
 
 
 @media (max-width: 768px) {
-  .privacySection {
+  .legalSection {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
-  .privacySection p,
+  .legalSection p,
   ul {
     text-align: left;
   }

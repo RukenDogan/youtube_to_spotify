@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PlaylistForm from "../components/PlaylistForm";
-import HistoryPanel from "../components/HistoryPanel.jsx";
 import "../styles/Dashboard.css";
 import logo from "../assets/images/logoBS.png";
 import beating from "../assets/images/beating.png";
@@ -9,32 +8,31 @@ import Footer from "../components/Footer.jsx";
 
 
 export default function Dashboard() {
-  const [spotifyToken, setSpotifyToken] = useState(null);
+  const [isSpotifyConnected, setIsSpotifyConnected] = useState(false);
   // const [view, setView] = useState("sync"); 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const checkSpotifyToken = async () => {
+    const checkSpotifyConnected = async () => {
       try {
         const res = await fetch("http://127.0.0.1:5000/token", {
           credentials: "include",
         });
         const data = await res.json();
 
-        if (data.access_token) {
-          setSpotifyToken(data.access_token);
-          localStorage.setItem("spotify_token", data.access_token);
+        if (data.connected) {
+          setIsSpotifyConnected(true); // token valide, on peut afficher le formulaire
         } else {
           // Pas de token → redirige vers la page NotFound
           navigate("/not-found");
         }
       } catch (err) {
-        console.error("Erreur de récupération du token :", err);
+        console.error("Erreur de vérification Spotify :", err);
         navigate("/not-found");
       }
     };
 
-    checkSpotifyToken();
+    checkSpotifyConnected();
   }, [navigate]);
 
   return (
@@ -60,8 +58,8 @@ export default function Dashboard() {
         </a>
       </nav>
 
-      {spotifyToken ? (
-        <PlaylistForm spotifyToken={spotifyToken} />
+      {isSpotifyConnected ? (
+        <PlaylistForm />
       ) : (
         <p>Chargement du compte Spotify...</p>
       )}

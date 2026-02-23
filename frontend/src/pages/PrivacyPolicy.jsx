@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/PrivacyPolicy.css";
+import "../styles/Legal.css";
 import {
   FaShieldAlt,
   FaLock,
@@ -13,18 +13,18 @@ import logo from "../assets/images/logoBS.png";
 
 export default function PrivacyPolicy() {
   return (
-    <div className="privacyContainer">
-      <img src={logo} alt="BeatSync Logo" className="privacyLogo" />
-      <h1 className="privacyTitle">Politique de confidentialité</h1>
+    <div className="legalContainer">
+      <img src={logo} alt="BeatSync Logo" className="legalLogo" />
+      <h1 className="legalTitle">Politique de confidentialité</h1>
 
-      <p className="privacyIntro">
+      <p className="legalIntro">
         BeatSync respecte votre vie privée et protège vos données personnelles.
         Cette page explique, en termes simples, quelles informations sont
         utilisées, pourquoi, combien de temps, et comment vous gardez le contrôle.
       </p>
 
-      <div className="privacySection">
-        <FaUserCheck className="privacyIcon" />
+      <div className="legalSection">
+        <FaUserCheck className="legalIcon" />
         <div>
           <h2>Données collectées</h2>
           <p>
@@ -33,8 +33,8 @@ export default function PrivacyPolicy() {
           </p>
           <ul>
             <li>
-              <strong>Token Spotify (OAuth)</strong> : permet d’agir sur votre
-              compte Spotify (ex. créer une playlist et ajouter des titres).
+              <strong>Tokens Spotify (OAuth 2.0 : access + refresh)</strong> : permettent
+              d’agir sur votre compte Spotify (ex. créer une playlist et ajouter des titres).
             </li>
             <li>
               <strong>Données “musique” minimales</strong> : titre et artiste des
@@ -53,40 +53,41 @@ export default function PrivacyPolicy() {
         </div>
       </div>
 
-      <div className="privacySection">
-        <FaDatabase className="privacyIcon" />
+      <div className="legalSection">
+        <FaDatabase className="legalIcon" />
         <div>
           <h2>Où sont stockées vos données</h2>
-          <p>
-            Pour assurer le bon fonctionnement de l’application :
-          </p>
+          <p>Pour assurer le bon fonctionnement de l’application :</p>
           <ul>
             <li>
-              Les <strong>tokens Spotify</strong> sont stockés dans{" "}
-              <strong>MongoDB</strong> (pour éviter de vous reconnecter à chaque
-              utilisation).
+              Les <strong>tokens Spotify</strong> sont stockés de manière sécurisée sur nos serveurs,
+              afin de permettre la synchronisation sans vous reconnecter à chaque utilisation.
             </li>
             <li>
-              L’<strong>historique utilisateur</strong> est stocké dans une base{" "}
-              <strong>SQL</strong> via <strong>SQLAlchemy</strong> (pour afficher
-              vos synchronisations passées).
+              L’<strong>historique utilisateur</strong> est stocké dans une base de données dédiée
+              afin d’afficher vos synchronisations passées.
             </li>
           </ul>
+          <p>
+            BeatSync s’appuie sur des <strong>services tiers</strong> (Spotify et YouTube) ainsi que sur
+            un <strong>hébergeur</strong> et des services de base de données nécessaires au fonctionnement.
+          </p>
         </div>
       </div>
 
-      <div className="privacySection">
-        <FaGavel className="privacyIcon" />
+      <div className="legalSection">
+        <FaGavel className="legalIcon" />
         <div>
           <h2>Pourquoi ces données sont utilisées</h2>
-          <p>
-            Les données sont utilisées uniquement pour :
-          </p>
+          <p>Les données sont utilisées uniquement pour :</p>
           <ul>
             <li>Exécuter la synchronisation (rechercher et ajouter des titres sur Spotify).</li>
             <li>Afficher un historique compréhensible de vos synchronisations.</li>
-            <li>Assurer la sécurité et prévenir les abus (journaux techniques limités).</li>
+            <li>Assurer le bon fonctionnement et la sécurité du service.</li>
           </ul>
+          <p>
+            Base légale : exécution du service demandé (synchronisation) et intérêt légitime (sécurité).
+          </p>
           <p>
             Conformité : BeatSync applique les principes du{" "}
             <strong>RGPD</strong> (minimisation des données, transparence,
@@ -95,8 +96,8 @@ export default function PrivacyPolicy() {
         </div>
       </div>
 
-      <div className="privacySection">
-        <FaLock className="privacyIcon" />
+      <div className="legalSection">
+        <FaLock className="legalIcon" />
         <div>
           <h2>Sécurité</h2>
           <p>
@@ -106,12 +107,13 @@ export default function PrivacyPolicy() {
           <ul>
             <li>Communications chiffrées via <strong>HTTPS/TLS</strong>.</li>
             <li>
-              Accès restreint aux données (seuls les composants nécessaires y
-              accèdent).
+              L’accès aux données est limité uniquement aux éléments nécessaires au fonctionnement du service.
             </li>
             <li>
-              Tokens et secrets gérés de manière sécurisée (pas d’informations
-              sensibles “en dur” dans le code).
+              Les informations sensibles (comme les clés d’accès techniques) sont protégées et ne sont jamais exposées publiquement.
+            </li>
+            <li>
+              Les informations de connexion ne sont jamais enregistrées dans votre navigateur.
             </li>
           </ul>
           <p>
@@ -121,18 +123,16 @@ export default function PrivacyPolicy() {
         </div>
       </div>
 
-      <div className="privacySection">
-        <FaShieldAlt className="privacyIcon" />
+      <div className="legalSection">
+        <FaShieldAlt className="legalIcon" />
         <div>
           <h2>Conservation des données</h2>
-          <p>
-            BeatSync conserve les données uniquement le temps nécessaire :
-          </p>
+          <p>BeatSync conserve les données uniquement le temps nécessaire :</p>
           <ul>
             <li>
               Les <strong>tokens Spotify</strong> peuvent expirer ou être révoqués.
-              Ils sont utilisés pour vous permettre de vous reconnecter le moins
-              souvent possible.
+              Ils sont conservés tant que la connexion est active, puis supprimés sur demande
+              ou après révocation.
             </li>
             <li>
               L’<strong>historique</strong> sert à afficher vos synchronisations
@@ -145,13 +145,11 @@ export default function PrivacyPolicy() {
         </div>
       </div>
 
-      <div className="privacySection">
-        <FaUserSlash className="privacyIcon" />
+      <div className="legalSection">
+        <FaUserSlash className="legalIcon" />
         <div>
           <h2>Vos droits (RGPD)</h2>
-          <p>
-            Conformément au RGPD, vous pouvez demander :
-          </p>
+          <p>Conformément au RGPD, vous pouvez demander :</p>
           <ul>
             <li>l’accès à vos données,</li>
             <li>la rectification si nécessaire,</li>
@@ -166,8 +164,8 @@ export default function PrivacyPolicy() {
         </div>
       </div>
 
-      <div className="privacySection">
-        <FaEnvelope className="privacyIcon" />
+      <div className="legalSection">
+        <FaEnvelope className="legalIcon" />
         <div>
           <h2>Contact</h2>
           <p>
@@ -179,7 +177,7 @@ export default function PrivacyPolicy() {
         </div>
       </div>
 
-      <p className="privacyFooter">© 2025 BeatSync. Tous droits réservés.</p>
+      <p className="legalFooter">© 2025 BeatSync. Tous droits réservés.</p>
     </div>
   );
 }

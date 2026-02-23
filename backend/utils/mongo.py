@@ -17,7 +17,7 @@ tokens_collection = db["spotify_tokens"]
 
 # test simple pour vérifier la connexion
 try:
-    print("Collections existantes :", db.list_collection_names())
+    # print("Collections existantes :", db.list_collection_names())
     print("✅ MongoDB connecté !")
 except Exception as e:
     print("❌ Impossible de se connecter à MongoDB :", e)
