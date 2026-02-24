@@ -39,7 +39,7 @@ def spotify_callback():
     """Récupère le code Spotify et génère le token"""
     code = request.args.get("code")
     if not code:
-        return jsonify({"error": "Missing code"}), 400
+        return jsonify({"error": "Code manquant"}), 400
     
     print("SESSION AVANT REDIRECT:", dict(session))
 

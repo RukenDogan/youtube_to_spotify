@@ -23,6 +23,12 @@ export default function HistoryPanel() {
     setLoading(false);
   };
 
+  const getStatusLabel = (status) => {
+  if (status === "SUCCESS") return "SUCCÈS";
+  if (status === "FAILED") return "ÉCHEC";
+  return status;
+};
+
   useEffect(() => {
     load();
   }, []);
@@ -59,7 +65,7 @@ export default function HistoryPanel() {
               {runs.map((r) => (
                 <tr key={r.id}>
                   <td>{new Date(r.started_at).toLocaleString()}</td>
-                  <td>{r.playlist_title}</td>
+                  <td>{r.playlist_title || "Playlist inconnue"}</td>
                   <td>
                     <span
                       className={
@@ -68,7 +74,7 @@ export default function HistoryPanel() {
                           : "historyBadge failed"
                       }
                     >
-                      {r.status}
+                      {getStatusLabel(r.status)}
                     </span>
                   </td>
                   <td>{r.added}</td>

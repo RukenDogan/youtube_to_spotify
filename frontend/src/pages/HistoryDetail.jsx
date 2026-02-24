@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getHistoryDetail } from "../api/api";
-import "../styles/HistoryPanel.css"; // pour garder le style
+import "../styles/HistoryPanel.css";
 import "../styles/HistoryDetail.css";
 
 export default function HistoryDetail() {
@@ -11,6 +11,13 @@ export default function HistoryDetail() {
   const [data, setData] = useState(null);
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(true);
+
+
+  const getStatusLabel = (status) => {
+    if (status === "SUCCESS") return "SUCCÈS";
+    if (status === "FAILED") return "ÉCHEC";
+    return status;
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -49,7 +56,7 @@ export default function HistoryDetail() {
       {!loading && !err && data && (
         <>
           <p className="historyText">
-            Statut : <strong>{data.status}</strong> - Ajoutés :{" "}
+            Statut : <strong>{getStatusLabel(data.status)}</strong> - Ajoutés :{" "}
             <strong>{data.added}</strong> - Échoués :{" "}
             <strong>{data.failed}</strong>
           </p>
