@@ -3,7 +3,7 @@ from flask import request, jsonify, redirect, session
 from backend.config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI, FRONTEND_URL
 from backend.services.sync_service import synchronize_youtube_to_spotify
 from spotipy.oauth2 import SpotifyOAuth
-from backend.utils.mongo import save_spotify_token, get_spotify_token
+from backend.services.token_service import save_spotify_token, get_spotify_token
 from spotipy import Spotify
 from backend.models.spotify_model import Spotify as SpotifyModel
 from urllib.parse import urljoin
