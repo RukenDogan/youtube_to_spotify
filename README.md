@@ -1,19 +1,33 @@
 # BeatSync App - Synchronisation de Playlists YouTube vers Spotify
 
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Flask](https://img.shields.io/badge/Flask-API-black)
+![React](https://img.shields.io/badge/React-Vite-61DAFB)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Render-blue)
+
+
 <p align="center">
-  <img src="docs-images/logoREADME.png" width="200" />
+  <img src="docs/images/logoREADME.png" width="200" />
 </p>
 
 ## Description
 
-Ce projet est une application **Python** / **Flask, React** / **Vite** et **MongoDB** qui permet de synchroniser les vidéos d'une playlist YouTube
-en créant automatiquement une playlist correspondante sur Spotify.
+BeatSync est une application full-stack (Python/Flask + React/Vite, MongoDB, SQLAlchemy/PostgreSQL) permettant de synchroniser automatiquement une playlist YouTube vers Spotify.
+
+L'application repose sur :
+
+- une authentification OAuth 2.0 via Spotify
+- une gestion sécurisée des tokens côté backend (MongoDB)
+- une base PostgreSQL pour l’historique des synchronisations
+- la structuration d’un backend en architecture MVC enrichie d’une couche Service
+- la mise en place d’une architecture frontend/backend découplée
 
 L'objectif principal est de se familiariser avec :
 
 - l'utilisation d'APIs REST (YouTube et Spotify),
 - l'authentification OAuth,
-- la gestion de données JSON,
+- la gestion des tokens sécurisée côté serveur
 - la structuration d'un projet en architecture MVC (Models, Controller, Views),
 - la recherche intelligente de morceaux sur Spotify avec correspondance titre/artiste.
 - la création d'une interface web en React.
@@ -30,20 +44,60 @@ L'objectif principal est de se familiariser avec :
 
 - **Backend :** Python, Flask, Spotipy, Google API Client
 - **Frontend :** React (JS, Vite)
-- **BDD :** MongoDB
+- **BDD :**
+  - MongoDB (stockage sécurisée des tokens Spotify)
+  - PostgreSQL (historique des synchronisations)
 - **Tests :** Pytest, Postman
 - **CI/CD :** GitHub Actions
 - **Gestion de projet :** Trello, Figma
+- **Déploiement :**  Docker & Render
 
 ## Architecture du projet
 
-Ce projet suit une architecture MVC adaptée avec un frontend React et un backend Flask :
+### Backend (Flask API)
 
-- **Models** : youtube_model.py et spotify_model.py côté backend, qui représentent les données et la logique métier (extraction YouTube, création playlist Spotify).
-- **Controllers** : les routes Flask (sync_controller) orchestrent les appels aux models et renvoient les données sous forme JSON.
-- **Views** : côté frontend React, les pages et composants (Login, Dashboard, Footer, etc.) affichent l’interface utilisateur.
+Le backend suit une architecture en couches :
 
-Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont entièrement gérées par React, ce qui correspond à une séparation frontend/backend tout en conservant le principe MVC.
+- **Controllers**
+
+  - `sync_controller`
+  - `history_controller`
+    → Gestion des requêtes HTTP et des sessions
+- **Services**
+
+  - `sync_service`
+  - `token_service`
+  - `mongo_tokens`
+  - `user_service`
+    → Logique applicative et orchestration
+- **Models**
+
+  - `synchronizer`
+  - `spotify_model`
+  - `youtube_model`
+    → Logique métier et intégration API
+- **sql_models**
+
+  - `User`
+  - `SyncJob`
+  - `SyncRun`
+    → Entités ORM PostgreSQL
+
+
+### Frontend (React)
+
+- Gère l’interface utilisateur
+- Implémente les "Views"
+- Communique avec le backend via requêtes HTTP (API REST)
+- Pages principales :
+  - Login
+  - Dashboard
+  - History
+  - History Detail
+  - Privacy
+  - CGU
+  - NotFound
+  - AlreadyConnected
 
 ## Prérequis
 
@@ -81,6 +135,7 @@ Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont
    - YOUTUBE_API_KEY=...
    - FLASK_SECRET_KEY=
    - MONGO_URI=
+   - DATABASE_URL=
    - FRONTEND_URL=
 
 ## Utilisation
@@ -108,11 +163,41 @@ Note : Dans cette architecture, Flask ne rend plus de HTML. Les “views” sont
 - La connexion OAuth Spotify est opérationnelle : le front redirige correctement vers Spotify et revient sur le dashboard une fois l’autorisation validée.
 - Stockage des tokens dans MongoDB pour renforcer la sécurité et permettre une authentification plus fiable.
 
-## Fonctionnalités à venir
+## Fonctionnalités détaillées
 
-Ces fonctionnalités sont prévues pour les prochaines versions afin d’améliorer la sécurité et l’expérience utilisateur :
+### Authentification
 
-- Amélioration de la gestion des erreurs et de la correspondance entre les morceaux YouTube ↔ Spotify
+- Connexion OAuth 2.0 via Spotify
+- Stockage sécurisé des tokens en MongoDB
+- Refresh automatique des tokens expirés
+
+### Synchronisation
+
+- Extraction des titres/artistes depuis YouTube
+- Recherche intelligente avec scoring Spotify
+- Création automatique de playlist
+- Gestion des morceaux non trouvés
+
+### Historique
+
+- Enregistrement de chaque synchronisation
+- Liste des synchronisations passées
+- Page détail avec :
+  - Morceaux ajoutés
+  - Morceaux non trouvés
+  - Statut (SUCCESS / FAILED)
+  - Date de début / fin
+
+### Pages
+
+- Login
+- Dashboard
+- AlreadyConnected
+- History
+- History Detail
+- Privacy Policy (Politique de Confidentialité)
+- CGU (Conditions Générales d’Utilisation)
+- NotFound (404)
 
 ## Déploiement prévu
 
@@ -139,17 +224,19 @@ Les instructions détaillées de déploiement (Dockerfile, configuration Render,
   - via le **terminal**
 - Test de la route avec Postman :
 
- ![Test de la route avec Postman](docs-images/route_postman.png)
+ ![Test de la route avec Postman](docs/images/route_postman.png)
 
 - Test de la route dans le terminal :
 
- ![Test de la route dans le terminal](docs-images/terminal_test_postman.png)
+ ![Test de la route dans le terminal](docs/images/terminal_test_postman.png)
 
 ## Sécurité
 
-- Les clés API et identifiants Spotify sont stockés dans un fichier `.env.local` non versionné.
-- (plus tard) Le projet ne stocke pas les tokens d’accès Spotify, ils sont utilisés uniquement le temps de la session.
-- (plus tard) Aucune donnée utilisateur n’est conservée côté serveur.
+- Tokens Spotify stockés uniquement côté backend (MongoDB)
+- Aucun token exposé côté navigateur
+- Variables sensibles via environnement (.env.local / Render)
+- Gestion sécurisée des sessions Flask
+- HTTPS automatique via Render (à venir)
 
 ## Aperçu visuel
 
@@ -159,14 +246,14 @@ Les instructions détaillées de déploiement (Dockerfile, configuration Render,
   Exemple d’exécution dans le terminal lors de la synchronisation :
 
 <p align="center">
-  <img src="docs-images/terminal_main.png" width="600" />
+  <img src="docs/images/terminal_main.png" width="600" />
 </p>
 
 Résultat sur Spotify :
 Playlist créée automatiquement :
 
 <p align="center">
-  <img src="docs-images/pl_spotify.png" width="600" />
+  <img src="docs/images/pl_spotify.png" width="600" />
 </p>
 
 **Côté frontend (React)**
@@ -177,31 +264,28 @@ Playlist créée automatiquement :
 Page d’accueil invitant l’utilisateur à se connecter à son compte Spotify :
 
 <p align="center">
-  <img src="docs-images/page_login.png" width="600" />
+  <img src="docs/images/page_login.png" width="600" />
 </p>
-
-
 
 ***Page de redirection OAuth Spotify** :*
  Interface de connexion OAuth Spotify :
 
 <p align="center">
-  <img src="docs-images/oauth_spotify.png" width="600" />
+  <img src="docs/images/oauth_spotify.png" width="600" />
 </p>
-
 
 **Page Dashboard** :
 Interface principale pour synchroniser les playlists YouTube → Spotify :
 
 <p align="center">
-  <img src="docs-images/page_dashboard.png" width="600" />
+  <img src="docs/images/page_dashboard.png" width="600" />
 </p>
 
 **Page NotFound** :
 Gère les erreurs de connexion ou les routes inexistantes :
 
 <p align="center">
-  <img src="docs-images/page_notfound.png" width="600" />
+  <img src="docs/images/page_notfound.png" width="600" />
 </p>
 
 **Page AlreadyConnected :**
@@ -210,7 +294,7 @@ Elle apparaît lorsqu’un utilisateur clique sur **“Se connecter à Spotify�
 Cette page sert de transition avant de rediriger automatiquement l’utilisateur vers le  **Dashboard** , évitant ainsi de refaire une authentification inutile :
 
 <p align="center">
-  <img src="docs-images/page_alreadyconnected.png" width="600" />
+  <img src="docs/images/page_alreadyconnected.png" width="600" />
 </p>
 
 * **Flux utilisateur simplifié :**
@@ -221,17 +305,17 @@ Cette page sert de transition avant de rediriger automatiquement l’utilisateur
 Cette page informe l’utilisateur sur la gestion de ses données personnelles et sur la manière dont BeatSync utilise les informations de Spotify et YouTube :
 
 <p align="center">
-  <img src="docs-images/page_privacy.png" width="600" />
+  <img src="docs/images/page_privacy.png" width="600" />
 </p>
 
 <p align="center">
-  <img src="docs-images/page_privacy2.png" width="600" />
+  <img src="docs/images/page_privacy2.png" width="600" />
 </p>
 
 #### Gif Visuel :
 
 <p align="center">
-  <img src="docs-images/interface_gif.gif" width="600" />
+  <img src="docs/images/interface_gif.gif" width="600" />
 </p>
 
 ---

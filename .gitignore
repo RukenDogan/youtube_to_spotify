@@ -87,7 +87,7 @@ instance/
 # Autres fichiers sensibles ou temporaires
 # =====================
 *.env.local
-*.env.production
+*.env.prod
 *.env.test
 *.tmp
 *.bak
