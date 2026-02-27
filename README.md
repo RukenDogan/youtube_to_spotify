@@ -6,7 +6,6 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Render-blue)
 
-
 <p align="center">
   <img src="docs/images/logoREADME.png" width="200" />
 </p>
@@ -82,7 +81,6 @@ Le backend suit une architecture en couches :
   - `SyncJob`
   - `SyncRun`
     → Entités ORM PostgreSQL
-
 
 ### Frontend (React)
 
@@ -308,8 +306,34 @@ Cette page informe l’utilisateur sur la gestion de ses données personnelles e
   <img src="docs/images/page_privacy.png" width="600" />
 </p>
 
+**Page Terms :**
+Cette page définit le cadre d’utilisation de l’application BeatSync (Condition Général d'Utilisation)
+
+
 <p align="center">
-  <img src="docs/images/page_privacy2.png" width="600" />
+  <img src="docs/images/page_terms.png" width="600" /> 
+</p>
+
+**Page History :**
+Cette page permet à l’utilisateur de consulter l’historique de ses synchronisations précédentes.
+
+<p align="center">
+  <img src="docs/images/page_history.png" width="600" /> 
+</p>
+
+**Page HistoryDetail :**
+Cette page affiche le détail d’une synchronisation spécifique.
+
+<p align="center">
+  <img src="docs/images/page_historydetail_success.png" width="600" /> 
+</p>
+
+<p align="center">
+  <img src="docs/images/page_historydetail_success2.png" width="600" /> 
+</p>
+
+<p align="center">
+  <img src="docs/images/page_historydetail_failed.png" width="600" /> 
 </p>
 
 #### Gif Visuel :
