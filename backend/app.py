@@ -1,18 +1,20 @@
 # Route principal de l'application Flask
-from backend.config import FLASK_SECRET_KEY, FRONTEND_URL, DATABASE_URL
+from doctest import debug
+
+from config import FLASK_SECRET_KEY, FRONTEND_URL, DATABASE_URL
 from flask import Flask
 from flask_cors import CORS
-from backend.controllers.sync_controller import (sync_playlist, spotify_login, spotify_callback, get_token)
+from controllers.sync_controller import (sync_playlist, spotify_login, spotify_callback, get_token)
 import os
 from flask_migrate import Migrate
-from backend.db import db
+from db import db
 # Import des modèles SQLAlchemy afin que Alembic puisse les détecter pour les migrations
-from backend.sql_models.user import User
-from backend.sql_models.sync_job import SyncJob
-from backend.sql_models.sync_run import SyncRun
+from sql_models.user import User
+from sql_models.sync_job import SyncJob
+from sql_models.sync_run import SyncRun
 
-from backend.controllers.history_controller import history_list, history_detail
-from backend.controllers.sync_controller import debug_session
+from controllers.history_controller import history_list, history_detail
+from controllers.sync_controller import debug_session
 
 
 app = Flask(__name__) # Création de l'application Flask
@@ -28,8 +30,9 @@ db.init_app(app)
 migrate = Migrate(app, db)
 
 # CORS pour autoriser les appels des routes depuis l'URL frontend
-CORS(app, origins=[FRONTEND_URL], supports_credentials=True)
-
+# CORS(app, origins=[FRONTEND_URL], supports_credentials=True)
+origins = [FRONTEND_URL.rstrip("/")] if FRONTEND_URL else []
+CORS(app, origins=origins, supports_credentials=True)
 
 # Routes de l'historique
 app.add_url_rule("/history", view_func=history_list, methods=["GET"])
@@ -48,4 +51,6 @@ app.add_url_rule("/youtube-to-spotify", view_func=sync_playlist, methods=["POST"
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
+    # app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
+    debug = os.getenv("FLASK_DEBUG", "0") == "1"
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=debug)

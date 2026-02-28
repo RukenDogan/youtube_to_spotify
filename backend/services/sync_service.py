@@ -1,5 +1,5 @@
 # Logique métier pour la synchronisation YouTube vers Spotify
-from backend.models.synchronizer import Synchronizer  # ou models/services/synchronizer
+from models.synchronizer import Synchronizer  # ou models/services/synchronizer
 
 def synchronize_youtube_to_spotify(youtube_url, spotify_user_id):
     sync = Synchronizer(youtube_url, spotify_user_id)

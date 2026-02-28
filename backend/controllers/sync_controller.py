@@ -1,19 +1,19 @@
 # Fichier contenant les routes de l'API Flask
 from flask import request, jsonify, redirect, session
-from backend.config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI, FRONTEND_URL
-from backend.services.sync_service import synchronize_youtube_to_spotify
+from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI, FRONTEND_URL
+from services.sync_service import synchronize_youtube_to_spotify
 from spotipy.oauth2 import SpotifyOAuth
-from backend.services.token_service import save_spotify_token, get_spotify_token
+from services.token_service import save_spotify_token, get_spotify_token
 from spotipy import Spotify
-from backend.models.spotify_model import Spotify as SpotifyModel
+from models.spotify_model import Spotify as SpotifyModel
 from urllib.parse import urljoin
-from backend.services.user_service import get_or_create_user_by_spotify_id
+from services.user_service import get_or_create_user_by_spotify_id
 from datetime import datetime, timezone
-from backend.db import db
-from backend.sql_models.user import User
-from backend.sql_models.sync_job import SyncJob
-from backend.sql_models.sync_run import SyncRun
-from backend.models import youtube_model as yt
+from db import db
+from sql_models.user import User
+from sql_models.sync_job import SyncJob
+from sql_models.sync_run import SyncRun
+from models import youtube_model as yt
 
 
 # Configuration Spotify

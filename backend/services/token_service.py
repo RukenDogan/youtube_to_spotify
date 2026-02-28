@@ -1,5 +1,5 @@
-from backend.services.mongo_tokens import get_spotify_token, save_spotify_token
-from backend.config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
+from services.mongo_tokens import get_spotify_token, save_spotify_token
+from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
 from spotipy.oauth2 import SpotifyOAuth
 import time
 

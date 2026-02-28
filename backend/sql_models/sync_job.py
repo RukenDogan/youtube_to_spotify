@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from backend.db import db
+from db import db
 
 class SyncJob(db.Model):
     __tablename__ = "sync_jobs"

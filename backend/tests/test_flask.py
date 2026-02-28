@@ -1,4 +1,4 @@
-from backend.app import app
+from app import app
 
 def test_youtube_to_spotify():
     client = app.test_client()

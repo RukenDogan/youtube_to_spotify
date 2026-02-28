@@ -1,6 +1,6 @@
 from flask import jsonify, session
-from backend.sql_models.sync_run import SyncRun
-from backend.services.user_service import get_or_create_user_by_spotify_id
+from sql_models.sync_run import SyncRun
+from services.user_service import get_or_create_user_by_spotify_id
 
 def history_list():
     spotify_user_id = session.get("spotify_user_id")

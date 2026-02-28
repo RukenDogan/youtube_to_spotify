@@ -1,3 +1,3 @@
-from backend.services.token_service import db
+from services.token_service import db
 
 print(db.list_collection_names())

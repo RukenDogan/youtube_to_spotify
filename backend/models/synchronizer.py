@@ -1,6 +1,6 @@
 # brique métier pour la synchronisation YouTube vers Spotify
-from backend.models import youtube_model as yt
-from backend.models import spotify_model as sp
+from models import youtube_model as yt
+from models import spotify_model as sp
 
 
 class Synchronizer:

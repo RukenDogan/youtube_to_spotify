@@ -2,7 +2,7 @@
 from multiprocessing.resource_sharer import stop
 from turtle import title
 
-from backend.config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
+from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import re

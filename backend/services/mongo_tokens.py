@@ -1,7 +1,7 @@
 from __future__ import annotations
 from functools import lru_cache
 from pymongo import MongoClient
-from backend.config import MONGO_URI
+from config import MONGO_URI
 
 
 @lru_cache(maxsize=1)

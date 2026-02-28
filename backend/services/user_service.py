@@ -1,5 +1,5 @@
-from backend.db import db
-from backend.sql_models.user import User
+from db import db
+from sql_models.user import User
 
 def get_or_create_user_by_spotify_id(spotify_user_id: str) -> User:
     user = User.query.filter_by(spotify_user_id=spotify_user_id).first()

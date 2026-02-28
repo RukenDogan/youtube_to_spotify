@@ -1,5 +1,5 @@
-from backend.main import Synchronizer
-from backend.models.spotify_model import SPOTIFY_USER_ID
+from main import Synchronizer
+from models.spotify_model import SPOTIFY_USER_ID
 
 def test_synchronizer():
     youtube_url = "https://www.youtube.com/playlist?list=PL0C00MH_AB4eundtu0PqswbWyYHdZawZi"
