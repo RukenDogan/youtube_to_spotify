@@ -14,6 +14,7 @@ from sql_models.sync_run import SyncRun
 from controllers.history_controller import history_list, history_detail
 from controllers.sync_controller import debug_session
 
+print("✅ LOADED backend/app.py (BeatSync) v1", flush=True)
 
 app = Flask(__name__) # Création de l'application Flask
 app.secret_key = FLASK_SECRET_KEY # Clé secrète pour les sessions Flask
@@ -47,6 +48,14 @@ app.add_url_rule("/token", view_func=get_token, methods=["GET"])
 # Route de synchronisation
 app.add_url_rule("/youtube-to-spotify", view_func=sync_playlist, methods=["POST"])
 
+
+@app.get("/")
+def home():
+    return {"status": "ok", "service": "beatsync-backend"}, 200
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}, 200
 
 if __name__ == "__main__":
     # app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
