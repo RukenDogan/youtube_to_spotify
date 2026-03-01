@@ -1,14 +1,17 @@
 # brique métier pour la synchronisation YouTube vers Spotify
 from models import youtube_model as yt
-from models import spotify_model as sp
+from models.spotify_model import Spotify as SpotifyModel
 
 
 class Synchronizer:
-    def __init__(self, youtube_url, spotify_user_id):
+    def __init__(self, youtube_url: str, spotify_user_id: str, access_token:str):
         self.youtube_url = youtube_url
         self.spotify_user_id = spotify_user_id
+        self.access_token = access_token
         self.playlist_id = None
         self.track_ids = []
+
+        self.spotify = SpotifyModel(access_token=self.access_token, spotify_user_id=self.spotify_user_id)
 
     def extract_youtube(self):
         self.playlist_id = yt.extract_playlist_id(self.youtube_url)
@@ -19,7 +22,7 @@ class Synchronizer:
         return self.titles, self.artists
 
     def create_spotify_playlist(self):
-        self.spotify = sp.Spotify(self.spotify_user_id)
+        # self.spotify = sp.Spotify(self.spotify_user_id)
         self.playlist_id = self.spotify.create_spotify_playlist(self.playlist_name, self.channel_name)
         return self.playlist_id
 

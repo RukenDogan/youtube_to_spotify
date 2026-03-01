@@ -3,7 +3,6 @@ from flask import request, jsonify, redirect, session
 from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI, FRONTEND_URL
 from services.sync_service import synchronize_youtube_to_spotify
 from spotipy.oauth2 import SpotifyOAuth
-from services.token_service import save_spotify_token, get_spotify_token
 from spotipy import Spotify
 from models.spotify_model import Spotify as SpotifyModel
 from urllib.parse import urljoin
@@ -14,6 +13,7 @@ from sql_models.user import User
 from sql_models.sync_job import SyncJob
 from sql_models.sync_run import SyncRun
 from models import youtube_model as yt
+from services.mongo_tokens import save_spotify_token, get_spotify_token
 
 
 # Configuration Spotify

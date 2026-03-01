@@ -23,11 +23,14 @@ SPOTIFY_REDIRECT_URI = os.getenv("SPOTIFY_REDIRECT_URI")
 FLASK_SECRET_KEY = os.getenv("FLASK_SECRET_KEY")
 MONGO_URI = os.getenv("MONGO_URI")
 DATABASE_URL = os.getenv("DATABASE_URL")
-FRONTEND_URL = os.getenv("FRONTEND_URL")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "")
 
 # Compatibilité PostgreSQL
-if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+if DATABASE_URL:
+    if DATABASE_URL.startswith("postgres://"):
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg://", 1)
+    elif DATABASE_URL.startswith("postgresql://"):
+        DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg://", 1)
 
 
 # Vérification
@@ -40,7 +43,7 @@ required_vars = {
     "FLASK_SECRET_KEY": FLASK_SECRET_KEY,
     "MONGO_URI": MONGO_URI,
     "DATABASE_URL": DATABASE_URL,
-    "FRONTEND_URL": FRONTEND_URL,
+    # "FRONTEND_URL": FRONTEND_URL,
 }
 
 missing = [name for name, value in required_vars.items() if not value]

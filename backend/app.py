@@ -1,6 +1,4 @@
 # Route principal de l'application Flask
-from doctest import debug
-
 from config import FLASK_SECRET_KEY, FRONTEND_URL, DATABASE_URL
 from flask import Flask
 from flask_cors import CORS

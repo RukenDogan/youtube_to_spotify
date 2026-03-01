@@ -1,25 +1,24 @@
 # créer une playlist sur spotify, rechercher les morceaux de la playlist youtube et ajouter les morceaux à la playlist spotify
-from multiprocessing.resource_sharer import stop
-from turtle import title
-
-from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
 import spotipy
-from spotipy.oauth2 import SpotifyOAuth
 import re
 
 
 SCOPE = "playlist-modify-public playlist-modify-private"
 
 class Spotify:
-    def __init__(self, spotify_user_id):
+    def __init__(self, access_token: str, spotify_user_id: str):
+        self.client = spotipy.Spotify(auth=access_token)
         self.spotify_user_id = spotify_user_id
-        self.client = spotipy.Spotify(auth_manager=SpotifyOAuth(
-            client_id=SPOTIFY_CLIENT_ID,
-            client_secret=SPOTIFY_CLIENT_SECRET,
-            redirect_uri=SPOTIFY_REDIRECT_URI,
-            scope=SCOPE
-        ))
-        self.spotify_user_id = self.client.me()["id"]
+
+    # def __init__(self, spotify_user_id):
+    #     self.spotify_user_id = spotify_user_id
+    #     self.client = spotipy.Spotify(auth_manager=SpotifyOAuth(
+    #         client_id=SPOTIFY_CLIENT_ID,
+    #         client_secret=SPOTIFY_CLIENT_SECRET,
+    #         redirect_uri=SPOTIFY_REDIRECT_URI,
+    #         scope=SCOPE
+    #     ))
+    #     self.spotify_user_id = self.client.me()["id"]
 
 
     def create_spotify_playlist(self, playlist_name, channel_name="YouTube"):
