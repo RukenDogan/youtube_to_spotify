@@ -13,8 +13,9 @@ from sql_models.sync_run import SyncRun
 
 from controllers.history_controller import history_list, history_detail
 from controllers.sync_controller import debug_session
+from migrate_on_start import run_migrations
 
-print("✅ LOADED backend/app.py (BeatSync) v1", flush=True)
+# print("✅ LOADED backend/app.py (BeatSync) v1", flush=True)
 
 app = Flask(__name__) # Création de l'application Flask
 app.secret_key = FLASK_SECRET_KEY # Clé secrète pour les sessions Flask
@@ -27,6 +28,12 @@ db.init_app(app)
 
 # Migrations
 migrate = Migrate(app, db)
+
+try:
+    run_migrations(app)
+    print("✅ Alembic upgrade OK", flush=True)
+except Exception as e:
+    print("⚠️ Alembic upgrade FAILED:", e, flush=True)
 
 # CORS pour autoriser les appels des routes depuis l'URL frontend
 # CORS(app, origins=[FRONTEND_URL], supports_credentials=True)
