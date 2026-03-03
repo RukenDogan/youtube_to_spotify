@@ -1,6 +1,8 @@
 import os
 from dotenv import load_dotenv
 
+SKIP_ENV_CHECK = os.getenv("SKIP_ENV_CHECK") == "1"
+
 # Chemin absolu vers la racine du projet
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -48,5 +50,8 @@ required_vars = {
 
 missing = [name for name, value in required_vars.items() if not value]
 
-if missing:
-    raise RuntimeError(f"❌ Variables manquantes : {', '.join(missing)}")
+if missing and not SKIP_ENV_CHECK:
+    raise RuntimeError(...)
+
+# if missing:
+#     raise RuntimeError(f"Variables manquantes : {', '.join(missing)}")

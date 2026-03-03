@@ -140,10 +140,10 @@ Le backend suit une architecture en couches :
 
 - Backend :
 
-1. Se positionner à la racine du projet :
-   `python backend/app.py`
-2. Entrer l'URL de la playlist YouTube quand demandé
-3. L'application créera la playlist sur Spotify et ajoutera les morceaux trouvés
+1. Se positionner dans le dossier `backend` :
+2. `python app.py`
+3. Entrer l'URL de la playlist YouTube quand demandé
+4. L'application créera la playlist sur Spotify et ajoutera les morceaux trouvés
 
 - Frontend :
 
@@ -209,6 +209,7 @@ Les instructions détaillées de déploiement (Dockerfile, configuration Render,
 ## Organisation du projet
 
 - Cahier des charges : [PDF](https://github.com/RukenDogan/youtube_to_spotify/tree/main/docs-images/CAHIER_DES_CHARGES_BeatSyncApp.pdf)
+- Formalisation des besoins fonctionnels en User Stories (Kanban) : [lien Trello](https://trello.com/b/bj08OaGH/formalisation-des-besoins-fonctionnels-en-user-stories-beatsync-app)
 - Gestion de projet (méthode Kanban) : [lien Trello](https://trello.com/invite/b/68e4cd834914b08442301ac4/ATTI16bcee34f742fc93b408b9e6ff2bba5e6B03E2A1/gestion-de-projet-youtube-spotify)
 - Création de maquettes avec Figma pour les pages Login et Dashboard : [lien Figma](https://www.figma.com/design/NAmYPrvKnnxLt6XkuWXm5A/Pages-Login-et-Dashboard-youtube-spotify?node-id=0-1&p=f&t=DaXgRIgKQMHaadRD-0)
 
@@ -308,7 +309,6 @@ Cette page informe l’utilisateur sur la gestion de ses données personnelles e
 
 **Page Terms :**
 Cette page définit le cadre d’utilisation de l’application BeatSync (Condition Général d'Utilisation)
-
 
 <p align="center">
   <img src="docs/images/page_terms.png" width="600" /> 
