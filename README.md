@@ -290,7 +290,7 @@ Gère les erreurs de connexion ou les routes inexistantes :
 **Page AlreadyConnected :**
 Page de redirection qui s'affiche si l'utilisateur est déjà connecté à Spotify.
 Elle apparaît lorsqu’un utilisateur clique sur **“Se connecter à Spotify”** depuis la page Login alors que sa session OAuth est toujours active.
-Cette page sert de transition avant de rediriger automatiquement l’utilisateur vers le  **Dashboard** , évitant ainsi de refaire une authentification inutile :
+Cette page sert de transition avant de rediriger automatiquement l’utilisateur vers le **Dashboard**, évitant ainsi de refaire une authentification inutile :
 
 <p align="center">
   <img src="docs/images/page_alreadyconnected.png" width="600" />
@@ -341,6 +341,31 @@ Cette page affiche le détail d’une synchronisation spécifique.
 <p align="center">
   <img src="docs/images/interface_gif.gif" width="600" />
 </p>
+
+
+
+#### Demo de BeatSync
+
+Cette vidéo présente le fonctionnement de l'application BeatSync :
+
+- connexion à Spotify via OAuth 2.0
+- redirection vers l'interface utilisateur après authentification
+- synchronisation d'une playlist YouTube vers Spotify
+- création automatique de la playlist Spotify
+- affichage du résultat de synchronisation (morceaux trouvés / non trouvés)
+- consultation de l'historique des synchronisations
+
+La démonstration est réalisée en navigation privée afin de montrer le processus complet d’authentification OAuth.
+
+▶ Voir la démonstration :
+
+```
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=AG0OVaYzRow">
+    <img src="https://img.youtube.com/vi/AG0OVaYzRow/0.jpg" width="600">
+  </a>
+</p>
+```
 
 ---
 
