@@ -359,13 +359,11 @@ La démonstration est réalisée en navigation privée afin de montrer le proces
 
 ▶ Voir la démonstration :
 
-```
 <p align="center">
   <a href="https://www.youtube.com/watch?v=AG0OVaYzRow">
     <img src="https://img.youtube.com/vi/AG0OVaYzRow/0.jpg" width="600">
   </a>
 </p>
-```
 
 ---
 
