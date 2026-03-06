@@ -99,7 +99,7 @@ Le backend suit une architecture en couches :
 
 ## Prérequis
 
-- Python 3.9 ou supérieur
+- Python 3.9 ou supérieur (la version utilisée dans ce projet : 3.13.3)
 - Un compte Spotify avec une application enregistrée pour obtenir Client ID et Client Secret
 - Une clé API YouTube
 - Modules Python :
@@ -341,8 +341,6 @@ Cette page affiche le détail d’une synchronisation spécifique.
 <p align="center">
   <img src="docs/images/interface_gif.gif" width="600" />
 </p>
-
-
 
 #### Demo de BeatSync
 
