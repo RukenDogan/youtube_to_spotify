@@ -5,7 +5,8 @@ import time
 
 SCOPE = "playlist-modify-public playlist-modify-private"
 
-_sp_oauth = SpotifyOAuth(
+def _sp_oauth() -> SpotifyOAuth:
+    return SpotifyOAuth(
     client_id=SPOTIFY_CLIENT_ID,
     client_secret=SPOTIFY_CLIENT_SECRET,
     redirect_uri=SPOTIFY_REDIRECT_URI,
@@ -27,8 +28,10 @@ def get_valid_access_token(spotify_user_id: str) -> str | None: # récupère un 
     if not refresh_token: # pas de refresh token
         return None
 
-    token_info = _sp_oauth.refresh_access_token(refresh_token) # refresh le token
-
+    # token_info = _sp_oauth.refresh_access_token(refresh_token) # refresh le token
+    sp_oauth = _sp_oauth()
+    token_info = sp_oauth.refresh_access_token(refresh_token) # refresh le token
+    
     save_spotify_token( # sauvegarde le nouveau token
         spotify_user_id,
         access_token=token_info["access_token"],
