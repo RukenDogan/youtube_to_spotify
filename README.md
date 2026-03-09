@@ -336,12 +336,6 @@ Cette page affiche le détail d’une synchronisation spécifique.
   <img src="docs/images/page_historydetail_failed.png" width="600" /> 
 </p>
 
-#### Gif Visuel :
-
-<p align="center">
-  <img src="docs/images/interface_gif.gif" width="600" />
-</p>
-
 #### Demo de BeatSync
 
 Cette vidéo présente le fonctionnement de l'application BeatSync :
@@ -355,7 +349,7 @@ Cette vidéo présente le fonctionnement de l'application BeatSync :
 
 La démonstration est réalisée en navigation privée afin de montrer le processus complet d’authentification OAuth.
 
-▶ Voir la démonstration :
+Voir la démonstration :
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=AG0OVaYzRow">
