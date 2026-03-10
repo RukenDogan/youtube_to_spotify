@@ -1,4 +1,3 @@
-# Fichier contenant les routes de l'API Flask
 from flask import request, jsonify, redirect, session
 from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI, FRONTEND_URL
 from services.sync_service import synchronize_youtube_to_spotify
