@@ -9,17 +9,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ENV_LOCAL = os.path.join(BASE_DIR, ".env.local")
 ENV_DEFAULT = os.path.join(BASE_DIR, ".env")
 
-print("BASE_DIR =", BASE_DIR)
-print("ENV_LOCAL =", ENV_LOCAL)
-print("ENV_DEFAULT =", ENV_DEFAULT)
-print("exists ENV_LOCAL =", os.path.exists(ENV_LOCAL))
-print("exists ENV_DEFAULT =", os.path.exists(ENV_DEFAULT))
-
-
-# if os.path.exists(ENV_LOCAL):
-#     load_dotenv(ENV_LOCAL)
-# elif os.path.exists(ENV_DEFAULT):
-#     load_dotenv(ENV_DEFAULT)
+# print("BASE_DIR =", BASE_DIR)
+# print("ENV_LOCAL =", ENV_LOCAL)
+# print("ENV_DEFAULT =", ENV_DEFAULT)
+# print("exists ENV_LOCAL =", os.path.exists(ENV_LOCAL))
+# print("exists ENV_DEFAULT =", os.path.exists(ENV_DEFAULT))
 
 if os.path.exists(ENV_DEFAULT):
     load_dotenv(ENV_DEFAULT)
