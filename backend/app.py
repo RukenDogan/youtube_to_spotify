@@ -29,11 +29,11 @@ db.init_app(app)
 # Migrations
 migrate = Migrate(app, db)
 
-# try:
-#     run_migrations(app)
-#     print("✅ Alembic upgrade OK", flush=True)
-# except Exception as e:
-#     print("⚠️ Alembic upgrade FAILED:", e, flush=True)
+try:
+    run_migrations(app)
+    print("✅ Alembic upgrade OK", flush=True)
+except Exception as e:
+    print("⚠️ Alembic upgrade FAILED:", e, flush=True)
 
 # CORS pour autoriser les appels des routes depuis l'URL frontend
 # CORS(app, origins=[FRONTEND_URL], supports_credentials=True)
