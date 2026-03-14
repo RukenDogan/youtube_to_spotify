@@ -1,7 +1,10 @@
 // API pour les routes de l'application
+
+const API_URL = import.meta.env.VITE_API_URL
+
 export async function syncPlaylist(youtubeUrl) {
   try {
-    const response = await fetch("http://127.0.0.1:5000/youtube-to-spotify", {
+    const response = await fetch(`${API_URL}/youtube-to-spotify`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ youtube_url: youtubeUrl }),
@@ -22,7 +25,7 @@ export async function syncPlaylist(youtubeUrl) {
 // récupérer l'historique des synchronisations
 export async function getHistory() {
   try {
-    const response = await fetch("http://127.0.0.1:5000/history", {
+    const response = await fetch(`${API_URL}/history`, {
       method: "GET",
       credentials: "include",
     });
@@ -39,7 +42,7 @@ export async function getHistory() {
 
 export async function getHistoryDetail(runId) {
   try {
-    const response = await fetch(`http://127.0.0.1:5000/history/${runId}`, {
+    const response = await fetch(`${API_URL}/history/${runId}`, {
       method: "GET",
       credentials: "include",
     });
