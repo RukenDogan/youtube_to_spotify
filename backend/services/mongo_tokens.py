@@ -8,7 +8,7 @@ def _get_collection():
     if not MONGO_URI:
         raise RuntimeError("MONGO_URI n'est pas défini ! Vérifie ton .env (.env.local/.env.prod).")
 
-    client = MongoClient(MONGO_URI)
+    client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=3000)
     db = client["beatsync"]
     return db["spotify_tokens"]
 
@@ -24,12 +24,12 @@ def save_spotify_token(spotify_user_id: str, access_token: str, refresh_token: s
         upsert=True
     )
 
-
 def get_spotify_token(spotify_user_id: str) -> dict | None:
-    return _get_collection().find_one({"spotify_user_id": spotify_user_id})
-
-
-
+    try:
+        return _get_collection().find_one({"spotify_user_id": spotify_user_id})
+    except Exception as e:
+        print("MongoDB error while fetching token:", e)
+        return None
 
 
 
