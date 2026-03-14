@@ -23,12 +23,12 @@ app.secret_key = FLASK_SECRET_KEY # Clé secrète pour les sessions Flask
 # Configuration de la base de données SQLAlchemy
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-# Connexion à la base de données
+# Connexion Flask à la base de données PostgreSQL via SQLAlchemy
 db.init_app(app)
 
-# Migrations
+# Initialisation du système de migrations Alembic avec Flask-Migrate
 migrate = Migrate(app, db)
-
+# Lancement des migrations Alembic au démarrage de l'application
 try:
     run_migrations(app)
     print("✅ Alembic upgrade OK", flush=True)
@@ -40,6 +40,7 @@ except Exception as e:
 origins = [FRONTEND_URL.rstrip("/")] if FRONTEND_URL else []
 CORS(app, origins=origins, supports_credentials=True)
 
+## Enregistrement des routes de l'application Flask
 # Routes de l'historique
 app.add_url_rule("/history", view_func=history_list, methods=["GET"])
 app.add_url_rule("/history/<int:run_id>", view_func=history_detail, methods=["GET"])

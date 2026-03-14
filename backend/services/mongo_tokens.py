@@ -3,7 +3,6 @@ from functools import lru_cache
 from pymongo import MongoClient
 from config import MONGO_URI
 
-
 @lru_cache(maxsize=1)
 def _get_collection():
     if not MONGO_URI:
