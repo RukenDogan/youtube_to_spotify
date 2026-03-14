@@ -1,17 +1,19 @@
 import "../styles/Login.css";
 import logo from "../assets/images/logoBS.png";
-import { FaSpotify } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
+import.meta.env.VITE_API_URL
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Login() {
   const navigate = useNavigate();
   const handleSpotifyLogin = async () => {
-    const res = await fetch("http://127.0.0.1:5000/token", { credentials: "include" });
+    const res = await fetch(`${API_URL}/token`, { credentials: "include" });
     const data = await res.json();
 
     if (data.connected) navigate("/already-connected");
-    else window.location.href = "http://127.0.0.1:5000/login";
+    else window.location.href = `${API_URL}/login`;
   };
 
   return (

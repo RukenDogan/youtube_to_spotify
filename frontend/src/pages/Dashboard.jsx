@@ -5,7 +5,9 @@ import "../styles/Dashboard.css";
 import logo from "../assets/images/logoBS.png";
 import beating from "../assets/images/beating.png";
 import Footer from "../components/Footer.jsx";
+import.meta.env.VITE_API_URL
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Dashboard() {
   const [isSpotifyConnected, setIsSpotifyConnected] = useState(false);
@@ -15,7 +17,7 @@ export default function Dashboard() {
   useEffect(() => {
     const checkSpotifyConnected = async () => {
       try {
-        const res = await fetch("http://127.0.0.1:5000/token", {
+        const res = await fetch(`${API_URL}/token`, {
           credentials: "include",
         });
         const data = await res.json();
