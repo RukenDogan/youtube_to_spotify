@@ -12,7 +12,7 @@ from sql_models.user import User
 from sql_models.sync_job import SyncJob
 from sql_models.sync_run import SyncRun
 from models import youtube_model as yt
-from services.mongo_tokens import save_spotify_token, get_spotify_token
+from services.sql_tokens import save_spotify_token, get_spotify_token
 
 
 # Configuration Spotify

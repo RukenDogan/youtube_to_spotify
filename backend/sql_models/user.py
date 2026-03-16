@@ -9,4 +9,8 @@ class User(db.Model):
     spotify_user_id = db.Column(db.String(64), unique=True, nullable=True)
     created_at = db.Column(db.DateTime(timezone=True),
                        default=lambda: datetime.now(timezone.utc),
-                       nullable=False)
+                       nullable=False
+    )
+    access_token = db.Column(db.Text, nullable=True)
+    refresh_token = db.Column(db.Text, nullable=True)
+    expires_at = db.Column(db.BigInteger, nullable=True)

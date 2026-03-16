@@ -1,102 +1,102 @@
-# service pour gérer les tokens Spotify dans MongoDB
-from __future__ import annotations
-from functools import lru_cache
-from pymongo import MongoClient
-from config import MONGO_URI
+# # service pour gérer les tokens Spotify dans MongoDB
+# from __future__ import annotations
+# from functools import lru_cache
+# from pymongo import MongoClient
+# from config import MONGO_URI
 
-@lru_cache(maxsize=1)
-def _get_collection():
-    if not MONGO_URI:
-        raise RuntimeError("MONGO_URI n'est pas défini !")
+# @lru_cache(maxsize=1)
+# def _get_collection():
+#     if not MONGO_URI:
+#         raise RuntimeError("MONGO_URI n'est pas défini !")
 
-    client = MongoClient(
-        MONGO_URI, 
-        serverSelectionTimeoutMS=3000,
-        connectTimeoutMS=3000,
-        socketTimeoutMS=3000,
-        retryWrites=True,
-        )
-    db = client["beatsync"]
-    return db["spotify_tokens"]
-
-
-def save_spotify_token(
-        spotify_user_id: str, 
-        access_token: str, 
-        refresh_token: str | None, 
-        expires_at: int
-    ) -> bool:
-        try:
-            _get_collection().update_one(
-                {"spotify_user_id": spotify_user_id},
-                {"$set": {
-                    "access_token": access_token,
-                    "refresh_token": refresh_token,
-                    "expires_at": expires_at
-                }},
-                upsert=True
-            )
-            return True
-        except Exception as e:
-            print("MongoDB error while saving token:", e, flush=True)
-            return False
+#     client = MongoClient(
+#         MONGO_URI, 
+#         serverSelectionTimeoutMS=3000,
+#         connectTimeoutMS=3000,
+#         socketTimeoutMS=3000,
+#         retryWrites=True,
+#         )
+#     db = client["beatsync"]
+#     return db["spotify_tokens"]
 
 
-def get_spotify_token(spotify_user_id: str) -> dict | None:
-    try:
-        return _get_collection().find_one({"spotify_user_id": spotify_user_id})
-    except Exception as e:
-        print("MongoDB error while fetching token:", e, flush=True)
-        return None
+# def save_spotify_token(
+#         spotify_user_id: str, 
+#         access_token: str, 
+#         refresh_token: str | None, 
+#         expires_at: int
+#     ) -> bool:
+#         try:
+#             _get_collection().update_one(
+#                 {"spotify_user_id": spotify_user_id},
+#                 {"$set": {
+#                     "access_token": access_token,
+#                     "refresh_token": refresh_token,
+#                     "expires_at": expires_at
+#                 }},
+#                 upsert=True
+#             )
+#             return True
+#         except Exception as e:
+#             print("MongoDB error while saving token:", e, flush=True)
+#             return False
 
 
-
-
-
-
-
-
-# # récupérer l'URI de MongoDB depuis les variables d'environnement
-# if not MONGO_URI:
-#     raise RuntimeError("MONGO_URI n'est pas défini ! Vérifie .env.local à la racine du projet")
-
-# # connexion à la base
-# db = MongoClient(MONGO_URI)["beatsync"]
-
-# # Collection pour stocker les tokens Spotify
-# tokens_collection = db["spotify_tokens"]
-
-
-# # test simple pour vérifier la connexion
-# try:
-#     # print("Collections existantes :", db.list_collection_names())
-#     print("✅ MongoDB connecté !")
-# except Exception as e:
-#     print("❌ Impossible de se connecter à MongoDB :", e)
-
-# # fonctions pour gérer les tokens Spotify dans MongoDB
-# def save_spotify_token(spotify_user_id, access_token, refresh_token, expires_at):
-#     """
-#     Sauvegarde ou met à jour le token Spotify d'un utilisateur.
-#     """
-#     tokens_collection.update_one(
-#         {"spotify_user_id": spotify_user_id}, # filtre pour trouver le document correspondant
-#         {"$set": {
-#             "access_token": access_token,
-#             "refresh_token": refresh_token,
-#             "expires_at": expires_at
-#         }},
-#         upsert=True # crée le document s'il n'existe pas
-#     )
-#     print(f"✅ Token enregistré pour {spotify_user_id}")
-
-# # fonction pour récupérer le token Spotify d'un utilisateur
-# def get_spotify_token(spotify_user_id):
-#     """
-#     Récupère le token Spotify d'un utilisateur depuis MongoDB.
-#     """
-#     doc = tokens_collection.find_one({"spotify_user_id": spotify_user_id})
-#     if doc:
-#         return doc
-#     else:
+# def get_spotify_token(spotify_user_id: str) -> dict | None:
+#     try:
+#         return _get_collection().find_one({"spotify_user_id": spotify_user_id})
+#     except Exception as e:
+#         print("MongoDB error while fetching token:", e, flush=True)
 #         return None
+
+
+
+
+
+
+
+
+# # # récupérer l'URI de MongoDB depuis les variables d'environnement
+# # if not MONGO_URI:
+# #     raise RuntimeError("MONGO_URI n'est pas défini ! Vérifie .env.local à la racine du projet")
+
+# # # connexion à la base
+# # db = MongoClient(MONGO_URI)["beatsync"]
+
+# # # Collection pour stocker les tokens Spotify
+# # tokens_collection = db["spotify_tokens"]
+
+
+# # # test simple pour vérifier la connexion
+# # try:
+# #     # print("Collections existantes :", db.list_collection_names())
+# #     print("✅ MongoDB connecté !")
+# # except Exception as e:
+# #     print("❌ Impossible de se connecter à MongoDB :", e)
+
+# # # fonctions pour gérer les tokens Spotify dans MongoDB
+# # def save_spotify_token(spotify_user_id, access_token, refresh_token, expires_at):
+# #     """
+# #     Sauvegarde ou met à jour le token Spotify d'un utilisateur.
+# #     """
+# #     tokens_collection.update_one(
+# #         {"spotify_user_id": spotify_user_id}, # filtre pour trouver le document correspondant
+# #         {"$set": {
+# #             "access_token": access_token,
+# #             "refresh_token": refresh_token,
+# #             "expires_at": expires_at
+# #         }},
+# #         upsert=True # crée le document s'il n'existe pas
+# #     )
+# #     print(f"✅ Token enregistré pour {spotify_user_id}")
+
+# # # fonction pour récupérer le token Spotify d'un utilisateur
+# # def get_spotify_token(spotify_user_id):
+# #     """
+# #     Récupère le token Spotify d'un utilisateur depuis MongoDB.
+# #     """
+# #     doc = tokens_collection.find_one({"spotify_user_id": spotify_user_id})
+# #     if doc:
+# #         return doc
+# #     else:
+# #         return None
