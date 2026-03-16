@@ -23,6 +23,12 @@ app.secret_key = FLASK_SECRET_KEY # Clé secrète pour les sessions Flask
 # Configuration de la base de données SQLAlchemy
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+# Configuration des cookies de session pour la sécurité et le support cross-site
+app.config["SESSION_COOKIE_HTTPONLY"] = True # Sécurise les cookies de session contre les attaques XSS
+app.config["SESSION_COOKIE_SAMESITE"] = "None" # Permet les cookies de session dans les contextes cross-site (nécessaire pour le frontend hébergé séparément)
+app.config["SESSION_COOKIE_SECURE"] = True # Assure que les cookies de session ne sont envoyés que sur des connexions HTTPS en production
+
 # Connexion Flask à la base de données PostgreSQL via SQLAlchemy
 db.init_app(app)
 
