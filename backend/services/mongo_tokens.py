@@ -1,3 +1,4 @@
+# service pour gérer les tokens Spotify dans MongoDB
 from __future__ import annotations
 from functools import lru_cache
 from pymongo import MongoClient
@@ -6,30 +7,52 @@ from config import MONGO_URI
 @lru_cache(maxsize=1)
 def _get_collection():
     if not MONGO_URI:
-        raise RuntimeError("MONGO_URI n'est pas défini ! Vérifie ton .env (.env.local/.env.prod).")
+        raise RuntimeError("MONGO_URI n'est pas défini !")
 
-    client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=3000)
+    client = MongoClient(
+        MONGO_URI, 
+        serverSelectionTimeoutMS=3000,
+        connectTimeoutMS=3000,
+        socketTimeoutMS=3000,
+        retryWrites=True,
+        )
     db = client["beatsync"]
     return db["spotify_tokens"]
 
 
-def save_spotify_token(spotify_user_id: str, access_token: str, refresh_token: str | None, expires_at: int) -> None:
-    _get_collection().update_one(
-        {"spotify_user_id": spotify_user_id},
-        {"$set": {
-            "access_token": access_token,
-            "refresh_token": refresh_token,
-            "expires_at": expires_at
-        }},
-        upsert=True
-    )
+def save_spotify_token(
+        spotify_user_id: str, 
+        access_token: str, 
+        refresh_token: str | None, 
+        expires_at: int
+    ) -> bool:
+        try:
+            _get_collection().update_one(
+                {"spotify_user_id": spotify_user_id},
+                {"$set": {
+                    "access_token": access_token,
+                    "refresh_token": refresh_token,
+                    "expires_at": expires_at
+                }},
+                upsert=True
+            )
+            return True
+        except Exception as e:
+            print("MongoDB error while saving token:", e, flush=True)
+            return False
+
 
 def get_spotify_token(spotify_user_id: str) -> dict | None:
     try:
         return _get_collection().find_one({"spotify_user_id": spotify_user_id})
     except Exception as e:
-        print("MongoDB error while fetching token:", e)
+        print("MongoDB error while fetching token:", e, flush=True)
         return None
+
+
+
+
+
 
 
 

@@ -40,24 +40,34 @@ def spotify_callback():
     if not code:
         return jsonify({"error": "Code manquant"}), 400
     
-    print("SESSION AVANT REDIRECT:", dict(session))
+    print("SESSION AVANT REDIRECT:", dict(session), flush=True)
 
-    # Récupère le token depuis Spotify et stocke dans MongoDB
-    token_info = sp_oauth.get_access_token(code, check_cache=False)
+    try:
+        # Récupère le token depuis Spotify et stocke dans MongoDB
+        token_info = sp_oauth.get_access_token(code, check_cache=False)
+    except Exception as e:
+        print("Erreur lors de la récupération du token Spotify:", e, flush=True)
+        return jsonify({"error": "Failed to retrieve Spotify token"}), 500
 
     # Récupère l'ID utilisateur Spotify
     # sp = Spotify(auth=token_info['access_token'])
     # spotify_user_id = sp.me()['id']
+    try:
+        # API Spotify brute
+        sp_api = Spotify(auth=token_info['access_token']) # spotipy
+        spotify_user_id = sp_api.me()['id'] # récupère l'user
+        session["spotify_user_id"] = spotify_user_id
+    except Exception as e:
+        print("Erreur lors de la récupération de l'ID utilisateur Spotify:", e, flush=True)
+        return jsonify({"error": "Failed to retrieve Spotify user ID"}), 500
 
-    # API Spotify brute
-    sp_api = Spotify(auth=token_info['access_token']) # spotipy
-    spotify_user_id = sp_api.me()['id'] # récupère l'user
-    session["spotify_user_id"] = spotify_user_id
-
-    user = get_or_create_user_by_spotify_id(spotify_user_id)
-    session["user_id"] = user.id
-    print("USER ID SQL:", session.get("user_id"))
-
+    try:
+        user = get_or_create_user_by_spotify_id(spotify_user_id)
+        session["user_id"] = user.id
+        print("USER ID SQL:", session.get("user_id"), flush=True)
+    except Exception as e:
+        print("Erreur lors de la récupération/création de l'utilisateur SQL:", e, flush=True)
+        return jsonify({"error": "Failed to retrieve/create user in SQL database"}), 500
 
     # Initialise le modèle Spotify avec l'ID utilisateur
     # sp_model = SpotifyModel(spotify_user_id)
@@ -69,12 +79,15 @@ def spotify_callback():
     
 
     # Stocke le token dans MongoDB
-    save_spotify_token(
+    saved = save_spotify_token(
         spotify_user_id,
         access_token = token_info['access_token'],
         refresh_token = token_info.get('refresh_token'),
         expires_at = token_info['expires_at']
     )
+    if not saved:
+        print("⚠️ Erreur lors de la sauvegarde du token dans MongoDB", flush=True)
+        return jsonify({"error": "Failed to save token"}), 500
 
     # Mise à jour de la session avec le token
     # session['spotify_token'] = token_info
