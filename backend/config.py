@@ -9,11 +9,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ENV_LOCAL = os.path.join(BASE_DIR, ".env.local")
 ENV_DEFAULT = os.path.join(BASE_DIR, ".env")
 
-if os.path.exists(ENV_DEFAULT):
-    load_dotenv(ENV_DEFAULT)
 
-if os.path.exists(ENV_LOCAL):
-    load_dotenv(ENV_LOCAL, override=True)
+# Charger les fichiers .env uniquement en local
+# Sur Render, utilise uniquement les variables définies dans l'interface Render
+if os.getenv("RENDER") is None:
+    if os.path.exists(ENV_DEFAULT):
+        load_dotenv(ENV_DEFAULT)
+
+    if os.path.exists(ENV_LOCAL):
+        load_dotenv(ENV_LOCAL, override=True)
 
 # Variables d'environnement
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
