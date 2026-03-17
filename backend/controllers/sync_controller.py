@@ -46,7 +46,7 @@ def spotify_callback():
         # Récupère le token depuis Spotify et stocke dans MongoDB
         token_info = sp_oauth.get_access_token(code, check_cache=False)
     except Exception as e:
-        print("Erreur lors de la récupération du token Spotify:", e, flush=True)
+        print("Erreur lors de la récupération du token Spotify:", repr(e), flush=True)
         return jsonify({"error": "Failed to retrieve Spotify token"}), 500
 
     # Récupère l'ID utilisateur Spotify
