@@ -13,7 +13,6 @@ from sql_models.sync_job import SyncJob
 from sql_models.sync_run import SyncRun
 from models import youtube_model as yt
 from services.sql_tokens import save_spotify_token, get_spotify_token
-import traceback
 
 
 # Configuration Spotify
@@ -47,9 +46,7 @@ def spotify_callback():
         # Récupère le token depuis Spotify et stocke dans MongoDB
         token_info = sp_oauth.get_access_token(code, check_cache=False)
     except Exception as e:
-        print("SPOTIFY_REDIRECT_URI utilisée =", SPOTIFY_REDIRECT_URI, flush=True)
         print("Erreur lors de la récupération du token Spotify:", repr(e), flush=True)
-        traceback.print_exc()
         return jsonify({"error": "Failed to retrieve Spotify token"}), 500
 
     # Récupère l'ID utilisateur Spotify
