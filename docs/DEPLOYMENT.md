@@ -117,3 +117,19 @@ Plusieurs améliorations peuvent être envisagées :
 Dans le cadre du projet, le déploiement sur Render a permis de valider le bon fonctionnement de l’application en environnement de production.
 
 Cette étape constitue une base avant la mise en place d’une conteneurisation via Docker, envisagée dans une démarche d’industrialisation et de reproductibilité de l’environnement.
+
+---
+
+
+
+#### Conteneurisation de l’application (Docker)
+
+Dans une logique d’industrialisation du projet, la mise en place d’une conteneurisation via Docker a été envisagée.
+
+L’objectif de cette démarche est de standardiser l’environnement d’exécution de l’application en encapsulant le backend et le frontend dans des conteneurs indépendants. Cela permet notamment de garantir la reproductibilité du projet, indépendamment de l’environnement local ou de la plateforme de déploiement.
+
+La conteneurisation repose sur la création de fichiers de configuration (Dockerfile) permettant de définir les dépendances et les étapes de build de chaque service. Une orchestration via Docker Compose peut également être envisagée afin de faciliter le lancement simultané des différents composants de l’application, notamment le backend, le frontend et la base de données.
+
+Cette approche permettrait à terme de simplifier le déploiement de l’application, d’améliorer sa portabilité et de s’inscrire dans une démarche DevOps plus complète.
+
+La mise en œuvre de cette solution constitue une amélioration en cours de réalisation.
