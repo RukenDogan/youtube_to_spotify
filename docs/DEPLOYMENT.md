@@ -2,88 +2,118 @@
 
 ### 1. Prérequis
 
-* Python / Flask
-* React / Vite (frontend)
-* PostgreSQL
-* Compte Spotify Developer
-* Compte Google Developer
-* Compte Render (ou autre plateforme cloud)
-* Docker
+Avant le déploiement, il est nécessaire de disposer :
+
+- d’un compte Render ;
+- d’un compte Spotify Developer ;
+- d’un compte Google Developer ;
+- d’un projet structuré en deux dossiers distincts : `backend` (Flask) et `frontend` (React/Vite) ;
+- des variables d’environnement nécessaires au fonctionnement de l’application.
+
+Le backend repose sur Flask, SQLAlchemy et Alembic pour la gestion des migrations.
+Le frontend repose sur React et Vite.
+Le déploiement présenté ici correspond à l’architecture retenue pour BeatSync sur Render.
 
 ---
 
-### 2. Configuration des variables d’environnement
+### 2. Création de la base de données PostgreSQL
+
+La première étape consiste à créer une base de données PostgreSQL sur Render.
+
+Une fois la base créée, Render fournit automatiquement une variable d’environnement `DATABASE_URL`.
+Cette URL doit être récupérée puis utilisée dans la configuration du backend afin de permettre la connexion à la base de données.
+
+Cette étape doit être réalisée avant le déploiement du backend, car celui-ci dépend de la base relationnelle pour enregistrer l’historique des synchronisations.
+
+---
+
+### 3. Configuration des variables d’environnement
 
 Le backend nécessite les variables suivantes :
 
-* SPOTIFY_CLIENT_ID
-* SPOTIFY_CLIENT_SECRET
-* SPOTIFY_REDIRECT_URI
-* YOUTUBE_API_KEY
-* DATABASE_URL
-* FRONTEND_URL
-* FLASK_SECRET_KEY
+- `SPOTIFY_CLIENT_ID`
+- `SPOTIFY_CLIENT_SECRET`
+- `SPOTIFY_REDIRECT_URI`
+- `YOUTUBE_API_KEY`
+- `DATABASE_URL`
+- `FRONTEND_URL`
+- `FLASK_SECRET_KEY`
 
-Ces variables doivent être configurées dans l’environnement d’hébergement (ex : Render).
+Le frontend nécessite notamment :
 
----
+- `VITE_API_URL`
 
-### 3. Déploiement du backend
-
-* Déployer le dossier `backend`
-* S’assurer que les éléments suivants sont présents dans le dossier backend :
-
-  * le fichier `requirements.txt` (dépendances Python)
-  * le dossier `migrations` (gestion des migrations Alembic)
-* Lors du déploiement sur Render, les dépendances sont installées automatiquement à partir du fichier `requirements.txt`.
-* gunicorn app:app
-
-* Vérifier le bon fonctionnement du backend via certaines routes techniques :
-  * `/` (route de base)
-  * `/health` (vérification de l’état du service)
-  * `/token` (vérification de la connexion à Spotify)
-
+Ces variables doivent être configurées directement dans l’environnement d’hébergement (ex : Render).
 
 ---
 
-### 4. Déploiement du frontend
+### 4. Déploiement du backend
 
-* Déployer le dossier `frontend`
-* Commandes de build :
+Le backend est déployé sur Render en tant que **Web Service**.
 
-<pre class="overflow-visible! px-0!" data-start="1386" data-end="1419"><div class="relative w-full mt-4 mb-1"><div class=""><div class="relative"><div class="h-full min-h-0 min-w-0"><div class="h-full min-h-0 min-w-0"><div class="border border-token-border-light border-radius-3xl corner-superellipse/1.1 rounded-3xl"><div class="h-full w-full border-radius-3xl bg-token-bg-elevated-secondary corner-superellipse/1.1 overflow-clip rounded-3xl lxnfua_clipPathFallback"><div class="pointer-events-none absolute end-1.5 top-1 z-2 md:end-2 md:top-1"></div><div class="pe-11 pt-3"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" dir="ltr" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼs ͼ16"><div class="cm-scroller"><div class="cm-content q9tKkq_readonly"><span>npm install</span><br/><span>npm run build</span></div></div></div></div></div></div></div></div></div><div class=""><div class=""></div></div></div></div></div></pre>
+Configuration principale :
 
-* Dossier de sortie : `dist`
+- **Root Directory** : `backend`
+- présence du fichier `requirements.txt` (dépendances Python)
+- présence du dossier `migrations` (gestion des migrations Alembic)
+- commande de démarrage : `gunicorn app:app`
 
----
+Le backend doit être relié à la variable `DATABASE_URL` fournie par la base PostgreSQL créée précédemment.
 
-### 5. Configuration importante
+Après déploiement, il est recommandé de vérifier :
 
-* Définir `VITE_API_URL` côté frontend
-* Vérifier les règles de rewrite (`/* → /index.html`)
-* Configurer CORS avec `FRONTEND_URL`
+- le bon démarrage du service ;
+- la connexion à la base de données ;
+- le fonctionnement des routes techniques (ex : `/`, `/health`, `/token`).
 
----
-
-### 6. Points de vigilance
-
-* OAuth peut être impacté par les cookies cross-site
-* Certaines extensions navigateur (ex : Privacy Badger) peuvent bloquer la connexion
-* Les APIs externes (Spotify, YouTube) doivent être accessibles
-* En mode développement Spotify, les utilisateurs doivent être ajoutés à l’allowlist
+Si Alembic est exécuté au démarrage, il convient également de vérifier que les migrations sont correctement appliquées.
 
 ---
 
-### 7. Améliorations possibles
+### 5. Déploiement du frontend
 
-* Dockerisation
-* CI/CD
-* Domaine unique frontend/backend
-* Monitoring avancé
-* Dockerisation :
+Le frontend est déployé sur Render en tant que **Static Site**.
 
-L’utilisation de Docker peut être envisagée afin de garantir la reproductibilité de l’environnement d’exécution et faciliter le déploiement sur différentes plateformes.
+Configuration principale :
 
-Dans la configuration actuelle, l’application est déployée directement sur Render sans containerisation, afin de simplifier la mise en production et de valider le fonctionnement global du système.
+- **Root Directory** : `frontend`
+- **Build Command** :`npm install && npm run build`
+- **Publish Directory** : `dist`
 
-La mise en place de Docker constitue une amélioration possible, notamment pour standardiser l’environnement et faciliter l’intégration dans une démarche DevOps.
+La variable `VITE_API_URL` doit pointer vers l’URL publique du backend déployé.
+
+---
+
+### 6. Configuration complémentaire
+
+Après le déploiement, plusieurs éléments doivent être vérifiés :
+
+- la configuration de CORS côté backend à l’aide de `FRONTEND_URL` ;
+- la règle de réécriture du frontend (`/* → /index.html`) ;
+- la cohérence entre `SPOTIFY_REDIRECT_URI`, l’URL backend de production et la configuration du tableau de bord Spotify Developer ;
+- l’accessibilité des API externes (Spotify et YouTube).
+
+---
+
+### 7. Points de vigilance
+
+Le flux OAuth peut être impacté par les restrictions liées aux cookies cross-site.
+Certaines extensions navigateur ou paramètres de confidentialité peuvent bloquer le fonctionnement du parcours d’authentification.
+
+En mode développement Spotify, seuls les utilisateurs ajoutés à l’allowlist peuvent tester l’application.
+
+---
+
+### 8. Améliorations possibles
+
+Plusieurs améliorations peuvent être envisagées :
+
+- dockerisation de l’application ;
+- mise en place d’un pipeline CI/CD ;
+- unification du domaine frontend/backend ;
+- mise en place d’un système de monitoring ;
+- amélioration de la gestion de l’authentification en production.
+
+Dans le cadre du projet, le déploiement sur Render a permis de valider le bon fonctionnement de l’application en environnement de production.
+
+Cette étape constitue une base avant la mise en place d’une conteneurisation via Docker, envisagée dans une démarche d’industrialisation et de reproductibilité de l’environnement.
