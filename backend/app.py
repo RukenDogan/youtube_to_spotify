@@ -51,9 +51,6 @@ CORS(app, origins=origins, supports_credentials=True)
 app.add_url_rule("/history", view_func=history_list, methods=["GET"])
 app.add_url_rule("/history/<int:run_id>", view_func=history_detail, methods=["GET"])
 
-# Routes de débogage
-app.add_url_rule("/debug-session", view_func=debug_session, methods=["GET"])
-
 # Routes Spotify
 app.add_url_rule("/login", view_func=spotify_login)
 app.add_url_rule("/callback", view_func=spotify_callback)
@@ -62,7 +59,6 @@ app.add_url_rule("/token", view_func=get_token, methods=["GET"])
 # Route de synchronisation
 app.add_url_rule("/youtube-to-spotify", view_func=sync_playlist, methods=["POST"])
 
-
 @app.get("/")
 def home():
     return {"status": "ok", "service": "beatsync-backend"}, 200
@@ -70,6 +66,10 @@ def home():
 @app.get("/health")
 def health():
     return {"status": "healthy"}, 200
+
+# Routes de débogage
+app.add_url_rule("/debug-session", view_func=debug_session, methods=["GET"])
+
 
 if __name__ == "__main__":
     # app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)

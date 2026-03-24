@@ -43,15 +43,12 @@ def spotify_callback():
     print("SESSION AVANT REDIRECT:", dict(session), flush=True)
 
     try:
-        # Récupère le token depuis Spotify et stocke dans MongoDB
+        # Échange du code d'autorisation contre un token d'accès Spotify
         token_info = sp_oauth.get_access_token(code, check_cache=False)
     except Exception as e:
         print("Erreur lors de la récupération du token Spotify:", repr(e), flush=True)
         return jsonify({"error": "Failed to retrieve Spotify token"}), 500
 
-    # Récupère l'ID utilisateur Spotify
-    # sp = Spotify(auth=token_info['access_token'])
-    # spotify_user_id = sp.me()['id']
     try:
         # API Spotify brute
         sp_api = Spotify(auth=token_info['access_token']) # spotipy
@@ -68,14 +65,6 @@ def spotify_callback():
     except Exception as e:
         print("Erreur lors de la récupération/création de l'utilisateur SQL:", e, flush=True)
         return jsonify({"error": "Failed to retrieve/create user in SQL database"}), 500
-
-    # Initialise le modèle Spotify avec l'ID utilisateur
-    # sp_model = SpotifyModel(spotify_user_id)
-
-    # Exemple : récupérer tous les morceaux d’une playlist
-    # tracks = sp_model.get_all_tracks_from_playlist("1234PLAYLISTID")
-
-    # print("Tracks trouvés:", len(tracks))
     
 
     # Stocke le token dans MongoDB
@@ -89,31 +78,13 @@ def spotify_callback():
         print("⚠️ Erreur lors de la sauvegarde du token dans MongoDB", flush=True)
         return jsonify({"error": "Failed to save token"}), 500
 
-    # Mise à jour de la session avec le token
-    # session['spotify_token'] = token_info
-
-    # print("SESSION TOKEN CHECK:", dict(session))
-
 
     # Redirige vers le frontend (Dashboard)
     return redirect(urljoin(FRONTEND_URL, "/dashboard"))
 
+
 def debug_session():
     return jsonify(dict(session)), 200
-
-
-
-    ########## Version callback sans MongoDB ##########
-    # """Récupère le code Spotify et génère le token"""
-    # code = request.args.get("code")
-    # if not code:
-    #     return jsonify({"error": "Missing code"}), 400
-
-    # token_info = sp_oauth.get_access_token(code, check_cache=False)
-    # session['spotify_token'] = token_info
-
-    # # Redirige vers le frontend (Dashboard)
-    # return redirect("http://127.0.0.1:5173/dashboard")
 
 
 def get_token():
@@ -127,11 +98,6 @@ def get_token():
         return jsonify({"connected": False}), 200
 
     return jsonify({"connected": True, "spotify_user_id": spotify_user_id}), 200
-    # print("SESSION ACTUELLE :", dict(session))
-    # token_info = session.get("spotify_token")
-    # if not token_info:
-    #     return jsonify({"error": "No token"}), 401
-    # return jsonify({"access_token": token_info["access_token"]})
 
 
 # Synchronisation YouTube - Spotify
