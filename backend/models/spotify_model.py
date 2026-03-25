@@ -3,23 +3,10 @@ import spotipy
 import re
 
 
-SCOPE = "playlist-modify-public playlist-modify-private"
-
 class Spotify:
     def __init__(self, access_token: str, spotify_user_id: str):
         self.client = spotipy.Spotify(auth=access_token)
         self.spotify_user_id = spotify_user_id
-
-    # def __init__(self, spotify_user_id):
-    #     self.spotify_user_id = spotify_user_id
-    #     self.client = spotipy.Spotify(auth_manager=SpotifyOAuth(
-    #         client_id=SPOTIFY_CLIENT_ID,
-    #         client_secret=SPOTIFY_CLIENT_SECRET,
-    #         redirect_uri=SPOTIFY_REDIRECT_URI,
-    #         scope=SCOPE
-    #     ))
-    #     self.spotify_user_id = self.client.me()["id"]
-
 
     def create_spotify_playlist(self, playlist_name, channel_name="YouTube"):
         name = f"{playlist_name} from @{channel_name}"
@@ -41,28 +28,6 @@ class Spotify:
         text = re.sub(r"\b(official|audio|video|hd|4k|lyric|lyrics|visualizer|vevo|live|remastered)\b", "", text, flags=re.I)
         text = re.sub(r"\s+", " ", text).strip()
         return text
-
-
-    # def search_track(self, query):
-    #     results = self.client.search(q=query, type="track", limit=5)
-    #     tracks = results.get("tracks", {}).get("items", [])
-    #     if not tracks:
-    #         return None
-        
-    #     # Découpage de la requête pour séparer titre et artiste
-    #     query_lower = query.lower()
-
-    #     for track in tracks:
-    #         track_title = track["name"].lower()
-    #         track_artists = " ".join([a["name"].lower() for a in track["artists"]])
-
-    #         title_terms = track_title.split()
-    #         artist_terms = track_artists.split()
-
-    #         if all(term in query_lower for term in title_terms + artist_terms):
-    #             return track
-            
-    #     return None
 
     def search_track(self, title: str, artist: str = ""):
         def norm_words(s: str):
