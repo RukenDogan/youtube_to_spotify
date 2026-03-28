@@ -3,7 +3,6 @@
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![Flask](https://img.shields.io/badge/Flask-API-black)
 ![React](https://img.shields.io/badge/React-Vite-61DAFB)
-![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Render-blue)
 
 <p align="center">
@@ -12,12 +11,12 @@
 
 ## Description
 
-BeatSync est une application full-stack (Python/Flask + React/Vite, MongoDB, SQLAlchemy/PostgreSQL) permettant de synchroniser automatiquement une playlist YouTube vers Spotify.
+BeatSync est une application full-stack (Python/Flask + React/Vite, SQLAlchemy/PostgreSQL) permettant de synchroniser automatiquement une playlist YouTube vers Spotify.
 
 L'application repose sur :
 
 - une authentification OAuth 2.0 via Spotify
-- une gestion sécurisée des tokens côté backend (MongoDB)
+- une gestion sécurisée des tokens côté backend (migration de MongoDB vers PostgreSQL en production)
 - une base PostgreSQL pour l’historique des synchronisations
 - la structuration d’un backend en architecture MVC enrichie d’une couche Service
 - la mise en place d’une architecture frontend/backend découplée
@@ -67,12 +66,12 @@ Le backend suit une architecture en couches :
 
   - `sync_service`
   - `token_service`
-  - `mongo_tokens`
+  - `sql_tokens` (initialement mongo_tokens)
   - `user_service`
     → Logique applicative et orchestration
 - **Models**
 
-  - `synchronizer` (à déplacer dans le dossier Services, car logiqe métier)
+  - `synchronizer`
   - `spotify_model`
   - `youtube_model`
     → Logique métier et intégration API
@@ -89,6 +88,7 @@ Le backend suit une architecture en couches :
 - Implémente les "Views"
 - Communique avec le backend via requêtes HTTP (API REST)
 - Pages principales :
+
   - Login
   - Dashboard
   - History
@@ -130,10 +130,9 @@ Le backend suit une architecture en couches :
    - SPOTIFY_CLIENT_ID=...
    - SPOTIFY_CLIENT_SECRET=...
    - SPOTIFY_REDIRECT_URI=...
-   - SPOTIFY_USER_ID=...
    - YOUTUBE_API_KEY=...
    - FLASK_SECRET_KEY=
-   - MONGO_URI= (pas nécessaire si stockage des tokens avec PostgreSQL)
+   - MONGO_URI= (utilisé dans une version précédente, non requis actuellement)
    - DATABASE_URL=
    - FRONTEND_URL=
 
@@ -160,14 +159,14 @@ Le backend suit une architecture en couches :
   si elles sont encore référencées dans la playlist. Ces vidéos peuvent ne plus apparaître dans l’interface YouTube, mais être comptées dans la requête API. Elles peuvent provoquer des écarts dans le nombre de morceaux importés.
 - La synchronisation inverse pourrait également être envisageable : à partir d'une playlist Spotify, nous pouvons récupérer les vidéos YouTube correspondantes et les ajouter à une playlist YouTube. Cela nécessite d'obtenir l'autorisation OAuth via l'API YouTube.
 - La connexion OAuth Spotify est opérationnelle : le front redirige correctement vers Spotify et revient sur le dashboard une fois l’autorisation validée.
-- Stockage des tokens dans MongoDB pour renforcer la sécurité et permettre une authentification plus fiable.
+- Les tokens Spotify sont stockés de manière sécurisée côté backend afin de garantir une authentification fiable sans exposition côté navigateur.
 
 ## Fonctionnalités détaillées
 
 ### Authentification
 
 - Connexion OAuth 2.0 via Spotify
-- Stockage sécurisé des tokens en MongoDB
+- Stockage sécurisé des tokens côté backend (initialement MongoDB, puis passage à PostgreSQL), sans exposition au frontend
 - Refresh automatique des tokens expirés
 
 ### Synchronisation
@@ -199,7 +198,6 @@ Le backend suit une architecture en couches :
 - NotFound (404)
 
 ## Déploiement
-
 
 L’application est déployée sur **Render** avec :
 
@@ -249,7 +247,7 @@ Ces contraintes ont permis d’identifier des axes d’amélioration pour une ve
 
 ## Sécurité
 
-- Tokens Spotify stockés uniquement côté backend (MongoDB)
+- Tokens Spotify stockés uniquement côté backend (MongoDB initialement, puis PostgreSQL)
 - Aucun token exposé côté navigateur
 - Variables sensibles via environnement (.env.local / Render)
 - Gestion sécurisée des sessions Flask
