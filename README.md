@@ -44,8 +44,9 @@ L'objectif principal est de se familiariser avec :
 - **Backend :** Python, Flask, Spotipy, Google API Client
 - **Frontend :** React (JS, Vite)
 - **BDD :**
-  - MongoDB (stockage sécurisée des tokens Spotify)
-  - PostgreSQL (historique des synchronisations)
+
+  - PostgreSQL (utilisateurs, tokens, historique des synchronisations)
+  - MongoDB (utilisé initialement en développement local, remplacé en production pour des raisons de stabilité)
 - **Tests :** Pytest, Postman
 - **CI/CD :** GitHub Actions
 - **Gestion de projet :** Trello, Figma
@@ -71,7 +72,7 @@ Le backend suit une architecture en couches :
     → Logique applicative et orchestration
 - **Models**
 
-  - `synchronizer`
+  - `synchronizer` (à déplacer dans le dossier Services, car logiqe métier)
   - `spotify_model`
   - `youtube_model`
     → Logique métier et intégration API
@@ -92,10 +93,10 @@ Le backend suit une architecture en couches :
   - Dashboard
   - History
   - History Detail
-  - Privacy
-  - CGU
-  - NotFound
+  - Privacy Policy
+  - Terms of Use
   - AlreadyConnected
+  - NotFound
 
 ## Prérequis
 
@@ -132,7 +133,7 @@ Le backend suit une architecture en couches :
    - SPOTIFY_USER_ID=...
    - YOUTUBE_API_KEY=...
    - FLASK_SECRET_KEY=
-   - MONGO_URI=
+   - MONGO_URI= (pas nécessaire si stockage des tokens avec PostgreSQL)
    - DATABASE_URL=
    - FRONTEND_URL=
 
@@ -197,21 +198,38 @@ Le backend suit une architecture en couches :
 - CGU (Conditions Générales d’Utilisation)
 - NotFound (404)
 
-## Déploiement prévu
+## Déploiement
 
-Le déploiement sera prochainement effectué :
 
-- sur **Render**, pour héberger le backend Flask et le frontend React, accessible via une URL publique
-- en **complément avec Docker**, pour créer un conteneur isolé contenant l’application complète et toutes ses dépendances, facilitant le test et la portabilité sur d’autres environnements
+L’application est déployée sur **Render** avec :
 
-Les instructions détaillées de déploiement (Dockerfile, configuration Render, etc.) seront ajoutées après la finalisation de ces fonctionnalités.
+- Backend Flask (Web Service)
+- Frontend React (Static Site)
+- PostgreSQL (base de données)
+
+Ce déploiement constitue une première mise en production permettant de valider le bon fonctionnement global de l’application dans un environnement réel (configuration, OAuth, base de données, communication frontend/backend).
+
+Il s’inscrit dans une démarche progressive avant une **dockerisation complète**, qui permettra à terme d’améliorer la portabilité et la reproductibilité de l’environnement.
+
+---
+
+### Contraintes rencontrées
+
+Le passage en production a mis en évidence plusieurs contraintes :
+
+- gestion des cookies OAuth en environnement cross-domain
+- blocage possible sur certains navigateurs (Firefox strict, extensions)
+- limitations liées au mode développement de l’API Spotify (utilisateurs autorisés)
+- importance de la configuration des variables d’environnement
+
+Ces contraintes ont permis d’identifier des axes d’amélioration pour une version future plus robuste.
 
 ## Organisation du projet
 
 - Cahier des charges : [PDF](https://github.com/RukenDogan/youtube_to_spotify/tree/main/docs-images/CAHIER_DES_CHARGES_BeatSyncApp.pdf)
 - Formalisation des besoins fonctionnels en User Stories (Kanban) : [lien Trello](https://trello.com/b/bj08OaGH/formalisation-des-besoins-fonctionnels-en-user-stories-beatsync-app)
 - Gestion de projet (méthode Kanban) : [lien Trello](https://trello.com/invite/b/68e4cd834914b08442301ac4/ATTI16bcee34f742fc93b408b9e6ff2bba5e6B03E2A1/gestion-de-projet-youtube-spotify)
-- Création de maquettes avec Figma pour les pages Login et Dashboard : [lien Figma](https://www.figma.com/design/NAmYPrvKnnxLt6XkuWXm5A/Pages-Login-et-Dashboard-youtube-spotify?node-id=0-1&p=f&t=DaXgRIgKQMHaadRD-0)
+- Création de maquettes avec Figma pour les pages de l'interface de l'application : [lien Figma](https://www.figma.com/design/NAmYPrvKnnxLt6XkuWXm5A/Pages-Login-et-Dashboard-youtube-spotify?node-id=0-1&p=f&t=DaXgRIgKQMHaadRD-0)
 
 ## Tests
 
